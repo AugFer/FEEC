@@ -1,0 +1,16 @@
+---
+import characters from '../data/characters.json'
+import CardChar from '../components/CardChar.astro'
+---
+
+<div class="grid gap-8 sm:grid-cols-3 lg:grid-cols-6">
+    {
+        characters.map(char => (
+        <CardChar 
+        ID = {char.ID}
+        Name = {char.Name}
+        Image = {char.Image}
+        />
+        ))
+    }
+</div>

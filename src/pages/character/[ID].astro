@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import characters from '../../data/characters.json'
+
+const { ID } = Astro.params
+
+export async function getStaticPaths() {
+    return characters.map(item => ({
+        params: { ID: item.ID},
+    }))
+}
+
+const char = characters.filter(item => item.ID === ID)
+---
+
+<Layout title={char[0].Name}>
+	<article>
+        <picture class="flex justify-center p-4">
+            <img src={char[0].Image} class="h-80 w-auto mb-5 rounded-lg" alt={char[0].Name}/>
+        </picture>
+        <h2 class="my-2 text-2xl font-bold tracking-tight text-white">
+			{char[0].Name}</a>
+		</h2>
+        <h2 class="my-2 text-2xl font-bold tracking-tight text-white">
+			{char[0].Gender}</a>
+		</h2>
+        <h2 class="my-2 text-2xl font-bold tracking-tight text-white">
+			{char[0].RecruitementChapter}</a>
+		</h2>
+        <h2 class="my-2 text-2xl font-bold tracking-tight text-white">
+			{char[0].RecruitementDescription}</a>
+		</h2>
+    </article>
+</Layout>
