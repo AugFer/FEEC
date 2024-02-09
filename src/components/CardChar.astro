@@ -9,12 +9,12 @@ const { ID, Image, Name } = Astro.props;
 ---
 
 <a href={`character/${ID}`}
-	class="rounded-lg border shadow-md bg-gray-800 border-gray-700 hover:scale-105 hover:bg-gray-700 hover:border-gray-500 transition flex flex-col">
-	<header class="p-4 flex-grow">
+	class="flex flex-col transition bg-gray-800 border border-gray-700 rounded-lg shadow-md hover:scale-105 hover:bg-gray-700 hover:border-gray-500">
+	<header class="flex-grow p-4">
 		<picture class="flex justify-center">
-            <img src={Image} class="h-auto w-auto mb-2 rounded-lg" alt={Name}/>
+            <img src={Image} class="w-auto h-auto mb-2 rounded-lg" alt={Name}/>
         </picture>
-		<h2 class="my-2 text-2xl text-center font-bold tracking-tight text-white">
+		<h2 class="my-2 text-2xl font-bold tracking-tight text-center text-white">
 			{Name}
 		</h2>
 	</header>
