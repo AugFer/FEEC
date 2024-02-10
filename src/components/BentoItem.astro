@@ -1,0 +1,19 @@
+---
+interface Props {
+    class?: string
+    title?: string
+}
+
+const { title } = Astro.props
+---
+
+<article title={ title } class={`
+    ${Astro.props.class}
+    rounded-lg
+    border border-gray-400/50
+    col-span-full 
+    ${(title !== 'Stats' && title !== 'Growth Rates') ? 'p-2' : 'relative overflow-x-auto p-0'}
+`}>
+    { (title !== 'Image' && title !== 'Bio' && title !== 'Stats' && title !== 'Growth Rates') ? <h2 class="mb-2 text-xl font-semibold">{ title }</h2> : null }
+    <slot></slot>
+</article>

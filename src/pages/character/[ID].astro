@@ -18,248 +18,120 @@ const char = characters.filter(item => item.ID === ID)
     title={char[0].Name}
     description=`Character info: ${char[0].Name}`
 >
-<section class="grid h-auto max-w-5xl gap-2 p-2 m-auto overflow-hidden sm:p-4 md:grid-cols-2 md:p-6 lg:grid-rows-10 lg:grid-cols-12">
-  <div title="Image" class="p-2 bg-yellow-900 rounded-lg md:col-span-3 md:row-span-6">
-    <img class="object-cover w-full h-full rounded-lg" src={char[0].Image} alt={char[0].Name}>
-  </div>
-  <div title="Bio" class="p-2 bg-red-900 rounded-lg md:col-span-6 md:row-span-3">
-    <h1 class="mb-1 text-2xl font-semibold tracking-wide text-center">{char[0].Name}</h1>
-    <p class="mb-1 font-thin text-center">({(char[0].Gender === 'M') ? 'Male' : 'Female'})</p>
-    <p class="text-justify">Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
-  </div>
-  <div title="Recruitment" class="p-2 bg-green-900 rounded-lg md:col-span-3 md:row-span-2">
-    <p>Recruitment: {char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
-  </div>
-  <div title="Base SP" class="p-2 bg-indigo-900 rounded-lg md:col-span-3 md:row-span-1">
-    <p>Base SP</p>
-  </div>
-  <div title="Personal Skill" class="p-2 bg-purple-900 rounded-lg md:col-span-9 md:row-span-1">
-    <p>Personal Skill</p>
-  </div>
-  <div title="Innate Proficiencies" class="p-2 rounded-lg bg-amber-900 md:col-span-4 md:row-span-2">
-    <p>Innate Proficiencies: {char[0].InnateProficiencies}</p>
-  </div>
-  <div title="Proficiencies" class="p-2 rounded-lg bg-cyan-900 md:col-span-5 md:row-span-2">
-    <p>Proficiencies: {char[0].Proficiencies}</p>
-  </div>
-  <div title="Level" class="p-2 rounded-lg bg-lime-900 md:col-span-4 md:row-span-2">
-    <p>Base Level: {char[0].BaseLevel}</p>
-    <p>Base Internal Level: {char[0].BaseInternalLevel}</p>
-    <!-- 
-      slider de nivel base y un check button para indicar el momento de asencion
-      cuando elige una clase avanzada en el dropdawn de clase, lo de arriba se deshabilita para no cambiarlo
-      se habilita entonces un slider de nivel para la clase avanzada
-      entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
-      a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
-    -->
-  </div>
-  <div title="Class" class="p-2 bg-blue-900 rounded-lg md:col-span-4 md:row-span-2">
-    <p>Base Class: {char[0].BaseClass}</p>
-  </div>
-  <div title="Emblem / Ring" class="p-2 bg-orange-900 rounded-lg md:col-span-4 md:row-span-2">
-    <p>Emblem / Ring</p>
-  </div>
-  <div title="Stats" class="w-full h-full bg-pink-900 rounded-lg md:col-span-6 md:row-span-2">
-    <div class="items-center justify-center w-full h-full ">
-      <div class="w-full h-full overflow-x-auto rounded-lg shadow-md">
-        <table class="w-full h-full text-sm text-center text-gray-400 bg-gray-700 table-auto">
-          <thead class="text-xs uppercase">
-            <tr>
-              <th class="text-sm" colspan="10">Stats</th>
+  <section class="grid max-w-6xl gap-2 p-2 m-auto overflow-hidden auto-rows-min md:grid-cols-12"
+  >
+    <BentoItem title="Image"                    class="md:col-span-3 md:row-span-6">
+      <img class="object-scale-down object-bottom w-auto m-auto rounded-lg sm:object-cover h-60 sm:h-full" src={char[0].Image} alt={char[0].Name}>
+    </BentoItem>
+    <BentoItem title="Bio"                      class="md:col-span-6 md:row-span-3">
+      <h2 class="mb-2 text-2xl font-semibold">{char[0].Name}</h2>
+      <p class="text-justify text-balance">Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
+    </BentoItem>
+    <BentoItem title="Recruitment"              class="md:col-span-3 md:row-span-2">
+      <p>{char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
+    </BentoItem>
+    <BentoItem title="Base SP"                  class="md:col-span-3 md:row-span-1">
+      <p>{char[0].BaseSP}</p>
+    </BentoItem>
+    <BentoItem title="Personal Skill"           class="md:col-span-9 md:row-span-1">
+      <img class="inline h-auto mr-2 align-middle rounded-sm w-7" src={char[0].PersonalSkillIcon} alt={char[0].PersonalSkill}/>
+      <p class="inline align-middle">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
+    </BentoItem>
+    <BentoItem title="Proficiencies"     class="md:col-span-4 md:row-span-2">
+      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/${char[0].InnateProficiencies}.png` alt={char[0].InnateProficiencies}/>
+      <p class="inline font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
+      <img class="inline h-auto ml-2 mr-1 align-middle rounded-sm w-7" src=`../src/data/images/${char[0].Proficiencies}.png` alt={char[0].Proficiencies}/>
+      <p class="inline align-middle">{char[0].Proficiencies}</p>
+    </BentoItem>
+    <BentoItem title="Libre"            class="md:col-span-5 md:row-span-2">
+      
+    </BentoItem>
+    <BentoItem title="Level"                    class="md:col-span-4 md:row-span-2">
+      <p>Base: {char[0].BaseLevel}</p>
+      <p>Base Internal: {char[0].BaseInternalLevel}</p>
+      <!--
+        slider de nivel base y un check button para indicar el momento de asencion
+        cuando elige una clase avanzada en el dropdawn de clase, lo de arriba se deshabilita para no cambiarlo
+        se habilita entonces un slider de nivel para la clase avanzada
+        entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
+        a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
+      -->
+    </BentoItem>
+    <BentoItem title="Class"                    class="md:col-span-4 md:row-span-2">
+      <p>Base: {char[0].BaseClass}</p>
+    </BentoItem>
+    <BentoItem title="Emblem / Ring"            class="md:col-span-4 md:row-span-2">
+      <p>Emblem or ring equiped and effect</p>
+    </BentoItem>
+    <BentoItem title="Stats"                    class="md:col-span-6 md:row-span-2">
+      <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
+        <thead>
+          <tr>
+            <th class="text-md" colspan="10">STATS</th>
+          </tr>  
+          <tr>
+              <th>HP</th>
+              <th>STR</th>
+              <th>MAG</th>
+              <th>DEX</th>
+              <th>SPD</th>
+              <th>DEF</th>
+              <th>RES</th>
+              <th>LCK</th>
+              <th>BLD</th>
+              <th>MOV</th>
             </tr>
-            <tr>
-              <th class="p-1">HP</th>
-              <th class="p-1">Str</th>
-              <th class="p-1">Mag</th>
-              <th class="p-1">Dex</th>
-              <th class="p-1">Spd</th>
-              <th class="p-1">Def</th>
-              <th class="p-1">Res</th>
-              <th class="p-1">Luck</th>
-              <th class="p-1">Bld</th>
-              <th class="p-1">Mov</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-gray-800 border-b border-gray-700">
-              <td class="p-1">{char[0].BaseHp}</td>
-              <td class="p-1">{char[0].BaseStr}</td>
-              <td class="p-1">{char[0].BaseMag}</td>
-              <td class="p-1">{char[0].BaseDex}</td>
-              <td class="p-1">{char[0].BaseSpd}</td>
-              <td class="p-1">{char[0].BaseDef}</td>
-              <td class="p-1">{char[0].BaseRes}</td>
-              <td class="p-1">{char[0].BaseLck}</td>
-              <td class="p-1">{char[0].BaseBld}</td>
-              <td class="p-1">{char[0].BaseMov}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div title="Growths" class="w-full h-full rounded-lg bg-violet-900 md:col-span-6 md:row-span-2">
-    <!-- 
-      un tooltip con un link a una pagina de FAQ donde se explique como funcionan los porcentajes en los dos modos de juego
-    -->
-    <div class="items-center justify-center w-full h-full ">
-      <div class="w-full h-full overflow-x-auto rounded-lg shadow-md">
-        <table class="w-full h-full text-sm text-center text-gray-400 bg-gray-700 table-auto">
-          <thead class="text-xs uppercase">
-            <tr>
-              <th class="text-sm" colspan="10">Growths</th>
-            </tr>
-            <tr>
-              <th class="p-1">Hp</th>
-              <th class="p-1">Str</th>
-              <th class="p-1">Mag</th>
-              <th class="p-1">Dex</th>
-              <th class="p-1">Spd</th>
-              <th class="p-1">Def</th>
-              <th class="p-1">Res</th>
-              <th class="p-1">Luck</th>
-              <th class="p-1">Bld</th>
-              <th class="p-1">Mov</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="bg-gray-800 border-b border-gray-700 ">
-              <td class="p-1">{char[0].GrowthHp}%</td>
-              <td class="p-1">{char[0].GrowthStr}%</td>
-              <td class="p-1">{char[0].GrowthMag}%</td>
-              <td class="p-1">{char[0].GrowthDex}%</td>
-              <td class="p-1">{char[0].GrowthSpd}%</td>
-              <td class="p-1">{char[0].GrowthDef}%</td>
-              <td class="p-1">{char[0].GrowthRes}%</td>
-              <td class="p-1">{char[0].GrowthLck}%</td>
-              <td class="p-1">{char[0].GrowthBld}%</td>
-              <td class="p-1">-</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- 
-  <section class="grid h-full max-w-5xl grid-cols-6 grid-rows-4 gap-2 px-4 m-auto">
-
-    <div class="h-full col-span-2 row-span-1 p-2 bg-gray-800 border-b border-gray-700 rounded-lg md:row-span-2 md:col-span-2">
-      <img class="object-cover object-top h-full mx-auto rounded-lg md:h-80 md:w-full" src={char[0].Image} alt={char[0].Name}>
-    </div>
-
-     <div class="h-full col-span-4 row-span-1 p-2 bg-orange-900 rounded-lg md:col-span-2">
-      <div class="flex flex-col font-normal leading-normal text-wrap text-md">
-        <h1 class="mb-2 text-2xl font-semibold tracking-wide text-center">{char[0].Name}</h1>
-        <span class="pb-4 font-thin text-center">({(char[0].Gender === 'M') ? 'Male' : 'Female'})</span>
-        <p>Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
-    </div>
-    </div>
-
-    <div class="h-full col-span-3 row-span-1 p-2 bg-blue-900 rounded-lg md:col-span-2">
-      <p>Recruitment: {char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
-    </div>
-    
-
-    <div class="h-full col-span-3 p-2 bg-green-900 rounded-lg md:col-span-2">
-      <p>Innate Proficiencies: {char[0].InnateProficiencies}</p>
-    </div>
-
-    <div class="h-full col-span-3 p-2 bg-yellow-900 rounded-lg md:col-span-2">
-      <p>Proficiencies: {char[0].Proficiencies}</p>
-    </div>
-
-    <div class="h-full col-span-3 p-2 bg-purple-900 rounded-lg md:col-span-1">
-      <p>Base Level: {char[0].BaseLevel}</p>
-      <p>Base Internal Level: {char[0].BaseInternalLevel}</p>
-    </div>
-
-    <div class="h-full col-span-3 p-2 bg-purple-900 rounded-lg md:order-1 md:col-span-1">
-      <p>Base Class: {char[0].BaseClass}</p>
-    </div>
-
-    <div class="bg-pink-900 rounded-lg md:order-2 col-span-full md:col-start-2 md:col-span-5">
-      <div class="items-center justify-center h-full">
-        <div class="h-full overflow-x-auto rounded-lg shadow-md">
-          <table class="w-full h-full text-sm text-center text-gray-400 bg-gray-700 table-auto">
-            <thead class="text-xs uppercase">
-              <tr>
-                <th class="text-lg" colspan="10">Base Stats</th>
-              </tr>
-              <tr>
-                <th class="p-3">HP</th>
-                <th class="p-3">Str</th>
-                <th class="p-3">Mag</th>
-                <th class="p-3">Dex</th>
-                <th class="p-3">Spd</th>
-                <th class="p-3">Def</th>
-                <th class="p-3">Res</th>
-                <th class="p-3">Luck</th>
-                <th class="p-3">Bld</th>
-                <th class="p-3">Mov</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-gray-800 border-b border-gray-700">
-                <td class="p-3">{char[0].BaseHp}</td>
-                <td class="p-3">{char[0].BaseStr}</td>
-                <td class="p-3">{char[0].BaseMag}</td>
-                <td class="p-3">{char[0].BaseDex}</td>
-                <td class="p-3">{char[0].BaseSpd}</td>
-                <td class="p-3">{char[0].BaseDef}</td>
-                <td class="p-3">{char[0].BaseRes}</td>
-                <td class="p-3">{char[0].BaseLck}</td>
-                <td class="p-3">{char[0].BaseBld}</td>
-                <td class="p-3">{char[0].BaseMov}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-pink-900 rounded-lg col-span-full md:col-start-2 md:col-span-5">
-      <div class="items-center justify-center h-full">
-        <div class="h-full overflow-x-auto rounded-lg shadow-md">
-          <table class="w-full h-full text-sm text-center text-gray-400 bg-gray-700 table-auto">
-            <thead class="text-xs uppercase">
-              <tr>
-                <th class="text-lg" colspan="10">Growth Stats</th>
-              </tr>
-              <tr>
-                <th class="p-3">Hp</th>
-                <th class="p-3">Str</th>
-                <th class="p-3">Mag</th>
-                <th class="p-3">Dex</th>
-                <th class="p-3">Spd</th>
-                <th class="p-3">Def</th>
-                <th class="p-3">Res</th>
-                <th class="p-3">Luck</th>
-                <th class="p-3">Bld</th>
-                <th class="p-3">Mov</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-gray-800 border-b border-gray-700 ">
-                <td class="p-3">{char[0].GrowthHp}%</td>
-                <td class="p-3">{char[0].GrowthStr}%</td>
-                <td class="p-3">{char[0].GrowthMag}%</td>
-                <td class="p-3">{char[0].GrowthDex}%</td>
-                <td class="p-3">{char[0].GrowthSpd}%</td>
-                <td class="p-3">{char[0].GrowthDef}%</td>
-                <td class="p-3">{char[0].GrowthRes}%</td>
-                <td class="p-3">{char[0].GrowthLck}%</td>
-                <td class="p-3">{char[0].GrowthBld}%</td>
-                <td class="p-3">-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section> 
--->
+        </thead>
+        <tbody>
+          <tr class="bg-gray-800">
+            <td>{char[0].BaseHp}</td>
+            <td>{char[0].BaseStr}</td>
+            <td>{char[0].BaseMag}</td>
+            <td>{char[0].BaseDex}</td>
+            <td>{char[0].BaseSpd}</td>
+            <td>{char[0].BaseDef}</td>
+            <td>{char[0].BaseRes}</td>
+            <td>{char[0].BaseLck}</td>
+            <td>{char[0].BaseBld}</td>
+            <td>{char[0].BaseMov}</td>
+          </tr>
+        </tbody>
+      </table>
+    </BentoItem>
+    <BentoItem title="Growth Rates"                  class="md:col-span-6 md:row-span-2">
+      <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
+        <thead>
+          <tr>
+            <th class="text-md" colspan="10">GROWTH RATES</th>
+          </tr>  
+          <tr>
+            <th>HP</th>
+            <th>STR</th>
+            <th>MAG</th>
+            <th>DEX</th>
+            <th>SPD</th>
+            <th>DEF</th>
+            <th>RES</th>
+            <th>LCK</th>
+            <th>BLD</th>
+            <th>MOV</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bg-gray-800">
+            <td>{char[0].GrowthHp}</td>
+            <td>{char[0].GrowthStr}</td>
+            <td>{char[0].GrowthMag}</td>
+            <td>{char[0].GrowthDex}</td>
+            <td>{char[0].GrowthSpd}</td>
+            <td>{char[0].GrowthDef}</td>
+            <td>{char[0].GrowthRes}</td>
+            <td>{char[0].GrowthLck}</td>
+            <td>{char[0].GrowthBld}</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    </BentoItem>
+  </section>
 </Layout>
