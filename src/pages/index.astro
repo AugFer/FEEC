@@ -1,14 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import CharacterCards from '../components/Characters.astro';
+import Layout from '../layouts/Layout.astro'
+import CharCard from '../components/CharCard.astro'
 ---
-
 <Layout 
 	title="Fire Emblem: Engage - Planner"
 	description="Web application with the necessary information to know the statistics of the characters, classes, and weapons of the game Fire Emblem Engage."
 >
 	<h1 class="mb-10 text-5xl font-bold text-center">Characters</h1>
-
 	<!-- falta un search box que oculte las tarjetas que no van coincidiendo con lo que se tipea -->
-	<CharacterCards />
+	<section class="grid max-w-5xl grid-cols-3 gap-2 px-4 m-auto sm:grid-cols-4 md:grid-cols-6">	
+		<CharCard />
+	</section>
 </Layout>

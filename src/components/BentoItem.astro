@@ -10,8 +10,10 @@ const { title } = Astro.props
 <article title={ title } class={`
     ${Astro.props.class}
     rounded-lg
-    border border-gray-400/50
-    col-span-full 
+    border-b border-b-gray-500/50
+    shadow-md
+    col-span-full
+    bg-gray-900 bg-opacity-50
     ${(title !== 'Stats' && title !== 'Growth Rates') ? 'p-2' : 'relative overflow-x-auto p-0'}
 `}>
     { (title !== 'Image' && title !== 'Bio' && title !== 'Stats' && title !== 'Growth Rates') ? <h2 class="mb-2 text-xl font-semibold">{ title }</h2> : null }

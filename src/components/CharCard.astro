@@ -1,0 +1,25 @@
+---
+import characters from '../data/characters.json'
+import { Image } from "astro:assets"
+
+const images = await Astro.glob('../data/images/characters/*.webp')
+.then((files) => files
+  .map((file) => file.default) 
+)
+---
+{ characters.map(char => (
+    <a href={`character/${char.ID}`}
+        class="flex flex-col p-2 bg-gray-800 border border-gray-700 rounded-lg shadow-md hover:scale-105 hover:bg-gray-700 hover:border-gray-500"
+    >
+        {
+            (images.filter(item => item.src.includes(char.ID))).map((img) => (  
+            <Image
+                src={img}
+                alt={char.Name}
+                class="justify-center h-full rounded-lg md:row-span-2 md:col-span-2"
+            />))
+        }
+        <h2 class="mt-2 text-base font-semibold tracking-wide text-center sm:text-2xl text-neutral-300">{char.Name}</h2>
+    </a>
+    ))
+}

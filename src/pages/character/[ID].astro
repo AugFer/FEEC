@@ -1,53 +1,73 @@
 ---
 import Layout from '../../layouts/Layout.astro'
 import characters from '../../data/characters.json'
+import classes from '../../data/classes.json'
 import BentoItem from '../../components/BentoItem.astro'
-
-const { ID } = Astro.params
+import { Image } from "astro:assets"
 
 export async function getStaticPaths() {
-    return characters.map(item => ({
-        params: { ID: item.ID},
-    }))
+  return characters.map((chars) => {
+    return {
+      params: { id: chars.ID },
+    };
+  });
 }
+const { id } = Astro.params;
+const char = characters.filter(item => item.ID === id)
+const imagen = await Astro.glob('../../data/images/characters/*.webp')
+.then((files) => files
+  .map((file) => file.default)
+    .filter(item => item.src.includes(id))
+)
 
-const char = characters.filter(item => item.ID === ID)
+/* const charClass = classes.map((clas) => clas)
+  .find(item => item.ID === char[0].BaseClass); */
 ---
-
 <Layout 
     title={char[0].Name}
     description=`Character info: ${char[0].Name}`
 >
   <section class="grid max-w-6xl gap-2 p-2 m-auto overflow-hidden auto-rows-min md:grid-cols-12"
   >
-    <BentoItem title="Image"                    class="md:col-span-3 md:row-span-6">
-      <img class="object-scale-down object-bottom w-auto m-auto rounded-lg sm:object-cover h-60 sm:h-full" src={char[0].Image} alt={char[0].Name}>
+    <BentoItem title="Image"          class="md:col-span-3 md:row-span-6">
+      {
+        imagen.map((img) => (  
+          <Image
+            src={img}
+            alt={char[0].Name}
+            class="object-scale-down object-bottom w-auto m-auto rounded-lg sm:object-cover h-60 sm:h-full"
+      />))
+      }
     </BentoItem>
-    <BentoItem title="Bio"                      class="md:col-span-6 md:row-span-3">
+    <BentoItem title="Bio"            class="md:col-span-6 md:row-span-3">
       <h2 class="mb-2 text-2xl font-semibold">{char[0].Name}</h2>
       <p class="text-justify text-balance">Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
     </BentoItem>
-    <BentoItem title="Recruitment"              class="md:col-span-3 md:row-span-2">
+    <BentoItem title="Recruitment"    class="md:col-span-3 md:row-span-2">
       <p>{char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
     </BentoItem>
-    <BentoItem title="Base SP"                  class="md:col-span-3 md:row-span-1">
+    <BentoItem title="Base SP"        class="md:col-span-3 md:row-span-1">
       <p>{char[0].BaseSP}</p>
     </BentoItem>
-    <BentoItem title="Personal Skill"           class="md:col-span-9 md:row-span-1">
-      <img class="inline h-auto mr-2 align-middle rounded-sm w-7" src={char[0].PersonalSkillIcon} alt={char[0].PersonalSkill}/>
+    <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
+      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
       <p class="inline align-middle">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
     </BentoItem>
-    <BentoItem title="Proficiencies"     class="md:col-span-4 md:row-span-2">
-      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/${char[0].InnateProficiencies}.png` alt={char[0].InnateProficiencies}/>
+    <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
+      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/proficiencies/${char[0].InnateProficiencies}.png` alt={char[0].InnateProficiencies}/>
       <p class="inline font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
-      <img class="inline h-auto ml-2 mr-1 align-middle rounded-sm w-7" src=`../src/data/images/${char[0].Proficiencies}.png` alt={char[0].Proficiencies}/>
+      <img class="inline h-auto ml-2 mr-1 align-middle rounded-sm w-7" src=`../src/data/images/proficiencies/${char[0].Proficiencies}.png` alt={char[0].Proficiencies}/>
       <p class="inline align-middle">{char[0].Proficiencies}</p>
     </BentoItem>
-    <BentoItem title="Libre"            class="md:col-span-5 md:row-span-2">
-      
+    <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
+      Stats Ranking
     </BentoItem>
-    <BentoItem title="Level"                    class="md:col-span-4 md:row-span-2">
-      <p>Base: {char[0].BaseLevel}</p>
+    <BentoItem title="Level"          class="md:col-span-4 md:row-span-2">
+      <div class="flex items-center mb-2">
+        <p class="m-0 mr-4 min-w-max">Base: {char[0].BaseLevel}</p>
+        <input id="baseLvl" type="range" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" step="1" class="w-full h-2 align-middle bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-600">
+        <span id="lvl" class="w-6 ml-2 text-center">{char[0].BaseLevel}</span>
+      </div>
       <p>Base Internal: {char[0].BaseInternalLevel}</p>
       <!--
         slider de nivel base y un check button para indicar el momento de asencion
@@ -55,15 +75,35 @@ const char = characters.filter(item => item.ID === ID)
         se habilita entonces un slider de nivel para la clase avanzada
         entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
         a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
+
+--------------------------------------
+        El level up incial funciona asi: el personaje arranca en nivel 1 con los Growths base ya aplicados (lo del personaje, sin la clase), cuando sube a nivel 2 se ya aplican los Growths que incluyen a la clase base, y ahi los que llegan o pasan 100 suben un nivel, lo que sobra queda para el nivel siguiente
+
+
       -->
     </BentoItem>
-    <BentoItem title="Class"                    class="md:col-span-4 md:row-span-2">
+    <BentoItem title="Class"          class="md:col-span-4 md:row-span-2">
       <p>Base: {char[0].BaseClass}</p>
+      <select id="selectClass" name="selectClass" class="p-2 rounded-lg min-w-min">
+        {
+          classes.map((item) => (
+            (item.ID === char[0].BaseClass)
+            ?
+            <option value={item.ID} selected>{item.ID}</option>
+            :
+            <option value={item.ID}>{item.ID}</option>
+        ))}
+      </select>
+      <label class="inline-flex align-middle cursor-pointer ">
+        <input type="checkbox" id="applyClass" name="applyClass" class="sr-only peer">
+        <div class="relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+        <span class="ms-2">Apply</span>
+      </label>
     </BentoItem>
-    <BentoItem title="Emblem / Ring"            class="md:col-span-4 md:row-span-2">
+    <BentoItem title="Emblem / Ring"  class="md:col-span-4 md:row-span-2">
       <p>Emblem or ring equiped and effect</p>
     </BentoItem>
-    <BentoItem title="Stats"                    class="md:col-span-6 md:row-span-2">
+    <BentoItem title="Stats"          class="md:col-span-6 md:row-span-2">
       <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
         <thead>
           <tr>
@@ -84,7 +124,7 @@ const char = characters.filter(item => item.ID === ID)
         </thead>
         <tbody>
           <tr class="bg-gray-800">
-            <td>{char[0].BaseHp}</td>
+            <td id="HP">{char[0].BaseHp}</td>
             <td>{char[0].BaseStr}</td>
             <td>{char[0].BaseMag}</td>
             <td>{char[0].BaseDex}</td>
@@ -98,7 +138,7 @@ const char = characters.filter(item => item.ID === ID)
         </tbody>
       </table>
     </BentoItem>
-    <BentoItem title="Growth Rates"                  class="md:col-span-6 md:row-span-2">
+    <BentoItem title="Growth Rates"   class="md:col-span-6 md:row-span-2">
       <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
         <thead>
           <tr>
@@ -135,3 +175,29 @@ const char = characters.filter(item => item.ID === ID)
     </BentoItem>
   </section>
 </Layout>
+
+<script is:inline define:vars={{charClasses:classes}}>
+  var applyClassCheckbox = document.getElementById('applyClass');
+  var baseHpCell = document.getElementById('HP');
+  var baseHpValue = parseInt(baseHpCell.textContent);
+
+  applyClassCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+      baseHpValue += 10;
+      baseHpCell.classList.add('text-green-400', 'font-semibold');
+    } else {
+      baseHpValue -= 10;
+      baseHpCell.classList.remove('text-green-400', 'font-semibold');
+    }
+    baseHpCell.textContent = baseHpValue;
+  });
+</script>
+
+<script is:inline>
+  var baseLvlInput = document.getElementById('baseLvl');
+  var lvlSpan = document.getElementById('lvl');
+
+  baseLvlInput.addEventListener('input', function() {
+    lvlSpan.textContent = this.value;
+  });
+</script>

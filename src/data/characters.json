@@ -1,13 +1,13 @@
 [
   {
     "ID": "AlearM",
-    "Image": "../src/data/images/characters/AlearM.webp",
     "Name": "Alear",
-    "PersonalSkill": "Divinely Inspiring",
-    "PersonalSkillDesc": "Adjacent allies deal +3 damage and take 1 less damage",
-    "PersonalSkillIcon": "../src/data/images/ps_divinely_inspiring.webp",
     "RecruitementChapter": "Prologue",
     "RecruitementDescription": "From start",
+    "PersonalSkill": "Divinely Inspiring",
+    "PersonalSkillDesc": "Adjacent allies deal +3 damage and take 1 less damage",
+    "InnateProficiencies": "Sword",
+    "Proficiencies": "Arts",
     "BaseClass": "Dragon Child",
     "BaseLevel": 1,
     "BaseInternalLevel": 1,
@@ -37,16 +37,13 @@
     "MaxSpd": 1,
     "MaxDef": 0,
     "MaxRes": 0,
-    "MaxLck": 0,
-    "InnateProficiencies": "Sword",
-    "Proficiencies": "Arts"
+    "MaxLck": 0
   },
   {
     "ID": "AlearF",
-    "Image": "../src/data/images/characters/AlearF.webp",
     "Name": "Alear",
-    "PersonalSkill": "../src/data/images/ps_divinely_inspiring.webp",
-    "PersonalSkillDesc": "Divinely Inspiring: Adjacent allies deal +3 damage and take 1 less damage.",
+    "PersonalSkill": "Divinely Inspiring",
+    "PersonalSkillDesc": "Adjacent allies deal +3 damage and take 1 less damage.",
     "RecruitementChapter": "Prologue",
     "RecruitementDescription": "From start",
     "BaseClass": "Dragon Child",
@@ -84,9 +81,7 @@
   },
   {
     "ID": "Vander",
-    "Image": "../src/data/images/characters/Vander.webp",
     "Name": "Vander",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 1",
     "RecruitementDescription": "-",
     "BaseClass": "Paladin Axe",
@@ -124,9 +119,7 @@
   },
   {
     "ID": "Clanne",
-    "Image": "../src/data/images/characters/Clanne.webp",
     "Name": "Clanne",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 2",
     "RecruitementDescription": "-",
     "BaseClass": "Mage",
@@ -164,9 +157,7 @@
   },
   {
     "ID": "Framme",
-    "Image": "../src/data/images/characters/Framme.webp",
     "Name": "Framme",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 2",
     "RecruitementDescription": "-",
     "BaseClass": "Martial Monk",
@@ -204,9 +195,7 @@
   },
   {
     "ID": "Alfred",
-    "Image": "../src/data/images/characters/Alfred.webp",
     "Name": "Alfred",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "BaseClass": "Noble Alfred",
@@ -244,9 +233,7 @@
   },
   {
     "ID": "Etie",
-    "Image": "../src/data/images/characters/Etie.webp",
     "Name": "Etie",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "BaseClass": "Archer",
@@ -284,9 +271,7 @@
   },
   {
     "ID": "Boucheron",
-    "Image": "../src/data/images/characters/Boucheron.webp",
     "Name": "Boucheron",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "BaseClass": "Axe Fighter",
@@ -324,9 +309,7 @@
   },
   {
     "ID": "Celine",
-    "Image": "../src/data/images/characters/Celine.webp",
     "Name": "Céline",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Noble Celine",
@@ -364,9 +347,7 @@
   },
   {
     "ID": "Chloe",
-    "Image": "../src/data/images/characters/Chloe.webp",
     "Name": "Chloé",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lance Flier",
@@ -404,9 +385,7 @@
   },
   {
     "ID": "Louis",
-    "Image": "../src/data/images/characters/Louis.webp",
     "Name": "Louis",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lance Armor",
@@ -444,9 +423,7 @@
   },
   {
     "ID": "Jean",
-    "Image": "../src/data/images/characters/Jean.webp",
     "Name": "Jean",
-    "Gender": "M",
     "RecruitementChapter": "Paralogue 1",
     "RecruitementDescription": "Talk with Alear or survive",
     "BaseClass": "Martial Monk",
@@ -484,9 +461,7 @@
   },
   {
     "ID": "Yunaka",
-    "Image": "../src/data/images/characters/Yunaka.webp",
     "Name": "Yunaka",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Thief",
@@ -524,9 +499,7 @@
   },
   {
     "ID": "Anna",
-    "Image": "../src/data/images/characters/Anna.webp",
     "Name": "Anna",
-    "Gender": "F",
     "RecruitementChapter": "Paralogue 2",
     "RecruitementDescription": "Talk with Alear or survive",
     "BaseClass": "Axe Fighter",
@@ -564,9 +537,7 @@
   },
   {
     "ID": "Alcryst",
-    "Image": "../src/data/images/characters/Alcryst.webp",
     "Name": "Alcryst",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lord Alcryst",
@@ -604,9 +575,7 @@
   },
   {
     "ID": "Citrinne",
-    "Image": "../src/data/images/characters/Citrinne.webp",
     "Name": "Citrinne",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Mage",
@@ -644,9 +613,7 @@
   },
   {
     "ID": "Lapis",
-    "Image": "../src/data/images/characters/Lapis.webp",
     "Name": "Lapis",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Sword Fighter",
@@ -684,9 +651,7 @@
   },
   {
     "ID": "Diamant",
-    "Image": "../src/data/images/characters/Diamant.webp",
     "Name": "Diamant",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 8",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lord Diamant",
@@ -724,9 +689,7 @@
   },
   {
     "ID": "Amber",
-    "Image": "../src/data/images/characters/Amber.webp",
     "Name": "Amber",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 8",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lance Cavalier",
@@ -764,9 +727,7 @@
   },
   {
     "ID": "Jade",
-    "Image": "../src/data/images/characters/Jade.webp",
     "Name": "Jade",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 9",
     "RecruitementDescription": "Tallk with Alear/Diamant or survive",
     "BaseClass": "Axe Armor",
@@ -804,9 +765,7 @@
   },
   {
     "ID": "Ivy",
-    "Image": "../src/data/images/characters/Ivy.webp",
     "Name": "Ivy",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "BaseClass": "Wing Tamer Ivy",
@@ -844,9 +803,7 @@
   },
   {
     "ID": "Kagetsu",
-    "Image": "../src/data/images/characters/Kagetsu.webp",
     "Name": "Kagetsu",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "BaseClass": "Swordmaster",
@@ -884,9 +841,7 @@
   },
   {
     "ID": "Zelkov",
-    "Image": "../src/data/images/characters/Zelkov.webp",
     "Name": "Zelkov",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "BaseClass": "Thief",
@@ -924,9 +879,7 @@
   },
   {
     "ID": "Fogado",
-    "Image": "../src/data/images/characters/Fogado.webp",
     "Name": "Fogado",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "BaseClass": "Sentinel Fogado",
@@ -964,9 +917,7 @@
   },
   {
     "ID": "Pandreo",
-    "Image": "../src/data/images/characters/Pandreo.webp",
     "Name": "Pandreo",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "BaseClass": "High Priest",
@@ -1004,9 +955,7 @@
   },
   {
     "ID": "Bunet",
-    "Image": "../src/data/images/characters/Bunet.webp",
     "Name": "Bunet",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "BaseClass": "Great Knight Sword Axe",
@@ -1044,9 +993,7 @@
   },
   {
     "ID": "Timerra",
-    "Image": "../src/data/images/characters/Timerra.webp",
     "Name": "Timerra",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Sentinel Timerra",
@@ -1084,9 +1031,7 @@
   },
   {
     "ID": "Panette",
-    "Image": "../src/data/images/characters/Panette.webp",
     "Name": "Panette",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Berserker",
@@ -1124,9 +1069,7 @@
   },
   {
     "ID": "Merrin",
-    "Image": "../src/data/images/characters/Merrin.webp",
     "Name": "Merrin",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Sword Wolf Knight",
@@ -1164,9 +1107,7 @@
   },
   {
     "ID": "Hortensia",
-    "Image": "../src/data/images/characters/Hortensia.webp",
     "Name": "Hortensia",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 14",
     "RecruitementDescription": "-",
     "BaseClass": "Wing Tamer Hortensia",
@@ -1204,9 +1145,7 @@
   },
   {
     "ID": "Seadall",
-    "Image": "../src/data/images/characters/Seadall.webp",
     "Name": "Seadall",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 15",
     "RecruitementDescription": "-",
     "BaseClass": "Dancer",
@@ -1244,9 +1183,7 @@
   },
   {
     "ID": "Rosado",
-    "Image": "../src/data/images/characters/Rosado.webp",
     "Name": "Rosado",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 16",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Lance Axe Wyvern Knight",
@@ -1284,9 +1221,7 @@
   },
   {
     "ID": "Goldmary",
-    "Image": "../src/data/images/characters/Goldmary.webp",
     "Name": "Goldmary",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 16",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Hero Lance",
@@ -1324,9 +1259,7 @@
   },
   {
     "ID": "Lindon",
-    "Image": "../src/data/images/characters/Lindon.webp",
     "Name": "Lindon",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 18",
     "RecruitementDescription": "Talk with Alear/Ivy/Hortensia",
     "BaseClass": "Sage",
@@ -1364,9 +1297,7 @@
   },
   {
     "ID": "Saphir",
-    "Image": "../src/data/images/characters/Saphir.webp",
     "Name": "Saphir",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 19",
     "RecruitementDescription": "Talk with Alear/Diamant/Alcryst or survive?",
     "BaseClass": "Warrior",
@@ -1404,9 +1335,7 @@
   },
   {
     "ID": "Veyle",
-    "Image": "../src/data/images/characters/Veyle.webp",
     "Name": "Veyle",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 21",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Fell Child",
@@ -1444,9 +1373,7 @@
   },
   {
     "ID": "Mauvier",
-    "Image": "../src/data/images/characters/Mauvier.webp",
     "Name": "Mauvier",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 22",
     "RecruitementDescription": "When the fight begins",
     "BaseClass": "Royal Knight",
@@ -1484,9 +1411,7 @@
   },
   {
     "ID": "Nel",
-    "Image": "../src/data/images/characters/Nel.webp",
     "Name": "Nel",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "BaseClass": "Fell Child Nel",
@@ -1524,9 +1449,7 @@
   },
   {
     "ID": "Rafal",
-    "Image": "../src/data/images/characters/Rafal.webp",
     "Name": "Rafal",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "BaseClass": "Fell Child Rafal",
@@ -1564,9 +1487,7 @@
   },
   {
     "ID": "Zelestia",
-    "Image": "../src/data/images/characters/Zelestia.webp",
     "Name": "Zelestia",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "BaseClass": "Melusine",
@@ -1604,9 +1525,7 @@
   },
   {
     "ID": "Gregory",
-    "Image": "../src/data/images/characters/Gregory.webp",
     "Name": "Gregory",
-    "Gender": "M",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "BaseClass": "Sage",
@@ -1644,9 +1563,7 @@
   },
   {
     "ID": "Madeline",
-    "Image": "../src/data/images/characters/Madeline.webp",
     "Name": "Madeline",
-    "Gender": "F",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "BaseClass": "Axe General",
