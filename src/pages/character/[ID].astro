@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import characters from '../../data/characters.json'
-import classes from '../../data/classes.json'
+import characters from '../../../public/data/characters.json'
+import classes from '../../../public/data/classes.json'
 import BentoItem from '../../components/BentoItem.astro'
-import { Image } from "astro:assets"
+import { Image } from 'astro:assets'
 
 export async function getStaticPaths() {
   return characters.map((chars) => {
@@ -12,16 +12,14 @@ export async function getStaticPaths() {
     };
   });
 }
-const { id } = Astro.params;
-const char = characters.filter(item => item.ID === id)
+
+const { id } = Astro.params
+const char = characters.filter(char => char.ID === id)
 const imagen = await Astro.glob('../../data/images/characters/*.webp')
-.then((files) => files
-  .map((file) => file.default)
+.then(imgs => imgs
+  .map(img => img.default)
     .filter(item => item.src.includes(id))
 )
-
-/* const charClass = classes.map((clas) => clas)
-  .find(item => item.ID === char[0].BaseClass); */
 ---
 <Layout 
     title={char[0].Name}
@@ -29,35 +27,39 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
 >
   <section class="grid max-w-6xl gap-2 p-2 m-auto overflow-hidden auto-rows-min md:grid-cols-12"
   >
-    <BentoItem title="Image"          class="md:col-span-3 md:row-span-6">
+    <BentoItem title="Image" class="md:col-span-3 md:row-span-6">
       {
-        imagen.map((img) => (  
+        imagen.map(img => (  
           <Image
             src={img}
             alt={char[0].Name}
             class="object-scale-down object-bottom w-auto m-auto rounded-lg sm:object-cover h-60 sm:h-full"
-      />))
+          />
+        ))
       }
     </BentoItem>
-    <BentoItem title="Bio"            class="md:col-span-6 md:row-span-3">
+    <BentoItem title="Bio" class="md:col-span-6 md:row-span-3">
       <h2 class="mb-2 text-2xl font-semibold">{char[0].Name}</h2>
       <p class="text-justify text-balance">Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
     </BentoItem>
-    <BentoItem title="Recruitment"    class="md:col-span-3 md:row-span-2">
+    <BentoItem title="Recruitment" class="md:col-span-3 md:row-span-2">
       <p>{char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
     </BentoItem>
-    <BentoItem title="Base SP"        class="md:col-span-3 md:row-span-1">
+    <BentoItem title="Base SP" class="md:col-span-2 md:row-span-1">
       <p>{char[0].BaseSP}</p>
     </BentoItem>
+    <BentoItem title="Libre2" class="md:col-span-1 md:row-span-1">
+      <p>Libre2</p>
+    </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
-      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
-      <p class="inline align-middle">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
+      <img class="inline align-middle rounded-md size-6" src=`../src/data/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
+      <p class="inline align-middle ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
     </BentoItem>
     <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
-      <img class="inline h-auto mr-1 align-middle rounded-sm w-7" src=`../src/data/images/proficiencies/${char[0].InnateProficiencies}.png` alt={char[0].InnateProficiencies}/>
-      <p class="inline font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
-      <img class="inline h-auto ml-2 mr-1 align-middle rounded-sm w-7" src=`../src/data/images/proficiencies/${char[0].Proficiencies}.png` alt={char[0].Proficiencies}/>
-      <p class="inline align-middle">{char[0].Proficiencies}</p>
+      <img class="inline align-middle rounded-md size-6" src=`../src/data/images/proficiencies/${char[0].InnateProficiencies}.webp` alt={char[0].InnateProficiencies}/>
+      <p class="inline ms-1 font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
+      <img class="inline ml-2 align-middle rounded-md size-6" src=`../src/data/images/proficiencies/${char[0].Proficiencies}.webp` alt={char[0].Proficiencies}/>
+      <p class="inline align-middle ms-1">{char[0].Proficiencies}</p>
     </BentoItem>
     <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
       Stats Ranking
@@ -76,9 +78,7 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
         entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
         a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
 
---------------------------------------
         El level up incial funciona asi: el personaje arranca en nivel 1 con los Growths base ya aplicados (lo del personaje, sin la clase), cuando sube a nivel 2 se ya aplican los Growths que incluyen a la clase base, y ahi los que llegan o pasan 100 suben un nivel, lo que sobra queda para el nivel siguiente
-
 
       -->
     </BentoItem>
@@ -86,13 +86,14 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
       <p>Base: {char[0].BaseClass}</p>
       <select id="selectClass" name="selectClass" class="p-2 rounded-lg min-w-min">
         {
-          classes.map((item) => (
+          classes.map(item => (
             (item.ID === char[0].BaseClass)
             ?
             <option value={item.ID} selected>{item.ID}</option>
             :
             <option value={item.ID}>{item.ID}</option>
-        ))}
+          ))
+        }
       </select>
       <label class="inline-flex align-middle cursor-pointer ">
         <input type="checkbox" id="applyClass" name="applyClass" class="sr-only peer">
@@ -124,7 +125,7 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
         </thead>
         <tbody>
           <tr class="bg-gray-800">
-            <td id="HP">{char[0].BaseHp}</td>
+            <td>{char[0].BaseHp}</td>
             <td>{char[0].BaseStr}</td>
             <td>{char[0].BaseMag}</td>
             <td>{char[0].BaseDex}</td>
@@ -139,7 +140,7 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
       </table>
     </BentoItem>
     <BentoItem title="Growth Rates"   class="md:col-span-6 md:row-span-2">
-      <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
+      <table id="Growths" class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
         <thead>
           <tr>
             <th class="text-md" colspan="10">GROWTH RATES</th>
@@ -176,22 +177,48 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
   </section>
 </Layout>
 
-<script is:inline define:vars={{charClasses:classes}}>
-  var applyClassCheckbox = document.getElementById('applyClass');
-  var baseHpCell = document.getElementById('HP');
-  var baseHpValue = parseInt(baseHpCell.textContent);
 
-  applyClassCheckbox.addEventListener('change', function() {
+
+<script is:inline define:vars={{ baseClass: char[0].BaseClass }}>
+  var applyClassCheckbox = document.getElementById('applyClass');
+  const cells = document.querySelectorAll('#Growths tbody > tr > td');
+  const baseValues = Array.from(cells, cell => parseInt(cell.textContent));
+  let cachedGrowths = null; // Variable global para almacenar en caché los datos de crecimiento
+
+  applyClassCheckbox.addEventListener('change', async function() {
     if (this.checked) {
-      baseHpValue += 10;
-      baseHpCell.classList.add('text-green-400', 'font-semibold');
+      if (!cachedGrowths) {
+        const response = await fetch('/data/classes.json');
+        const classes = await response.json();
+        const baseClassData = classes.find(cls => cls.ID === baseClass).Growths;
+        cachedGrowths = baseClassData;
+      }
+
+      Object.keys(cachedGrowths).forEach((key, index) => {
+        
+        if (cachedGrowths[key] !== 0) {
+          cells[index].textContent = baseValues[index] + cachedGrowths[key];
+          cells[index].classList.add('text-green-400', 'font-semibold');
+        }
+      });
     } else {
-      baseHpValue -= 10;
-      baseHpCell.classList.remove('text-green-400', 'font-semibold');
+      cells.forEach((cell, index) => {
+        if (!isNaN(baseValues[index])) {
+          cell.textContent = baseValues[index];
+        }
+        cell.classList.remove('text-green-400', 'font-semibold');
+      });
     }
-    baseHpCell.textContent = baseHpValue;
   });
 </script>
+
+
+
+
+
+
+
+
 
 <script is:inline>
   var baseLvlInput = document.getElementById('baseLvl');
@@ -200,4 +227,20 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
   baseLvlInput.addEventListener('input', function() {
     lvlSpan.textContent = this.value;
   });
+</script>
+
+<script is:inline>
+  async function fetchData() {
+    try {
+      const response = await fetch('/data/characters.json');
+      if (!response.ok) {
+        throw new Error('Error al cargar el archivo JSON');
+      }
+      const data = await response.json();
+    } catch (error) {
+      console.error('Error al obtener datos:', error);
+    }
+  }
+
+  fetchData();
 </script>

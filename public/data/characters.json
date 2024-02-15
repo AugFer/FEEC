@@ -1,6 +1,6 @@
 [
   {
-    "ID": "AlearM",
+    "ID": "Alear",
     "Name": "Alear",
     "RecruitementChapter": "Prologue",
     "RecruitementDescription": "From start",
@@ -38,46 +38,6 @@
     "MaxDef": 0,
     "MaxRes": 0,
     "MaxLck": 0
-  },
-  {
-    "ID": "AlearF",
-    "Name": "Alear",
-    "PersonalSkill": "Divinely Inspiring",
-    "PersonalSkillDesc": "Adjacent allies deal +3 damage and take 1 less damage.",
-    "RecruitementChapter": "Prologue",
-    "RecruitementDescription": "From start",
-    "BaseClass": "Dragon Child",
-    "BaseLevel": 1,
-    "BaseInternalLevel": 1,
-    "BaseSP": 300,
-    "BaseHp": 22,
-    "BaseStr": 6,
-    "BaseMag": 0,
-    "BaseDex": 5,
-    "BaseSpd": 7,
-    "BaseDef": 5,
-    "BaseRes": 3,
-    "BaseLck": 5,
-    "BaseBld": 4,
-    "BaseMov": 4,
-    "GrowthHp": 60,
-    "GrowthStr": 35,
-    "GrowthMag": 20,
-    "GrowthDex": 45,
-    "GrowthSpd": 50,
-    "GrowthDef": 40,
-    "GrowthRes": 25,
-    "GrowthLck": 25,
-    "GrowthBld": 5,
-    "MaxStr": 1,
-    "MaxMag": 0,
-    "MaxDex": 1,
-    "MaxSpd": 1,
-    "MaxDef": 0,
-    "MaxRes": 0,
-    "MaxLck": 0,
-    "InnateProficiencies": "Sword",
-    "Proficiencies": "Arts"
   },
   {
     "ID": "Vander",
@@ -494,7 +454,7 @@
     "MaxDef": -2,
     "MaxRes": 2,
     "MaxLck": -1,
-    "InnateProficiencies": "Knife",
+    "InnateProficiencies": "Dagger",
     "Proficiencies": "-"
   },
   {
@@ -874,7 +834,7 @@
     "MaxDef": 0,
     "MaxRes": -1,
     "MaxLck": 1,
-    "InnateProficiencies": "Knife",
+    "InnateProficiencies": "Dagger",
     "Proficiencies": "-"
   },
   {
@@ -1064,7 +1024,7 @@
     "MaxDef": 0,
     "MaxRes": -1,
     "MaxLck": 0,
-    "InnateProficiencies": "Knife",
+    "InnateProficiencies": "Dagger",
     "Proficiencies": "Axe"
   },
   {
@@ -1102,7 +1062,7 @@
     "MaxDef": -1,
     "MaxRes": 0,
     "MaxLck": 1,
-    "InnateProficiencies": "Knife",
+    "InnateProficiencies": "Dagger",
     "Proficiencies": "Sword"
   },
   {
@@ -1369,7 +1329,7 @@
     "MaxRes": 3,
     "MaxLck": -2,
     "InnateProficiencies": "Tome",
-    "Proficiencies": "Knife"
+    "Proficiencies": "Dagger"
   },
   {
     "ID": "Mauvier",
