@@ -1,54 +1,30 @@
-# Astro Starter Kit: Basics
 
-```sh
-npm create astro@latest -- --template basics
-```
+# Fire Emblem Engage Companion
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+![Fire Emblem Engage Logo](https://upload.wikimedia.org/wikipedia/commons/9/91/Fire_Emblem_Engage_Logo.png)
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Fire Emblem Engage Companion es una aplicación web diseñada para servir como una base de datos para el juego Fire Emblem Engage. Esta aplicación proporciona a los jugadores una interfaz intuitiva para planificar estrategias y conocer las estadísticas a largo plazo de cada personaje y clase disponible en el juego.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## Características Principales
 
-## 🚀 Project Structure
+- **Información Detallada de Personajes:** Obtén información detallada sobre cada personaje del juego, incluyendo sus estadísticas base, crecimiento de atributos, habilidades exclusivas, debilidades y modificadores de clase para comprender su potencial a largo plazo. Considera cómo estas estadísticas se alinean con las clases disponibles, tu estilo de juego y el resto de tu equipo.
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Clases Disponibles:** Explora las clases disponibles en el juego y sus características únicas. Comprende las fortalezas y debilidades de cada clase para crear equipos equilibrados y estratégicos.
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- **Planificación a Largo Plazo:** Utiliza la aplicación para planificar estrategias a largo plazo, anticipando el crecimiento de atributos de tus personajes y seleccionando las clases más adecuadas para maximizar su potencial. Considera las fortalezas y debilidades de cada personaje y clase para formar un equipo poderoso que pueda enfrentarse al máximo desafio que ofrece Fire Emblem Engage.
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+- **Interfaz Intuitiva:** Disfruta de una interfaz de usuario intuitiva y fácil de usar que permite navegar rápidamente entre los distintos personajes y clases. Encuentra la información que necesitas con rapidez y eficiencia.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## Contribución
 
-Any static assets, like images, can be placed in the `public/` directory.
+¡Fire Emblem Engage Companion es un proyecto en desarrollo realizado por una unica persona. Toda contribución, sugerencia de características, informe de errores o mejoras de cualquier tipo, se recibirán con una sonrisa 😃
 
-## 🧞 Commands
+## Licencia
 
-All commands are run from the root of the project, from a terminal:
+Este proyecto está bajo la licencia [MIT](https://opensource.org/licenses/MIT). Siéntete libre de utilizar, modificar y distribuir el código según tus necesidades.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Contacto
 
-## 👀 Want to learn more?
+Para cualquier pregunta o consulta, no dudes en ponerte en contacto.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+¡Gracias por usar Fire Emblem Engage Companion y que disfrutes planificando tus estrategias en el juego!
