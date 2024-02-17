@@ -1,8 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro'
-import characters from '../../../public/data/characters.json'
-import classes from '../../../public/data/classes.json'
+import characters from '../../assets/data/characters.json'
 import BentoItem from '../../components/BentoItem.astro'
+import classes from '../../assets/data/classes.json'
 import { Image } from 'astro:assets'
 
 export async function getStaticPaths() {
@@ -15,11 +15,11 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params
 const char = characters.filter(char => char.ID === id)
-const imagen = await Astro.glob('../../data/images/characters/*.webp')
+const imagen = await Astro.glob('../../assets/images/characters/*.webp')
 .then(imgs => imgs
   .map(img => img.default)
     .filter(item => item.src.includes(id))
-)
+);
 ---
 <Layout 
     title={char[0].Name}
@@ -52,14 +52,26 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
       <p>Libre2</p>
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
-      <img class="inline align-middle rounded-md size-6" src=`../src/data/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
+      <img class="inline align-middle rounded-md size-6" src=`../src/assets/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
       <p class="inline align-middle ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
     </BentoItem>
     <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
-      <img class="inline align-middle rounded-md size-6" src=`../src/data/images/proficiencies/${char[0].InnateProficiencies}.webp` alt={char[0].InnateProficiencies}/>
+      <img class="inline align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
       <p class="inline ms-1 font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
-      <img class="inline ml-2 align-middle rounded-md size-6" src=`../src/data/images/proficiencies/${char[0].Proficiencies}.webp` alt={char[0].Proficiencies}/>
-      <p class="inline align-middle ms-1">{char[0].Proficiencies}</p>
+      
+      {(char[0].Proficiencies !== "-" && !Array.isArray(char[0].Proficiencies)) && (
+        <>
+          <img class="inline ml-2 align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${char[0].Proficiencies}.webp`} alt={char[0].Proficiencies}/>
+          <p class="inline align-middle ms-1">{char[0].Proficiencies}</p>
+        </>
+      )}
+
+      {(char[0].Proficiencies !== "-") && Array.isArray(char[0].Proficiencies) && char[0].Proficiencies.map((proficiency: string) => (
+        <>
+          <img class="inline ml-2 align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${proficiency}.webp`} alt={proficiency}/>
+          <p class="inline align-middle ms-1">{proficiency}</p>
+        </>
+      ))}
     </BentoItem>
     <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
       Stats Ranking
@@ -67,8 +79,7 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
     <BentoItem title="Level"          class="md:col-span-4 md:row-span-2">
       <div class="flex items-center mb-2">
         <p class="m-0 mr-4 min-w-max">Base: {char[0].BaseLevel}</p>
-        <input id="baseLvl" type="range" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" step="1" class="w-full h-2 align-middle bg-gray-700 rounded-lg appearance-none cursor-pointer accent-red-600">
-        <span id="lvl" class="w-6 ml-2 text-center">{char[0].BaseLevel}</span>
+        <input id="baseLvl" onkeydown="return false" type="number" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" class="border text-gray-300 text-sm rounded-lg block w-14 p-1 text-center bg-gray-700 border-gray-600 "/>
       </div>
       <p>Base Internal: {char[0].BaseInternalLevel}</p>
       <!--
@@ -83,7 +94,14 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
       -->
     </BentoItem>
     <BentoItem title="Class"          class="md:col-span-4 md:row-span-2">
-      <p>Base: {char[0].BaseClass}</p>
+      <div class="flex justify-between">
+        <p>Base: {char[0].BaseClass}</p>
+        <label for="applyClass" class="ms-2 inline-flex align-middle cursor-pointer">
+          <input id="applyClass" name="applyClass" type="checkbox" class="sr-only peer">
+          <div class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600 ring-blue-500"></div>
+          Apply
+        </label>
+      </div>
       <select id="selectClass" name="selectClass" class="p-2 rounded-lg min-w-min">
         {
           classes.map(item => (
@@ -95,17 +113,12 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
           ))
         }
       </select>
-      <label class="inline-flex align-middle cursor-pointer ">
-        <input type="checkbox" id="applyClass" name="applyClass" class="sr-only peer">
-        <div class="relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
-        <span class="ms-2">Apply</span>
-      </label>
     </BentoItem>
     <BentoItem title="Emblem / Ring"  class="md:col-span-4 md:row-span-2">
       <p>Emblem or ring equiped and effect</p>
     </BentoItem>
     <BentoItem title="Stats"          class="md:col-span-6 md:row-span-2">
-      <table class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
+      <table id="Stats" class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
         <thead>
           <tr>
             <th class="text-md" colspan="10">STATS</th>
@@ -177,70 +190,105 @@ const imagen = await Astro.glob('../../data/images/characters/*.webp')
   </section>
 </Layout>
 
-
-
 <script is:inline define:vars={{ baseClass: char[0].BaseClass }}>
-  var applyClassCheckbox = document.getElementById('applyClass');
-  const cells = document.querySelectorAll('#Growths tbody > tr > td');
-  const baseValues = Array.from(cells, cell => parseInt(cell.textContent));
-  let cachedGrowths = null; // Variable global para almacenar en caché los datos de crecimiento
+  let applyClassCheckbox = document.getElementById('applyClass'); // el checkbox
+  const baseLvlInput = document.getElementById('baseLvl'); // el slider de nivel
+  let lvlactual = baseLvlInput.valueAsNumber;
+  let $statCells = document.querySelectorAll('#Stats tbody > tr > td'); // las celdas de la tabla de Stats
+  const baseStats = Array.from($statCells, cell => parseInt(cell.textContent)); // array con los stats base
+  const $growthCells = document.querySelectorAll('#Growths tbody > tr > td:not(:last-child)'); // las celdas de la tabla de growths
+  const baseGrowths = Array.from($growthCells, cell => parseInt(cell.textContent)); // array con los growths base
+  let growthCounters = Array.from(baseGrowths); // array que como sumador de los growths para calcular la subida de nivel
+  let classGrowths = []; // array con los growths de la clase base
+  let totalGrowths = []; // array con la suma de los growths base y de la clase base
+  (async function getClassGrowths() {
+    const response = await fetch('/data/classes.json');
+    const classes = await response.json();
+    classGrowths = Object.values(classes.find(cls => cls.ID === baseClass).Growths);
+    classGrowths.forEach((growth, index) => {
+      totalGrowths[index] = baseGrowths[index] + growth;
+    });
+  })();
 
-  applyClassCheckbox.addEventListener('change', async function() {
-    if (this.checked) {
-      if (!cachedGrowths) {
-        const response = await fetch('/data/classes.json');
-        const classes = await response.json();
-        const baseClassData = classes.find(cls => cls.ID === baseClass).Growths;
-        cachedGrowths = baseClassData;
+  applyClassCheckbox.addEventListener('change', function() {
+    if (baseLvlInput.valueAsNumber === 1) {
+        applyBaseClass();
+    }
+});
+  
+  baseLvlInput.addEventListener('input', function() {
+      // Obtener el nuevo valor de lvlactual
+      //lvlactual = parseInt(this.value);
+      
+      // Si lvlactual es igual a 1, permitir al usuario activar o desactivar el checkbox
+      if (baseLvlInput.valueAsNumber === 1) {
+          applyClassCheckbox.disabled = false;
+      } else {
+          // De lo contrario, marcar y deshabilitar el checkbox
+          applyClassCheckbox.checked = true;
+          applyClassCheckbox.disabled = true;
+          applyBaseClass();
       }
+  });
 
-      Object.keys(cachedGrowths).forEach((key, index) => {
-        
-        if (cachedGrowths[key] !== 0) {
-          cells[index].textContent = baseValues[index] + cachedGrowths[key];
-          cells[index].classList.add('text-green-400', 'font-semibold');
+  function applyBaseClass() {
+    if (applyClassCheckbox.checked) {
+      classGrowths.forEach((growth, index) => {
+        if (growth !== 0) {
+          $growthCells[index].textContent = baseGrowths[index] + growth;
+          $growthCells[index].classList.add('text-green-400', 'font-semibold');
         }
       });
     } else {
-      cells.forEach((cell, index) => {
-        if (!isNaN(baseValues[index])) {
-          cell.textContent = baseValues[index];
-        }
+      $growthCells.forEach((cell, index) => {
+        cell.textContent = baseGrowths[index];
         cell.classList.remove('text-green-400', 'font-semibold');
       });
     }
-  });
-</script>
-
-
-
-
-
-
-
-
-
-<script is:inline>
-  var baseLvlInput = document.getElementById('baseLvl');
-  var lvlSpan = document.getElementById('lvl');
-
-  baseLvlInput.addEventListener('input', function() {
-    lvlSpan.textContent = this.value;
-  });
-</script>
-
-<script is:inline>
-  async function fetchData() {
-    try {
-      const response = await fetch('/data/characters.json');
-      if (!response.ok) {
-        throw new Error('Error al cargar el archivo JSON');
-      }
-      const data = await response.json();
-    } catch (error) {
-      console.error('Error al obtener datos:', error);
-    }
   }
 
-  fetchData();
+
+  baseLvlInput.addEventListener('input', function() {
+    let newLevel = this.valueAsNumber;
+    if(newLevel > lvlactual){
+      lvlactual=newLevel
+      for (let i = 0; i < growthCounters.length; i++) {
+        growthCounters[i] += totalGrowths[i];
+        if (growthCounters[i] >= 100) {
+          growthCounters[i] -= 100;
+          $statCells[i].textContent = parseInt($statCells[i].textContent) + 1;
+          $statCells[i].classList.remove('text-red-400');
+          $statCells[i].classList.add('text-green-400', 'font-semibold');
+        }
+        else {
+          $statCells[i].classList.remove('text-green-400', 'font-semibold');
+        }
+      }
+    } else{
+      lvlactual=newLevel
+      for (let i = 0; i < growthCounters.length; i++) {
+        growthCounters[i] -= totalGrowths[i];
+        if (growthCounters[i] < 0) {
+          growthCounters[i] = 100 + growthCounters[i]
+          $statCells[i].textContent = parseInt($statCells[i].textContent) - 1;
+          $statCells[i].classList.remove('text-green-400');
+          $statCells[i].classList.add('text-red-400', 'font-semibold');
+          if(lvlactual===1){
+            $statCells[i].classList.remove('text-red-400', 'font-semibold');
+          }
+        }
+        else {
+          $statCells[i].classList.remove('text-red-400', 'font-semibold');
+        }
+      }
+      
+    }
+  });
 </script>
+
+<style>
+
+  input[type="checkbox"][disabled] {
+    filter: invert(100%) hue-rotate(18deg) brightness(5);
+  }
+</style>
