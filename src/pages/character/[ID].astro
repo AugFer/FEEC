@@ -52,53 +52,61 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
       <p>Libre2</p>
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
-      <img class="inline align-middle rounded-md size-6" src=`../src/assets/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
+      <img class="inline align-middle size-6" src=`/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
       <p class="inline align-middle ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
     </BentoItem>
     <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
-      <img class="inline align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
-      <p class="inline ms-1 font-semibold align-middle text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
+      <img class="inline align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
+      <p class="inline font-semibold align-middle ms-1 text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
       
       {(char[0].Proficiencies !== "-" && !Array.isArray(char[0].Proficiencies)) && (
         <>
-          <img class="inline ml-2 align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${char[0].Proficiencies}.webp`} alt={char[0].Proficiencies}/>
+          <img class="inline ml-2 align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].Proficiencies}.webp`} alt={char[0].Proficiencies}/>
           <p class="inline align-middle ms-1">{char[0].Proficiencies}</p>
         </>
       )}
 
       {(char[0].Proficiencies !== "-") && Array.isArray(char[0].Proficiencies) && char[0].Proficiencies.map((proficiency: string) => (
         <>
-          <img class="inline ml-2 align-middle rounded-md size-6" src={`../src/assets/images/proficiencies/${proficiency}.webp`} alt={proficiency}/>
+          <img class="inline ml-2 align-middle rounded-md size-6" src={`/images/proficiencies/${proficiency}.webp`} alt={proficiency}/>
           <p class="inline align-middle ms-1">{proficiency}</p>
         </>
       ))}
     </BentoItem>
     <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
-      Stats Ranking
+      <p>Stats Ranking</p>
     </BentoItem>
     <BentoItem title="Level"          class="md:col-span-4 md:row-span-2">
       <div class="flex items-center mb-2">
         <p class="m-0 mr-4 min-w-max">Base: {char[0].BaseLevel}</p>
-        <input id="baseLvl" onkeydown="return false" type="number" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" class="border text-gray-300 text-sm rounded-lg block w-14 p-1 text-center bg-gray-700 border-gray-600 "/>
+        <div class="flex">
+          <button id="baseLvlDown" class="w-8 p-1 font-extrabold text-center text-gray-300 bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
+          <input type="text" readonly id="baseLvl" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" class="w-12 p-1 text-sm text-center text-gray-300 bg-gray-700 border border-gray-600">
+          <button id="baseLvlUp" class="w-8 p-1 font-extrabold text-center text-gray-300 bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
+        </div>
+        <label for="promote" class="inline-flex align-middle cursor-pointer ms-2">
+          <input id="promote" type="checkbox" class="sr-only peer"/>
+          <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+          Promote
+        </label>
       </div>
       <p>Base Internal: {char[0].BaseInternalLevel}</p>
+      
+      
       <!--
         slider de nivel base y un check button para indicar el momento de asencion
         cuando elige una clase avanzada en el dropdawn de clase, lo de arriba se deshabilita para no cambiarlo
         se habilita entonces un slider de nivel para la clase avanzada
         entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
         a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
-
-        El level up incial funciona asi: el personaje arranca en nivel 1 con los Growths base ya aplicados (lo del personaje, sin la clase), cuando sube a nivel 2 se ya aplican los Growths que incluyen a la clase base, y ahi los que llegan o pasan 100 suben un nivel, lo que sobra queda para el nivel siguiente
-
       -->
     </BentoItem>
     <BentoItem title="Class"          class="md:col-span-4 md:row-span-2">
       <div class="flex justify-between">
         <p>Base: {char[0].BaseClass}</p>
-        <label for="applyClass" class="ms-2 inline-flex align-middle cursor-pointer">
-          <input id="applyClass" name="applyClass" type="checkbox" class="sr-only peer">
-          <div class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600 ring-blue-500"></div>
+        <label for="applyBaseClass" class="inline-flex align-middle cursor-pointer ms-2">
+          <input id="applyBaseClass" type="checkbox" class="sr-only peer"/>
+          <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           Apply
         </label>
       </div>
@@ -190,18 +198,19 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
   </section>
 </Layout>
 
-<script is:inline define:vars={{ baseClass: char[0].BaseClass }}>
-  let applyClassCheckbox = document.getElementById('applyClass'); // el checkbox
-  const baseLvlInput = document.getElementById('baseLvl'); // el slider de nivel
-  let lvlactual = baseLvlInput.valueAsNumber;
-  let $statCells = document.querySelectorAll('#Stats tbody > tr > td'); // las celdas de la tabla de Stats
-  const baseStats = Array.from($statCells, cell => parseInt(cell.textContent)); // array con los stats base
+<script type="module" define:vars={{ baseClass: char[0].BaseClass, baseLevel: char[0].BaseLevel }}>
+  const $applyBaseClass = document.getElementById('applyBaseClass'); // el checkbox
+  const $baseLvl = document.getElementById('baseLvl'); // el slider de nivel
+  const $statCells = document.querySelectorAll('#Stats tbody > tr > td'); // las celdas de la tabla de Stats
   const $growthCells = document.querySelectorAll('#Growths tbody > tr > td:not(:last-child)'); // las celdas de la tabla de growths
-  const baseGrowths = Array.from($growthCells, cell => parseInt(cell.textContent)); // array con los growths base
-  let growthCounters = Array.from(baseGrowths); // array que como sumador de los growths para calcular la subida de nivel
+  const baseStats = Array.from($statCells, cell => Number(cell.textContent)); // array con los stats base
+  const baseGrowths = Array.from($growthCells, cell => Number(cell.textContent)); // array con los growths base
+  let growthCounters = Array.from(baseGrowths); // array que sirve de sumador de los growths para calcular la subida de nivel
   let classGrowths = []; // array con los growths de la clase base
   let totalGrowths = []; // array con la suma de los growths base y de la clase base
-  (async function getClassGrowths() {
+  let lvlactual = Number($baseLvl.value);
+
+  (async function getBaseClassGrowths() {
     const response = await fetch('/data/classes.json');
     const classes = await response.json();
     classGrowths = Object.values(classes.find(cls => cls.ID === baseClass).Growths);
@@ -210,29 +219,23 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     });
   })();
 
-  applyClassCheckbox.addEventListener('change', function() {
-    if (baseLvlInput.valueAsNumber === 1) {
-        applyBaseClass();
+  $applyBaseClass.addEventListener('change', function() {
+    if (Number($baseLvl.value) === baseLevel) {
+      applyBaseClass();
     }
-});
-  
-  baseLvlInput.addEventListener('input', function() {
-      // Obtener el nuevo valor de lvlactual
-      //lvlactual = parseInt(this.value);
-      
-      // Si lvlactual es igual a 1, permitir al usuario activar o desactivar el checkbox
-      if (baseLvlInput.valueAsNumber === 1) {
-          applyClassCheckbox.disabled = false;
-      } else {
-          // De lo contrario, marcar y deshabilitar el checkbox
-          applyClassCheckbox.checked = true;
-          applyClassCheckbox.disabled = true;
-          applyBaseClass();
-      }
   });
 
+  document.getElementById('baseLvlDown').addEventListener("click", function() {
+    changeBaseLvl(-1);
+  });
+
+  document.getElementById('baseLvlUp').addEventListener("click", function() {
+    changeBaseLvl(1);
+  });
+ 
+  // Aplica colores a las celdas de Growths que se modifiquen por la clase base
   function applyBaseClass() {
-    if (applyClassCheckbox.checked) {
+    if ($applyBaseClass.checked) {
       classGrowths.forEach((growth, index) => {
         if (growth !== 0) {
           $growthCells[index].textContent = baseGrowths[index] + growth;
@@ -247,18 +250,57 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     }
   }
 
+  function baseClassToggle() {
+    const baseClassToggle = document.getElementById('baseClassToggle');
+    if ($applyBaseClass.disabled) {
+      baseClassToggle.classList.remove('peer-checked:bg-red-600', 'after:bg-gray-100');
+      baseClassToggle.classList.add('peer-checked:bg-red-800', 'after:bg-gray-400');
+    } else {
+      baseClassToggle.classList.remove('peer-checked:bg-red-800', 'after:bg-gray-400');
+      baseClassToggle.classList.add('peer-checked:bg-red-600', 'after:bg-gray-100');
+    }
+  }
 
-  baseLvlInput.addEventListener('input', function() {
-    let newLevel = this.valueAsNumber;
+  function changeBaseLvl(change) {
+    const value = Number($baseLvl.value);
+    const minValue = Number($baseLvl.min);
+    const maxValue = Number($baseLvl.max);
+    const newValue = value + change;
+    if (newValue >= minValue && newValue <= maxValue) {
+      $baseLvl.value = newValue;
+      changeBaseStats();
+      changeBaseClassCheckbox();
+      checkBaseLevel();
+    }
+  }
+
+  function changeBaseClassCheckbox() {
+    if (Number($baseLvl.value) === baseLevel) {
+      $applyBaseClass.disabled = false;
+    } else {
+      $applyBaseClass.checked = true;
+      $applyBaseClass.disabled = true;
+      applyBaseClass();
+    }
+    baseClassToggle();
+  }
+  
+  // Se encarga de hacer el calculo de las estadisticas base a medida que se sube o baja de nivel, ademas agrega clases a las celdas que cambian para reflejar los cambios
+  function changeBaseStats() {
+    let newLevel = Number($baseLvl.value);
     if(newLevel > lvlactual){
       lvlactual=newLevel
       for (let i = 0; i < growthCounters.length; i++) {
         growthCounters[i] += totalGrowths[i];
         if (growthCounters[i] >= 100) {
-          growthCounters[i] -= 100;
-          $statCells[i].textContent = parseInt($statCells[i].textContent) + 1;
-          $statCells[i].classList.remove('text-red-400');
-          $statCells[i].classList.add('text-green-400', 'font-semibold');
+          while (growthCounters[i] >= 100){
+            growthCounters[i] -= 100;
+            $statCells[i].textContent = parseInt($statCells[i].textContent) + 1;
+            if (!$statCells[i].classList.contains('text-green-400') || !$statCells[i].classList.contains('font-semibold') || !$statCells[i].classList.contains('text-red-400')) {
+              $statCells[i].classList.remove('text-red-400');
+              $statCells[i].classList.add('text-green-400', 'font-semibold');
+            }
+          }
         }
         else {
           $statCells[i].classList.remove('text-green-400', 'font-semibold');
@@ -269,26 +311,36 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
       for (let i = 0; i < growthCounters.length; i++) {
         growthCounters[i] -= totalGrowths[i];
         if (growthCounters[i] < 0) {
-          growthCounters[i] = 100 + growthCounters[i]
-          $statCells[i].textContent = parseInt($statCells[i].textContent) - 1;
-          $statCells[i].classList.remove('text-green-400');
-          $statCells[i].classList.add('text-red-400', 'font-semibold');
-          if(lvlactual===1){
-            $statCells[i].classList.remove('text-red-400', 'font-semibold');
+          while(growthCounters[i] < 0){
+            growthCounters[i] = 100 + growthCounters[i]
+            $statCells[i].textContent = parseInt($statCells[i].textContent) - 1;
+            if (!$statCells[i].classList.contains('text-green-400') || !$statCells[i].classList.contains('font-semibold') || !$statCells[i].classList.contains('text-red-400')) {
+              $statCells[i].classList.remove('text-green-400');
+              $statCells[i].classList.add('text-red-400', 'font-semibold');
+            }
+            if(lvlactual===baseLevel){
+              $statCells[i].classList.remove('text-red-400', 'font-semibold');
+            }
           }
         }
         else {
           $statCells[i].classList.remove('text-red-400', 'font-semibold');
         }
       }
-      
     }
-  });
-</script>
-
-<style>
-
-  input[type="checkbox"][disabled] {
-    filter: invert(100%) hue-rotate(18deg) brightness(5);
   }
-</style>
+
+  // Se ejecuta al cargar la pagina para definir si el checkbox empieza Disabled o no
+  checkBaseLevel();
+  function checkBaseLevel() {
+    const promoteCheckbox = document.getElementById('promote');
+    if (lvlactual < 10) {
+        promoteCheckbox.disabled = true;
+    } else {
+        promoteCheckbox.disabled = false;
+    }
+  }
+
+  
+
+</script>
