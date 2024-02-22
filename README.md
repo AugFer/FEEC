@@ -1,9 +1,12 @@
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Fire_Emblem_Engage_Logo.png" width="50%" />
+  
+  [![](https://img.shields.io/badge/App_preview-Netlify-cyan)](https://engagecompanion.netlify.app)
+</div>
 
 # Fire Emblem Engage Companion
 
-![Fire Emblem Engage Logo](https://upload.wikimedia.org/wikipedia/commons/9/91/Fire_Emblem_Engage_Logo.png)
-
-Fire Emblem Engage Companion es una aplicación web diseñada para servir como una base de datos para el juego Fire Emblem Engage. Esta aplicación proporciona a los jugadores una interfaz intuitiva para planificar estrategias y conocer las estadísticas a largo plazo de cada personaje y clase disponible en el juego.
+Es una aplicación web diseñada para servir como una base de datos para el juego. Proporciona a los jugadores una interfaz intuitiva para conocer las estadísticas a largo plazo de cada personaje y clase disponible en el juego.
 
 ## Características Principales
 
