@@ -326,10 +326,9 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
   $advClass.addEventListener("change", async function() {
     if(this.value !== "") {
       await getAdvClass(this.value);  // Hacer el fetch de la clase seleccionada y guardarla en una constante
-
     }
     $advClassToggle.disabled = (this.value === "");
-    $advClassToggle.checked = (this.value !== "");
+    $advClassToggle.checked = false;
     applyAdvClass();
   });
 
