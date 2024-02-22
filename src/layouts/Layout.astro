@@ -22,7 +22,7 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 		<ViewTransitions />
 	</head>
-	<body class="pt-20 pb-3 min-h-screen">
+	<body class="min-h-screen pt-20 pb-3">
 		<Header />
 		<slot />
 		<Footer />
@@ -35,6 +35,7 @@ const { title, description } = Astro.props;
 	html {
 		font-family: 'Onest Variable', system-ui, Roboto;
 		background-image: linear-gradient(to top, #e4454f 0%, #44408f 100%);
+		color: rgb(209 213 219);
 	}
 	p {
 		margin-bottom: 0.5em;
@@ -42,6 +43,10 @@ const { title, description } = Astro.props;
 	th, td{
 		padding: 0.25rem;
 	}
-
+	*:disabled {
+		background-color: rgb(107 114 128);
+		color: rgb(55 65 81);
+  		opacity: 1;
+	}
 	
 </style>

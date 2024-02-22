@@ -1,9 +1,10 @@
 ---
-import Layout from '../../layouts/Layout.astro'
-import characters from '../../assets/data/characters.json'
-import BentoItem from '../../components/BentoItem.astro'
-import classes from '../../assets/data/classes.json'
-import { Image } from 'astro:assets'
+import Layout from '../../layouts/Layout.astro';
+import characters from '../../assets/data/characters.json';
+import BentoItem from '../../components/BentoItem.astro';
+import BentoTable from '../../components/BentoTable.astro';
+import classes from '../../assets/data/classes.json';
+import { Image } from 'astro:assets';
 
 export async function getStaticPaths() {
   return characters.map((chars) => {
@@ -53,7 +54,7 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
       <img class="inline align-middle size-6" src=`/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
-      <p class="inline align-middle ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
+      <p class="inline align-middle text-pretty ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
     </BentoItem>
     <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
       <img class="inline align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
@@ -76,169 +77,147 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
       <p>Stats Ranking</p>
     </BentoItem>
-    <BentoItem title="Level"          class="md:col-span-4 md:row-span-2">
+    <BentoItem title="Emblem"  class="md:col-span-2 md:row-span-2">
       <div class="flex items-center mb-2">
-        <p class="m-0 mr-4 min-w-max">Base: {char[0].BaseLevel}</p>
-        <div class="flex">
-          <button id="baseLvlDown" class="w-8 p-1 font-extrabold text-center text-gray-300 bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
-          <input type="text" readonly id="baseLvl" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" class="w-12 p-1 text-sm text-center text-gray-300 bg-gray-700 border border-gray-600">
-          <button id="baseLvlUp" class="w-8 p-1 font-extrabold text-center text-gray-300 bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
-        </div>
-        <label for="promote" class="inline-flex align-middle cursor-pointer ms-2">
-          <input id="promote" type="checkbox" class="sr-only peer"/>
-          <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
-          Promote
-        </label>
+        <select id="emblem" name="emblem" class="p-2 rounded-lg min-w-min">
+          <option value="" selected>- Select -</option>
+        </select>
       </div>
-      <p>Base Internal: {char[0].BaseInternalLevel}</p>
-      
-      
-      <!--
-        slider de nivel base y un check button para indicar el momento de asencion
-        cuando elige una clase avanzada en el dropdawn de clase, lo de arriba se deshabilita para no cambiarlo
-        se habilita entonces un slider de nivel para la clase avanzada
-        entonces en el calculo se toma la clase base y los crecimiento base, durante los niveles que se colocaron antes de marcar el check
-        a eso se le suma el caluclo de los niveles del segundo slider, con los crecimientos de la clase avanzada
-      -->
     </BentoItem>
-    <BentoItem title="Class"          class="md:col-span-4 md:row-span-2">
+    <BentoItem title="Base Class"          class="md:col-span-5 md:row-span-2">
       <div class="flex justify-between">
         <p>Base: {char[0].BaseClass}</p>
         <label for="applyBaseClass" class="inline-flex align-middle cursor-pointer ms-2">
           <input id="applyBaseClass" type="checkbox" class="sr-only peer"/>
-          <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:bg-gray-100 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+          <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600 peer-disabled:peer-checked:bg-green-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
           Apply
         </label>
       </div>
-      <select id="selectClass" name="selectClass" class="p-2 rounded-lg min-w-min">
-        {
-          classes.map(item => (
-            (item.ID === char[0].BaseClass)
-            ?
-            <option value={item.ID} selected>{item.ID}</option>
-            :
-            <option value={item.ID}>{item.ID}</option>
-          ))
-        }
-      </select>
     </BentoItem>
-    <BentoItem title="Emblem / Ring"  class="md:col-span-4 md:row-span-2">
-      <p>Emblem or ring equiped and effect</p>
+    <BentoItem title="Base Level"          class="md:col-span-5 md:row-span-2">
+      <div class="flex items-center justify-between mb-2">
+        <p class="m-0 mr-4 min-w-max">Initial: {char[0].BaseLevel}</p>
+        <p class="m-0 mr-4 min-w-max">Internal: {char[0].BaseInternalLevel}</p>
+        <div class="flex">
+          <button id="baseLvlDown" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
+          <input type="text" readonly id="baseLvl" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` max="20" class="w-12 p-1 text-sm text-center bg-gray-700 border border-gray-600">
+          <button id="baseLvlUp" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
+        </div>
+      </div>
     </BentoItem>
-    <BentoItem title="Stats"          class="md:col-span-6 md:row-span-2">
-      <table id="Stats" class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
-        <thead>
-          <tr>
-            <th class="text-md" colspan="10">STATS</th>
-          </tr>  
-          <tr>
-              <th>HP</th>
-              <th>STR</th>
-              <th>MAG</th>
-              <th>DEX</th>
-              <th>SPD</th>
-              <th>DEF</th>
-              <th>RES</th>
-              <th>LCK</th>
-              <th>BLD</th>
-              <th>MOV</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-gray-800">
-            <td>{char[0].BaseHp}</td>
-            <td>{char[0].BaseStr}</td>
-            <td>{char[0].BaseMag}</td>
-            <td>{char[0].BaseDex}</td>
-            <td>{char[0].BaseSpd}</td>
-            <td>{char[0].BaseDef}</td>
-            <td>{char[0].BaseRes}</td>
-            <td>{char[0].BaseLck}</td>
-            <td>{char[0].BaseBld}</td>
-            <td>{char[0].BaseMov}</td>
-          </tr>
-        </tbody>
-      </table>
+    <BentoTable
+      tableType="Base"
+      id="baseGrowths"
+      title="GROWTH RATES"
+      character={char[0]}
+    />
+    <BentoTable
+      tableType="Base"
+      id="baseStats"
+      title="STATS"
+      character={char[0]}
+    />
+    <BentoItem title="Promotion" class="md:col-span-2 md:row-span-2">
+      <label for="promote" class="inline-flex align-middle cursor-pointer ms-2">
+        <input id="promote" type="checkbox" class="sr-only peer"/>
+        <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-violet-600 peer-disabled:peer-checked:bg-violet-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
+        Promote
+      </label>
     </BentoItem>
-    <BentoItem title="Growth Rates"   class="md:col-span-6 md:row-span-2">
-      <table id="Growths" class="w-full text-xs text-center text-gray-400 bg-gray-700 sm:text-sm">
-        <thead>
-          <tr>
-            <th class="text-md" colspan="10">GROWTH RATES</th>
-          </tr>  
-          <tr>
-            <th>HP</th>
-            <th>STR</th>
-            <th>MAG</th>
-            <th>DEX</th>
-            <th>SPD</th>
-            <th>DEF</th>
-            <th>RES</th>
-            <th>LCK</th>
-            <th>BLD</th>
-            <th>MOV</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-gray-800">
-            <td>{char[0].GrowthHp}</td>
-            <td>{char[0].GrowthStr}</td>
-            <td>{char[0].GrowthMag}</td>
-            <td>{char[0].GrowthDex}</td>
-            <td>{char[0].GrowthSpd}</td>
-            <td>{char[0].GrowthDef}</td>
-            <td>{char[0].GrowthRes}</td>
-            <td>{char[0].GrowthLck}</td>
-            <td>{char[0].GrowthBld}</td>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
+    <BentoItem title="Advanced Class" class="md:col-span-5 md:row-span-2">
+      <div class="flex justify-between">
+        <select id="advClass" disabled name="advClass" class="p-2 rounded-lg min-w-min">
+          <option value="" selected>- Select -</option>
+          {
+            classes.map(item => (
+            ((item.ExclusiveChar === "" || item.ExclusiveChar === char[0].Name) && 
+            (item.ReqBaseClassId === "" || item.ReqBaseClassId === char[0].BaseClass))
+            && (
+              <option value={item.ID}>{item.ID} | {item.Type}</option>
+            )
+          ))}
+        </select>
+        <label for="applyAdvClass" class="inline-flex align-middle cursor-pointer ms-2">
+          <input id="applyAdvClass" type="checkbox" disabled class="sr-only peer"/>
+          <div id="advClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600 peer-disabled:peer-checked:bg-cyan-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
+          Apply
+        </label>
+      </div>
+
     </BentoItem>
+    <BentoItem title="Advanced Level" class="md:col-span-5 md:row-span-2">
+      <div class="flex">
+        <button id="advLvlDown" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
+        <input type="text" readonly id="advLvl" value="1" min="1" max="20" class="w-12 p-1 text-sm text-center bg-gray-700 border border-gray-600">
+        <button id="advLvlUp" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
+      </div>
+    </BentoItem>
+    <BentoTable
+      tableType="Advanced"
+      id="advGrowths"
+      title="GROWTH RATES"
+    />
+    <BentoTable
+      tableType="Advanced"
+      id="advStats"
+      title="STATS"
+    />
   </section>
 </Layout>
 
-<script type="module" define:vars={{ baseClass: char[0].BaseClass, baseLevel: char[0].BaseLevel }}>
-  const $applyBaseClass = document.getElementById('applyBaseClass'); // el checkbox
-  const $baseLvl = document.getElementById('baseLvl'); // el slider de nivel
-  const $statCells = document.querySelectorAll('#Stats tbody > tr > td'); // las celdas de la tabla de Stats
-  const $growthCells = document.querySelectorAll('#Growths tbody > tr > td:not(:last-child)'); // las celdas de la tabla de growths
+<script define:vars={{ baseClass: char[0].BaseClass, charID: char[0].ID }}>
+  const $baseClassToggle = document.getElementById('applyBaseClass');
+  const $baseLvl = document.getElementById('baseLvl');
+  const charBaseLvl = Number($baseLvl.min);
+  const $statCells = document.querySelectorAll('#baseStats tbody > tr > td'); // las celdas de la tabla de Stats
+  const $growthCells = document.querySelectorAll('#baseGrowths tbody > tr > td:not(:last-child)'); // las celdas de la tabla de growths
   const baseStats = Array.from($statCells, cell => Number(cell.textContent)); // array con los stats base
   const baseGrowths = Array.from($growthCells, cell => Number(cell.textContent)); // array con los growths base
   let growthCounters = Array.from(baseGrowths); // array que sirve de sumador de los growths para calcular la subida de nivel
   let classGrowths = []; // array con los growths de la clase base
   let totalGrowths = []; // array con la suma de los growths base y de la clase base
   let lvlactual = Number($baseLvl.value);
+  let baseClassBaseStats = []; // array con los base stats de la clase base
 
-  (async function getBaseClassGrowths() {
+  (async function getBaseClassGrowths() { // Trae el JSON con las clases, encuentra la clase base del persoanje actual y guarda sus crecimientos
     const response = await fetch('/data/classes.json');
     const classes = await response.json();
-    classGrowths = Object.values(classes.find(cls => cls.ID === baseClass).Growths);
+    const baseClassData = classes.find(cls => cls.ID === baseClass);
+    classGrowths = Object.values(baseClassData.Growths);
     classGrowths.forEach((growth, index) => {
       totalGrowths[index] = baseGrowths[index] + growth;
+      if (charID === "Jean") { // La habilidad personal de Jean duplica los crecimientos de su clase
+        totalGrowths[index] += growth;
+      }
     });
+    baseClassBaseStats = Object.values(baseClassData.BaseStats);
   })();
 
-  $applyBaseClass.addEventListener('change', function() {
-    if (Number($baseLvl.value) === baseLevel) {
-      applyBaseClass();
+  document.getElementById('baseLvlDown').addEventListener("click", () => changeBaseLvl(-1)); // Disminuye en 1 el nivel base actual
+  document.getElementById('baseLvlUp').addEventListener("click", () => changeBaseLvl(1)); // Aumenta en 1 el nivel base actual
+
+  function changeBaseLvl(change) { // Refleja las subidas o bajadas de nivel en las tablas de estadisticas base y cehckbox asociados
+    const value = Number($baseLvl.value);
+    const minValue = Number($baseLvl.min);
+    const maxValue = Number($baseLvl.max);
+    const newValue = value + change;
+    if (newValue >= minValue && newValue <= maxValue) {
+      $baseLvl.value = newValue;
+      changeBaseStats(change);
+      if (newValue <= minValue + 1) {
+        baseClassToggle(newValue);
+      }
+      enablePromotion();
     }
-  });
+  }
 
-  document.getElementById('baseLvlDown').addEventListener("click", function() {
-    changeBaseLvl(-1);
-  });
+  $baseClassToggle.addEventListener('change', () => baseClassToggle(Number($baseLvl.value))); // Accion a realizar cuando se clickea el checkbox de clase base
 
-  document.getElementById('baseLvlUp').addEventListener("click", function() {
-    changeBaseLvl(1);
-  });
- 
-  // Aplica colores a las celdas de Growths que se modifiquen por la clase base
-  function applyBaseClass() {
-    if ($applyBaseClass.checked) {
-      classGrowths.forEach((growth, index) => {
-        if (growth !== 0) {
-          $growthCells[index].textContent = baseGrowths[index] + growth;
+  function applyBaseClass() { // Actualiza los valores de crecimiento de la tabla base y pinta los que cambien
+    if ($baseClassToggle.checked) {
+      totalGrowths.forEach((growth, index) => {
+        if (growth !== baseGrowths[index]) {
+          $growthCells[index].textContent = growth;
           $growthCells[index].classList.add('text-green-400', 'font-semibold');
         }
       });
@@ -250,97 +229,178 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     }
   }
 
-  function baseClassToggle() {
-    const baseClassToggle = document.getElementById('baseClassToggle');
-    if ($applyBaseClass.disabled) {
-      baseClassToggle.classList.remove('peer-checked:bg-red-600', 'after:bg-gray-100');
-      baseClassToggle.classList.add('peer-checked:bg-red-800', 'after:bg-gray-400');
-    } else {
-      baseClassToggle.classList.remove('peer-checked:bg-red-800', 'after:bg-gray-400');
-      baseClassToggle.classList.add('peer-checked:bg-red-600', 'after:bg-gray-100');
-    }
-  }
-
-  function changeBaseLvl(change) {
-    const value = Number($baseLvl.value);
-    const minValue = Number($baseLvl.min);
-    const maxValue = Number($baseLvl.max);
-    const newValue = value + change;
-    if (newValue >= minValue && newValue <= maxValue) {
-      $baseLvl.value = newValue;
-      changeBaseStats();
-      changeBaseClassCheckbox();
-      checkBaseLevel();
-    }
-  }
-
-  function changeBaseClassCheckbox() {
-    if (Number($baseLvl.value) === baseLevel) {
-      $applyBaseClass.disabled = false;
-    } else {
-      $applyBaseClass.checked = true;
-      $applyBaseClass.disabled = true;
+  function baseClassToggle(value) { // Valida si el checkbox de la clase se debe activar y bloquear, y cambia su estilo visual en funcion del estado
+    if (value === charBaseLvl) {
+      $baseClassToggle.disabled = false;
+      applyBaseClass();
+    } else if (value === charBaseLvl + 1) {
+      $baseClassToggle.checked = true;
+      $baseClassToggle.disabled = true;
       applyBaseClass();
     }
-    baseClassToggle();
   }
-  
-  // Se encarga de hacer el calculo de las estadisticas base a medida que se sube o baja de nivel, ademas agrega clases a las celdas que cambian para reflejar los cambios
-  function changeBaseStats() {
-    let newLevel = Number($baseLvl.value);
-    if(newLevel > lvlactual){
-      lvlactual=newLevel
-      for (let i = 0; i < growthCounters.length; i++) {
+
+  function changeBaseStats(change) { // Hace los calculos de los contadores y actualiza las celdas de la tabla de estadisticas base que se modifiquan
+    for (let i = 0; i < growthCounters.length; i++) {
+      if (change > 0) {
         growthCounters[i] += totalGrowths[i];
         if (growthCounters[i] >= 100) {
-          while (growthCounters[i] >= 100){
+          while (growthCounters[i] >= 100) {
             growthCounters[i] -= 100;
-            $statCells[i].textContent = parseInt($statCells[i].textContent) + 1;
-            if (!$statCells[i].classList.contains('text-green-400') || !$statCells[i].classList.contains('font-semibold') || !$statCells[i].classList.contains('text-red-400')) {
-              $statCells[i].classList.remove('text-red-400');
-              $statCells[i].classList.add('text-green-400', 'font-semibold');
-            }
+            $statCells[i].textContent++;
+            $statCells[i].classList.remove('text-red-400');
+            $statCells[i].classList.add('text-green-400', 'font-semibold');
           }
-        }
-        else {
+        } else {
           $statCells[i].classList.remove('text-green-400', 'font-semibold');
         }
-      }
-    } else{
-      lvlactual=newLevel
-      for (let i = 0; i < growthCounters.length; i++) {
+      } else {
         growthCounters[i] -= totalGrowths[i];
         if (growthCounters[i] < 0) {
-          while(growthCounters[i] < 0){
-            growthCounters[i] = 100 + growthCounters[i]
-            $statCells[i].textContent = parseInt($statCells[i].textContent) - 1;
-            if (!$statCells[i].classList.contains('text-green-400') || !$statCells[i].classList.contains('font-semibold') || !$statCells[i].classList.contains('text-red-400')) {
-              $statCells[i].classList.remove('text-green-400');
-              $statCells[i].classList.add('text-red-400', 'font-semibold');
-            }
-            if(lvlactual===baseLevel){
+          while (growthCounters[i] < 0) {
+            growthCounters[i] = 100 + growthCounters[i];
+            $statCells[i].textContent--;
+            $statCells[i].classList.remove('text-green-400');
+            $statCells[i].classList.add('text-red-400', 'font-semibold');
+            if (Number($baseLvl.value) === charBaseLvl) {
               $statCells[i].classList.remove('text-red-400', 'font-semibold');
             }
           }
-        }
-        else {
+        } else {
           $statCells[i].classList.remove('text-red-400', 'font-semibold');
         }
       }
     }
   }
 
-  // Se ejecuta al cargar la pagina para definir si el checkbox empieza Disabled o no
-  checkBaseLevel();
-  function checkBaseLevel() {
-    const promoteCheckbox = document.getElementById('promote');
-    if (lvlactual < 10) {
-        promoteCheckbox.disabled = true;
+// Promote checkbox: intermediario entre la seccion de estadisitcas base y las avanzadas
+  const $promote = document.getElementById('promote'); // Checkbox de promoción
+  const $advClass = document.getElementById('advClass'); // Select de clases avanzadas (y basicas)
+  enablePromotion(); // Llamada inicial para habilitar o deshabilitar el checkbox al cargar la página
+
+  function enablePromotion() { // Función para habilitar o deshabilitar el checkbox de promoción y aplicar estilos
+    if (Number($baseLvl.value) < 10) {
+      $promote.checked = false;
+      $promote.disabled = true;
     } else {
-        promoteCheckbox.disabled = false;
+      $promote.disabled = false;
     }
   }
 
+  $promote.addEventListener('change', function() { // Comportamiento al activar o desactivar el checkbox de promoción
+    // Habilitar o deshabilitar los botones de cambio de nivel base
+    enableBaseLvlButtons();
+    if (this.checked) {
+      // Habilitar el selector de clase
+      $advClass.disabled = false; 
+      // Trasladar los valores actuales de estadisticas y crecimientos base a las tablas avanzadas
+      updateAdvGrowths();
+    } else {
+      // Dehabilitar y resetear el selector de clase avanzada
+      $advClass.disabled = true; 
+      $advClass.value = "";
+      // Dehabilitar y resetear el checkbox de clase avanzada
+      $advClassToggle.disabled = true; 
+      $advClassToggle.checked = false;
+      // Resetea el estilo de las celdas de las tablas de crecimientos avanzados
+      applyAdvClass();
+      // Setear las celdas de las tablas de estadísticas avanzadas con el string "-"
+      const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td');
+      const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
+      $advGrowthCells.forEach(cell => cell.textContent = '-');
+      $advStatsCells.forEach(cell => cell.textContent = '-');
+      // Setear el nivel avanzado en 1
+    }
+  });
+  
+  function enableBaseLvlButtons() { // Habilita o dehabilita los botones de nivel base segun el checkbox de promocion
+    const $baseLvlDown = document.getElementById('baseLvlDown');
+    const $baseLvlUp = document.getElementById('baseLvlUp');
+    const disabled = $promote.checked;
+    $baseLvlDown.disabled = disabled;
+    $baseLvlUp.disabled = disabled;
+  }
+
+  const $advClassToggle = document.getElementById('applyAdvClass');
+  
+  $advClass.addEventListener("change", async function() {
+    if(this.value !== "") {
+      await getAdvClass(this.value);  // Hacer el fetch de la clase seleccionada y guardarla en una constante
+
+    }
+    $advClassToggle.disabled = (this.value === "");
+    $advClassToggle.checked = (this.value !== "");
+    applyAdvClass();
+  });
+
+  function updateAdvGrowths() {
+    // Copiar los datos de la tabla baseGrowths a la tabla advGrowths
+    const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
+    baseGrowths.forEach((baseCell, index) => {
+      $advGrowthCells[index].textContent = String(baseCell);
+    });
+
+    // Copiar el contenido de la celda de baseStats a la correspondiente en advStats
+    const $actualBaseStatsCells = document.querySelectorAll('#baseStats tbody > tr > td');
+    const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
+    $actualBaseStatsCells.forEach((cell, index) => {
+      $advStatsCells[index].textContent = cell.textContent;
+    });
+
+    // Copia los contadores de crecimiento base al seleccionar la clase avanzada
+    advGrowthCounters = Array.from(growthCounters); 
+  }
+
+  let advGrowthCounters = []; // array con los contadores de crecimiento al momento de seleccionar la clase avanzada
+  let advClassGrowths = []; // array con los growths de la clase base
+  let advTotalGrowths = []; // array con la suma de los growths base y de la clase avanzada
+  let advClassBaseStats = []; // array con los base stats de la clase avanzada
+  
   
 
+  async function getAdvClass(advClass) {
+    const response = await fetch('/data/classes.json');
+    const classes = await response.json();
+    advClassGrowths = Object.values(classes.find(cls => cls.ID === advClass).Growths);
+    advClassGrowths.forEach((growth, index) => {
+      advTotalGrowths[index] = baseGrowths[index] + growth;
+      if(charID==="Jean") { // La habilidad personal de Jean duplica los crecimientos de su clase
+        advTotalGrowths[index] += growth;
+      }
+    });
+    advClassBaseStats = Object.values(classes.find(cls => cls.ID === advClass).BaseStats);
+  }
+
+  $advClassToggle.addEventListener('change', applyAdvClass);
+  
+  function applyAdvClass() { // Actualiza los valores de crecimiento de la tabla base y pinta los que cambien
+    const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
+    const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
+    if ($advClassToggle.checked) {
+      advTotalGrowths.forEach((growth, index) => {
+        if (growth !== baseGrowths[index]) {
+          $advGrowthCells[index].textContent = growth;
+          $advGrowthCells[index].classList.add('text-cyan-400', 'font-semibold');
+        }
+      });
+      advClassBaseStats.forEach((stat, index) => {
+        $advStatsCells[index].textContent = Number($advStatsCells[index].textContent) + (stat - baseClassBaseStats[index]);
+        if (stat > baseClassBaseStats[index]) {
+          $advStatsCells[index].classList.add('text-cyan-400', 'font-semibold');
+        } 
+        if (stat < baseClassBaseStats[index]) {
+          $advStatsCells[index].classList.add('text-red-400', 'font-semibold');
+        }
+      });
+    } else {
+      $advGrowthCells.forEach((cell, index) => {
+        cell.textContent = baseGrowths[index];
+        cell.classList.remove('text-cyan-400', 'font-semibold');
+      });
+      $advStatsCells.forEach((cell, index) => {
+        cell.textContent = $statCells[index].textContent;
+        cell.classList.remove('text-cyan-400', 'text-red-400', 'font-semibold');
+      });
+    }
+  }
 </script>
