@@ -1,8 +1,8 @@
 ---
-import characters from '../assets/data/characters.json'
+import characters from '@/assets/data/characters.json'
 import { Image } from "astro:assets"
 
-const images = await Astro.glob('../assets/images/characters/*.webp')
+const images = await Astro.glob('@/assets/images/characters/*.webp')
 .then((files) => files
   .map((file) => file.default) 
 )

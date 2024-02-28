@@ -1,10 +1,10 @@
 ---
 import { Image } from 'astro:assets';
-import Layout from '../../layouts/Layout.astro';
-import BentoItem from '../../components/BentoItem.astro';
-import BentoTable from '../../components/BentoTable.astro';
-import characters from '../../assets/data/characters.json';
-import classes from '../../assets/data/classes.json';
+import Layout from '@/layouts/Layout.astro';
+import BentoItem from '@/components/BentoItem.astro';
+import BentoTable from '@/components/BentoTable.astro';
+import characters from '@/assets/data/characters.json';
+import classes from '@/assets/data/classes.json';
 
 export async function getStaticPaths() {
   return characters.map((chars) => {
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { id } = Astro.params
 const char = characters.filter(char => char.ID === id)
-const imagen = await Astro.glob('../../assets/images/characters/*.webp')
+const imagen = await Astro.glob('@/assets/images/characters/*.webp')
 .then(imgs => imgs
   .map(img => img.default)
     .filter(item => item.src.includes(id))
@@ -44,17 +44,17 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
         ))
       }
     </BentoItem>
-    <BentoItem title="Bio"            class="md:col-span-6 md:row-span-3">
+    <BentoItem title="Bio"            class="md:col-span-5 md:row-span-3">
       <h2 class="mb-2 text-2xl font-semibold">{char[0].Name}</h2>
-      <p class="text-justify text-balance">Alear is the main protagonist in Fire Emblem Engage. As an Avatar, their gender, along with their name and birthday, is determined by the player.</p>
+      <p class="text-justify text-balance">{char[0].Bio}</p>
     </BentoItem>
-    <BentoItem title="Recruitment"    class="md:col-span-3 md:row-span-2">
+    <BentoItem title="Recruitment"    class="md:col-span-4 md:row-span-2">
       <p>{char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
     </BentoItem>
     <BentoItem title="Base SP"        class="md:col-span-2 md:row-span-1">
       <p>{char[0].BaseSP}</p>
     </BentoItem>
-    <BentoItem title="Libre2"         class="md:col-span-1 md:row-span-1">
+    <BentoItem title="Libre2"         class="md:col-span-2 md:row-span-1">
       <p>Libre2</p>
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
@@ -158,9 +158,9 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
     </BentoItem>
     <BentoItem title="Advanced Level" class="md:col-span-5 md:row-span-2">
       <div class="flex">
-        <button id="advLvlDown" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
+        <button id="advLvlDown" disabled class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
         <input type="text" readonly id="advLvl" value="1" min="1" max="20" class="w-12 p-1 text-sm text-center bg-gray-700 border border-gray-600">
-        <button id="advLvlUp" class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
+        <button id="advLvlUp" disabled class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-e-lg">+</button>
       </div>
     </BentoItem>
     <BentoTable
@@ -177,313 +177,393 @@ const imagen = await Astro.glob('../../assets/images/characters/*.webp')
 </Layout>
 
 <script>
-//document.addEventListener('astro:page-load', () => {
-//  try {
-    let charInfo = document.getElementById('charInfo');
-    let baseClass = charInfo!.getAttribute('data-baseClass');
-    let charID = charInfo!.getAttribute('data-charID');
-    console.log(baseClass)
-    console.log(charID)
+  interface Clase {
+    ID: string;
+    Name: string;
+    Type: string;
+    ReqBaseClassId: string;
+    Proficiencies: string;
+    ProficienciesRank: string;
+    ProficienciesInnateRanks: string;
+    ExclusiveChar: string;
+    UnitType: string;
+    UnitWeaknesses: string;
+    BaseStats: {
+        BaseHp: number;
+        BaseStr: number;
+        BaseMag: number;
+        BaseDex: number;
+        BaseSpd: number;
+        BaseLck: number;
+        BaseDef: number;
+        BaseRes: number;
+        BaseBld: number;
+        BaseMov: number;
+    };
+    Growths: {
+        GrowthHp: number;
+        GrowthStr: number;
+        GrowthMag: number;
+        GrowthDex: number;
+        GrowthSpd: number;
+        GrowthDef: number;
+        GrowthRes: number;
+        GrowthLck: number;
+        GrowthBld: number;
+    };
+    MaxStats: {
+        MaxHp: number;
+        MaxStr: number;
+        MaxMag: number;
+        MaxDex: number;
+        MaxSpd: number;
+        MaxLck: number;
+        MaxDef: number;
+        MaxRes: number;
+        MaxBld: number;
+    };
+  }
 
-    const $baseClassToggle = document.getElementById('applyBaseClass') as HTMLInputElement;
-    const $baseLvl = document.getElementById('baseLvl') as HTMLInputElement;
-    const $optionBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
-    const charBaseLvl = Number($baseLvl.min);
-    const $baseStatsCells = document.querySelectorAll('#baseStats tbody > tr > td') as NodeListOf<HTMLTableCellElement>;
-    const $baseGrowthsCells = document.querySelectorAll('#baseGrowths tbody > tr > td:not(:last-child)') as NodeListOf<HTMLTableCellElement>;
-    const baseStats = Array.from($baseStatsCells, cell => Number(cell.textContent)); // array con los stats base
-    const baseGrowths = Array.from($baseGrowthsCells, cell => Number(cell.textContent)); // array con los growths base
-    let growthCounters = Array.from(baseGrowths); // array que sirve de sumador de los growths para calcular la subida de nivel
-    let classGrowths : number[] = []; // array con los growths de la clase base
-    let totalGrowths : number[] = []; // array con la suma de los growths base y de la clase base
-    let baseClassBaseStats : number[] = []; // array con los base stats de la clase base
+  let charInfo = document.getElementById('charInfo');
+  let charID = charInfo!.getAttribute('data-charID');
+  let baseClass = charInfo!.getAttribute('data-baseClass');
+  let classes: Clase[];
 
-    // Base tier elements
-    const $baseLvlDown = document.getElementById('baseLvlDown') as HTMLButtonElement;
-    const $baseLvlUp = document.getElementById('baseLvlUp') as HTMLButtonElement;
+  const $optionBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
+  const $baseClassToggle = document.getElementById('applyBaseClass') as HTMLInputElement;
+  const $baseLvl = document.getElementById('baseLvl') as HTMLInputElement;
+  const charBaseLvl = Number($baseLvl.min);
+  const $baseStatsCells = document.querySelectorAll('#baseStats tbody > tr > td') as NodeListOf<HTMLTableCellElement>;
+  const $baseGrowthsCells = document.querySelectorAll('#baseGrowths tbody > tr > td:not(:last-child)') as NodeListOf<HTMLTableCellElement>;
+  const baseStats = Array.from($baseStatsCells, cell => Number(cell.textContent));
+  const baseGrowths = Array.from($baseGrowthsCells, cell => Number(cell.textContent));
+  const $baseLvlDown = document.getElementById('baseLvlDown') as HTMLButtonElement;
+  const $baseLvlUp = document.getElementById('baseLvlUp') as HTMLButtonElement;
+  let growthCounters = Array.from(baseGrowths);
+  let classGrowths : number[] = [];
+  let totalGrowths : number[] = [];
+  let baseClassBaseStats : number[] = [];
 
-    // Advanced tier elements
-    const $advClassToggle = document.getElementById('applyAdvClass') as HTMLInputElement;
-    const $advLvlDown = document.getElementById('advLvlDown') as HTMLButtonElement;
-    const $advLvlUp = document.getElementById('advLvlUp') as HTMLButtonElement;
-    
-    interface Clase {
-      ID: string;
-      Name: string;
-      Type: string;
-      ReqBaseClassId: string;
-      Proficiencies: string;
-      ProficienciesRank: string;
-      ProficienciesInnateRanks: string;
-      ExclusiveChar: string;
-      UnitType: string;
-      UnitWeaknesses: string;
-      BaseStats: {
-          BaseHp: number;
-          BaseStr: number;
-          BaseMag: number;
-          BaseDex: number;
-          BaseSpd: number;
-          BaseLck: number;
-          BaseDef: number;
-          BaseRes: number;
-          BaseBld: number;
-          BaseMov: number;
-      };
-      Growths: {
-          GrowthHp: number;
-          GrowthStr: number;
-          GrowthMag: number;
-          GrowthDex: number;
-          GrowthSpd: number;
-          GrowthDef: number;
-          GrowthRes: number;
-          GrowthLck: number;
-          GrowthBld: number;
-      };
-      MaxStats: {
-          MaxHp: number;
-          MaxStr: number;
-          MaxMag: number;
-          MaxDex: number;
-          MaxSpd: number;
-          MaxLck: number;
-          MaxDef: number;
-          MaxRes: number;
-          MaxBld: number;
-      };
+  const $promote = document.getElementById('promote') as HTMLInputElement;
+  const $advClass = document.getElementById('advClass') as HTMLSelectElement;
+  const $advClassToggle = document.getElementById('applyAdvClass') as HTMLInputElement;
+  const $advLvl = document.getElementById('advLvl') as HTMLInputElement;
+  const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td') as NodeListOf<HTMLTableCellElement>;
+  const $advGrowthsCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
+  const $advLvlDown = document.getElementById('advLvlDown') as HTMLButtonElement;
+  const $advLvlUp = document.getElementById('advLvlUp') as HTMLButtonElement;
+  let advGrowthCounters : number[] = [];
+  let advClassGrowths : number[] = [];
+  let advTotalGrowths : number[] = [];
+  let advClassBaseStats : number[] = [];
+  let advClassApplyStyleChanges: number[] = [];
+  
+  (async function getBaseClass() {
+    const response = await fetch('/data/classes.json');
+    classes = await response.json();
+    const baseClassData = classes.find((cls: Clase) => cls.ID === baseClass);
+    classGrowths = Object.values(baseClassData!.Growths);
+    classGrowths.forEach((growth, index) => {
+      totalGrowths[index] = baseGrowths[index] + growth;
+      if (charID === "Jean") {
+        totalGrowths[index] += growth;
+      }
+    });
+    baseClassBaseStats = Object.values(baseClassData!.BaseStats);
+  })();
+
+  enablePromotion();
+
+  $baseLvlDown.addEventListener("click", () => changeBaseLvl(-1));
+
+  $baseLvlUp.addEventListener("click", () => changeBaseLvl(1));
+
+  $baseClassToggle.addEventListener('change', () => baseClassToggle(Number($baseLvl.value)));
+
+  function changeBaseLvl(change: number) {
+    const value = Number($baseLvl.value);
+    const minValue = Number($baseLvl.min);
+    const maxValue = Number($baseLvl.max);
+    const newValue = value + change;
+    if (newValue >= minValue && newValue <= maxValue) {
+      $baseLvl.value = String(newValue);
+      changeBaseStats(change);
+      if (newValue <= minValue + 1) {
+        baseClassToggle(newValue);
+      }
+      $optionBaseClass.disabled = !(newValue === maxValue);
+      enablePromotion();
     }
+  }
 
-    (async function getBaseClass() { // Trae el JSON de clases, busca la clase base y guarda su datos en variables
-      const response = await fetch('/data/classes.json');
-      const classes = await response.json();
-      const baseClassData = classes.find((cls: Clase) => cls.ID === baseClass);
-      classGrowths = Object.values(baseClassData.Growths);
-      classGrowths.forEach((growth, index) => {
-        totalGrowths[index] = baseGrowths[index] + growth;
-        if (charID === "Jean") { // La habilidad personal de Jean duplica los crecimientos de su clase
-          totalGrowths[index] += growth;
+  function applyBaseClass() {
+    if ($baseClassToggle.checked) {
+      totalGrowths.forEach((growth, index) => {
+        if (growth !== baseGrowths[index]) {
+          $baseGrowthsCells[index].textContent = String(growth);
+          $baseGrowthsCells[index].classList.add('text-green-400', 'font-semibold');
         }
       });
-      baseClassBaseStats = Object.values(baseClassData.BaseStats);
-      console.log(baseClassBaseStats)
-    })();
-
-    $baseLvlDown.addEventListener("click", () => changeBaseLvl(-1)); // Disminuye en 1 el nivel base actual
-    $baseLvlUp.addEventListener("click", () => changeBaseLvl(1)); // Aumenta en 1 el nivel base actual
-
-    function changeBaseLvl(change: number) { // Refleja las subidas o bajadas de nivel en las tablas de estadisticas base y cehckbox asociados
-      const value = Number($baseLvl.value);
-      const minValue = Number($baseLvl.min);
-      const maxValue = Number($baseLvl.max);
-      const newValue = value + change;
-      if (newValue >= minValue && newValue <= maxValue) {
-        $baseLvl.value = String(newValue);
-        changeBaseStats(change);
-        if (newValue <= minValue + 1) {
-          baseClassToggle(newValue);
-        }
-        $optionBaseClass.disabled = !(newValue === maxValue);
-        enablePromotion();
-      }
+    } else {
+      $baseGrowthsCells.forEach((cell, index) => {
+        cell.textContent = String(baseGrowths[index]);
+        cell.classList.remove('text-green-400', 'font-semibold');
+      });
     }
+  }
 
-    $baseClassToggle.addEventListener('change', () => baseClassToggle(Number($baseLvl.value))); // Accion a realizar cuando se clickea el checkbox de clase base
-
-    function applyBaseClass() { // Actualiza los valores de crecimiento de la tabla base y pinta los que cambien
-      if ($baseClassToggle.checked) {
-        totalGrowths.forEach((growth, index) => {
-          if (growth !== baseGrowths[index]) {
-            $baseGrowthsCells[index].textContent = String(growth);
-            $baseGrowthsCells[index].classList.add('text-green-400', 'font-semibold');
-          }
-        });
-      } else {
-        $baseGrowthsCells.forEach((cell, index) => {
-          cell.textContent = String(baseGrowths[index]);
-          cell.classList.remove('text-green-400', 'font-semibold');
-        });
-      }
+  function baseClassToggle(value: number) {
+    if (value === charBaseLvl) {
+      $baseClassToggle.disabled = false;
+      applyBaseClass();
+    } else if (value === charBaseLvl + 1) {
+      $baseClassToggle.checked = true;
+      $baseClassToggle.disabled = true;
+      applyBaseClass();
     }
+  }
 
-    function baseClassToggle(value: number) { // Valida si el checkbox de la clase se debe activar y bloquear, y cambia su estilo visual en funcion del estado
-      if (value === charBaseLvl) {
-        $baseClassToggle.disabled = false;
-        applyBaseClass();
-      } else if (value === charBaseLvl + 1) {
-        $baseClassToggle.checked = true;
-        $baseClassToggle.disabled = true;
-        applyBaseClass();
-      }
-    }
-
-    function changeBaseStats(change: number) { // Hace los calculos de los contadores y actualiza las celdas de la tabla de estadisticas base que se modifiquan
-      for (let i = 0; i < growthCounters.length; i++) {
-        if (change > 0) {
-          growthCounters[i] += totalGrowths[i];
-          if (growthCounters[i] >= 100) {
-            while (growthCounters[i] >= 100) {
-              growthCounters[i] -= 100;
-              $baseStatsCells[i].textContent = String(Number($baseStatsCells[i].textContent) + 1);
-              $baseStatsCells[i].classList.remove('text-red-400');
-              $baseStatsCells[i].classList.add('text-green-400', 'font-semibold');
-            }
-          } else {
-            $baseStatsCells[i].classList.remove('text-green-400', 'font-semibold');
+  function changeBaseStats(change: number) {
+    for (let i = 0; i < growthCounters.length; i++) {
+      if (change > 0) {
+        growthCounters[i] += totalGrowths[i];
+        if (growthCounters[i] >= 100) {
+          while (growthCounters[i] >= 100) {
+            growthCounters[i] -= 100;
+            $baseStatsCells[i].textContent = String(Number($baseStatsCells[i].textContent) + 1);
+            $baseStatsCells[i].classList.remove('text-red-400');
+            $baseStatsCells[i].classList.add('text-green-400', 'font-semibold');
           }
         } else {
-          growthCounters[i] -= totalGrowths[i];
-          if (growthCounters[i] < 0) {
-            while (growthCounters[i] < 0) {
-              growthCounters[i] = 100 + growthCounters[i];
-              $baseStatsCells[i].textContent = String(Number($baseStatsCells[i].textContent) - 1);
-              $baseStatsCells[i].classList.remove('text-green-400');
-              $baseStatsCells[i].classList.add('text-red-400', 'font-semibold');
-              if (Number($baseLvl.value) === charBaseLvl) {
-                $baseStatsCells[i].classList.remove('text-red-400', 'font-semibold');
-              }
+          $baseStatsCells[i].classList.remove('text-green-400', 'font-semibold');
+        }
+      } else {
+        growthCounters[i] -= totalGrowths[i];
+        if (growthCounters[i] < 0) {
+          while (growthCounters[i] < 0) {
+            growthCounters[i] = 100 + growthCounters[i];
+            $baseStatsCells[i].textContent = String(Number($baseStatsCells[i].textContent) - 1);
+            $baseStatsCells[i].classList.remove('text-green-400');
+            $baseStatsCells[i].classList.add('text-red-400', 'font-semibold');
+            if (Number($baseLvl.value) === charBaseLvl) {
+              $baseStatsCells[i].classList.remove('text-red-400', 'font-semibold');
             }
-          } else {
-            $baseStatsCells[i].classList.remove('text-red-400', 'font-semibold');
           }
+        } else {
+          $baseStatsCells[i].classList.remove('text-red-400', 'font-semibold');
         }
       }
     }
+  }
 
-  // Promote checkbox: intermediario entre la seccion de estadisitcas base y las avanzadas
-    const $promote = document.getElementById('promote') as HTMLInputElement; // Checkbox de promoción
-    const $advClass = document.getElementById('advClass') as HTMLSelectElement; // Select de clases avanzadas (y basicas)
-    enablePromotion(); // Llamada inicial para habilitar o deshabilitar el checkbox al cargar la página
-
-    function enablePromotion() { // Función para habilitar o deshabilitar el checkbox de promoción y aplicar estilos
-      if (Number($baseLvl.value) < 10) {
-        $promote.checked = false;
-        $promote.disabled = true;
-      } else {
-        $promote.disabled = false;
-      }
+  function enablePromotion() {
+    if (Number($baseLvl.value) < 10) {
+      $promote.checked = false;
+      $promote.disabled = true;
+    } else {
+      $promote.disabled = false;
     }
+  }
 
-    $promote.addEventListener('change', function() { // Comportamiento al activar o desactivar el checkbox de promoción
-      // Habilitar o deshabilitar los botones de cambio de nivel base
-      enableBaseLvlButtons();
-      if (this.checked) {
-        // Habilitar el selector de clase
-        $advClass.disabled = false; 
-        // Trasladar los valores actuales de estadisticas y crecimientos base a las tablas avanzadas
-        setAdvValues();
-      } else {
-        // Dehabilitar y resetear el selector de clase avanzada
-        $advClass.disabled = true; 
-        $advClass.value = "";
-        // Dehabilitar y resetear el checkbox de clase avanzada
-        $advClassToggle.disabled = true; 
-        $advClassToggle.checked = false;
-        // Resetea el estilo de las celdas de las tablas de crecimientos avanzados
-        applyAdvClass();
-        // Setear las celdas de las tablas de estadísticas avanzadas con el string "-"
-        const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td');
-        const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
-        $advGrowthCells.forEach(cell => cell.textContent = '-');
-        $advStatsCells.forEach(cell => cell.textContent = '-');
-        // Setear el nivel avanzado en 1
-      }
-    });
-    
-    function enableBaseLvlButtons() { // Habilita o dehabilita los botones de nivel base segun el checkbox de promocion
-      const $baseLvlDown = document.getElementById('baseLvlDown') as HTMLButtonElement;
-      const $baseLvlUp = document.getElementById('baseLvlUp') as HTMLButtonElement;
-      const disabled = $promote.checked;
-      $baseLvlDown.disabled = disabled;
-      $baseLvlUp.disabled = disabled;
-    }
-    
-    $advClass.addEventListener("change", async function() {
-      if(this.value !== "") {
-        await getAdvClass(this.value);  
-      }
-      $advClassToggle.disabled = (this.value === "");
+  $promote.addEventListener('change', function() {
+    // Habilitar o deshabilitar los botones de cambio de nivel base
+    const promoteState = $promote.checked;
+    $baseLvlDown.disabled = promoteState;
+    $baseLvlUp.disabled = promoteState;
+    if (promoteState) {
+      // Habilitar el selector de clase
+      $advClass.disabled = false;
+    } else {
+      // Dehabilitar y resetear el selector de clase avanzada
+      $advClass.disabled = true; 
+      $advClass.value = "";
+      // Dehabilitar y resetear el checkbox de clase avanzada
+      $advClassToggle.disabled = true; 
       $advClassToggle.checked = false;
-      applyAdvClass();
-    });
-
-    function setAdvValues() {
-      // Copia el contenido de las celdas de la tabla baseGrowths a las celdas de la tabla advGrowths
-      const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
-      baseGrowths.forEach((baseCell, index) => {
-        $advGrowthCells[index].textContent = String(baseCell);
-      });
-      // Copia el contenido de las celdas de la tabla baseStats a las celdas de la tabla advStats
-      const $actualBaseStatsCells = document.querySelectorAll('#baseStats tbody > tr > td');
-      const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
-      $actualBaseStatsCells.forEach((cell, index) => {
-        $advStatsCells[index].textContent = cell.textContent;
-      });
-      // Copia el array de contadores de crecimiento base al array de crecimiento avanzado
-      advGrowthCounters = Array.from(growthCounters); 
+      // Resetea el estilo de las celdas de las tablas de crecimientos avanzados
+      resetAdvTables();
+      // Setear el nivel avanzado en 1 y deshabilitar
+      $advLvlDown.disabled = true;
+      $advLvlUp.disabled = true;
+      $advLvl.value = String(1);
     }
-
-    let advGrowthCounters : number[] = []; // array con los contadores de crecimiento al momento de seleccionar la clase avanzada
-    let advClassGrowths : number[] = []; // array con los growths de la clase base
-    let advTotalGrowths : number[] = []; // array con la suma de los growths base y de la clase avanzada
-    let advClassBaseStats : number[] = []; // array con los base stats de la clase avanzada
-    
-    async function getAdvClass(advClass: string) { // Trae el JSON de clases, busca la clase seleccionada y guarda su datos en variables
-      const response = await fetch('/data/classes.json');
-      const classes = await response.json();
-      const advClassData = classes.find((cls: Clase) => cls.ID === advClass);
-      advClassGrowths = Object.values(advClassData.Growths);
-      advClassGrowths.forEach((growth, index) => {
-        advTotalGrowths[index] = baseGrowths[index] + growth;
-        if(charID === "Jean") { // La habilidad personal de Jean duplica los crecimientos de su clase
-          advTotalGrowths[index] += growth;
-        }
-      });
-      advClassBaseStats = Object.values(advClassData.BaseStats);
+  });
+  
+  $advClass.addEventListener("change", function() {
+    const value = this.value;
+    if(value === "") {
+      resetAdvTables();
     }
-
-    $advClassToggle.addEventListener('change', applyAdvClass);
-    
-    function applyAdvClass() { // Actualiza las celdas de las tablas de crecimiento y estadisticas avanzadas, y pinta las que cambien
-      const $advGrowthCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
-      const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td');
-      if ($advClassToggle.checked) {
-        advTotalGrowths.forEach((growth, index) => {
-          if (growth !== baseGrowths[index]) {
-            $advGrowthCells[index].textContent = String(growth);
-            $advGrowthCells[index].classList.add('text-cyan-400', 'font-semibold');
-          }
-        });
-        advClassBaseStats.forEach((stat, index) => {
-          $advStatsCells[index].textContent = String(Number($advStatsCells[index].textContent) + (stat - baseClassBaseStats[index]));
-          if (stat > baseClassBaseStats[index]) {
-            $advStatsCells[index].classList.add('text-cyan-400', 'font-semibold');
-          } else {
-            if (stat < baseClassBaseStats[index]) {
-              $advStatsCells[index].classList.add('text-red-400', 'font-semibold');
-            }
-          }
-        });
+    else {
+      getAdvClass(value);
+      setAdvValues();
+      if (value === "Thief" || value === "Dancer") {
+        $advLvl.max = "40";
       } else {
-        $advGrowthCells.forEach((cell, index) => {
-          cell.textContent = String(baseGrowths[index]);
-          cell.classList.remove('text-cyan-400', 'font-semibold');
-        });
-        $advStatsCells.forEach((cell, index) => {
-          cell.textContent = $baseStatsCells[index].textContent;
-          cell.classList.remove('text-cyan-400', 'text-red-400', 'font-semibold');
-        });
+          $advLvl.max = "20";
       }
     }
+    $advClassToggle.disabled = value === "";
+    $advClassToggle.checked = false;
+    $advLvlDown.disabled = true;
+    $advLvlUp.disabled = true;
+    $advLvl.value = String(1);
+  });
 
-    $advLvlDown.addEventListener("click", () => changeAdvLvl(-1)); // Disminuye en 1 el nivel avanzado actual
-    $advLvlUp.addEventListener("click", () => changeAdvLvl(1)); // Aumenta en 1 el nivel avanzado actual
-    
-    function changeAdvLvl(change: number){
+  $advClassToggle.addEventListener('change', function() {
+    const value = !this.checked;
+    applyAdvClass();
+    $advLvlDown.disabled = value;
+    $advLvlUp.disabled = value;
+  });
 
+  $advLvlDown.addEventListener("click", () => changeAdvLvl(-1));
+
+  $advLvlUp.addEventListener("click", () => changeAdvLvl(1));
+
+  function resetAdvTables(){
+    $advGrowthsCells.forEach((cell) => {
+      cell.textContent = '-';
+      cell.classList.remove('text-cyan-400', 'font-semibold');
+    });
+    $advStatsCells.forEach((cell) => {
+      cell.textContent = '-';
+      cell.classList.remove('text-cyan-400', 'text-red-400', 'text-green-400', 'font-semibold');
+    });
+  }
+
+  function setAdvValues() {
+    baseGrowths.forEach((baseCell, index) => {
+      $advGrowthsCells[index].textContent = String(baseCell);
+      $advGrowthsCells[index].classList.remove('text-cyan-400', 'font-semibold');
+    });
+    const $actualBaseStatsCells = document.querySelectorAll('#baseStats tbody > tr > td');
+    $actualBaseStatsCells.forEach((cell, index) => {
+      $advStatsCells[index].textContent = cell.textContent;
+      $advStatsCells[index].classList.remove('text-cyan-400', 'text-red-400', 'text-green-400', 'font-semibold');
+    });
+    advGrowthCounters = Array.from(growthCounters); 
+  }
+
+  function getAdvClass(advClass: string) {
+    const advClassData = classes.find((cls: Clase) => cls.ID === advClass);
+    advClassGrowths = Object.values(advClassData!.Growths);
+    advClassGrowths.forEach((growth, index) => {
+      advTotalGrowths[index] = baseGrowths[index] + growth;
+      if(charID === "Jean") {
+        advTotalGrowths[index] += growth;
+      }
+    });
+    advClassBaseStats = Object.values(advClassData!.BaseStats);
+  }
+
+  function applyAdvClass() {
+    if ($advClassToggle.checked) {
+      advTotalGrowths.forEach((growth, index) => {
+        if (growth !== baseGrowths[index]) {
+          $advGrowthsCells[index].textContent = String(growth);
+          $advGrowthsCells[index].classList.add('text-cyan-400', 'font-semibold');
+        }
+      });
+      advClassBaseStats.forEach((stat, index) => {
+        $advStatsCells[index].textContent = String(Number($advStatsCells[index].textContent) + (stat - baseClassBaseStats[index]));
+        if (stat > baseClassBaseStats[index]) {
+          $advStatsCells[index].classList.add('text-cyan-400', 'font-semibold');
+          advClassApplyStyleChanges[index] = 1;
+        } else {
+          if (stat < baseClassBaseStats[index]) {
+            $advStatsCells[index].classList.add('text-red-400', 'font-semibold');
+            advClassApplyStyleChanges[index] = -1;
+          } else {
+            advClassApplyStyleChanges[index] = 0;
+          }
+        }
+      });
+    } else {
+      $advGrowthsCells.forEach((cell, index) => {
+        cell.textContent = String(baseGrowths[index]);
+        cell.classList.remove('text-cyan-400', 'font-semibold');
+      });
+      advClassBaseStats.forEach((stat, index) => {
+        $advStatsCells[index].textContent = String(Number($advStatsCells[index].textContent) - (stat - baseClassBaseStats[index]));
+        $advStatsCells[index].classList.remove('text-cyan-400', 'text-red-400', 'text-green-400', 'font-semibold');
+      });
     }
-//  } catch (err) {
-//    console.log(err);
-//    }
-//  });
+    console.log(advClassApplyStyleChanges);
+  }
+  
+  function changeAdvLvl(change: number) {
+    const value = Number($advLvl.value);
+    const minValue = Number($advLvl.min);
+    const maxValue = Number($advLvl.max);
+    const newValue = value + change;
+
+    if (newValue >= minValue && newValue <= maxValue) {
+      if (value === minValue && newValue === minValue + 1) {
+          $advStatsCells[$advStatsCells.length - 1].classList.remove('text-cyan-400', 'text-red-400', 'font-semibold');
+      }
+      advClassToggle(newValue);
+      $advLvl.value = String(newValue);
+      changeAdvStats(change);
+    }
+  }
+
+  function advClassToggle(newValue: number) {
+    if (newValue === 1) {
+      $advClassToggle.disabled = false;
+    } else if (newValue === 2) {
+      $advClassToggle.disabled = true;
+    }
+  }
+
+  function changeAdvStats(change: number) {
+    for (let i = 0; i < advGrowthCounters.length; i++) {
+      if (change > 0) {
+        advGrowthCounters[i] += advTotalGrowths[i];
+        if (advGrowthCounters[i] >= 100) {
+          while (advGrowthCounters[i] >= 100) {
+            advGrowthCounters[i] -= 100;
+            $advStatsCells[i].textContent = String(Number($advStatsCells[i].textContent) + 1);
+            $advStatsCells[i].classList.remove('text-red-400', 'text-cyan-400');
+            $advStatsCells[i].classList.add('text-green-400', 'font-semibold');
+          }
+        } else {
+          $advStatsCells[i].classList.remove('text-red-400', 'text-green-400', 'font-semibold', 'text-cyan-400');
+        }
+      } else {
+        advGrowthCounters[i] -= advTotalGrowths[i];
+        if (advGrowthCounters[i] < 0) {
+          while (advGrowthCounters[i] < 0) {
+            advGrowthCounters[i] = 100 + advGrowthCounters[i];
+            $advStatsCells[i].textContent = String(Number($advStatsCells[i].textContent) - 1);
+            $advStatsCells[i].classList.remove('text-green-400', 'text-cyan-400');
+            $advStatsCells[i].classList.add('text-red-400', 'font-semibold');
+            if (Number($advLvl.value) === 1) {
+              applyAdvClassStyleChanges();
+            }
+          }
+        } else {
+          $advStatsCells[i].classList.remove('text-red-400', 'font-semibold', 'text-cyan-400');
+          if (Number($advLvl.value) === 1) {
+            applyAdvClassStyleChanges();
+            }
+        }
+      }
+    }
+  }
+
+  function applyAdvClassStyleChanges() {
+    for (let i = 0; i < $advStatsCells.length; i++) {
+      if (advClassApplyStyleChanges[i] > 0) {
+        $advStatsCells[i].classList.add('text-cyan-400', 'font-semibold');
+        $advStatsCells[i].classList.remove('text-red-400');
+      } else if (advClassApplyStyleChanges[i] < 0) {
+        $advStatsCells[i].classList.remove('text-cyan-400');
+        $advStatsCells[i].classList.add('text-red-400', 'font-semibold');
+      }
+      else{
+        $advStatsCells[i].classList.remove('text-red-400', 'text-cyan-400', 'font-semibold');
+      }
+    }
+  }
 </script>

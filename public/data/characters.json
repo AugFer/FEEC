@@ -2,6 +2,7 @@
   {
     "ID": "Alear",
     "Name": "Alear",
+    "Bio": "Alear is the main protagonist and successor to the Divine Dragon, awoken from a long sleep. Summons Emblems to lead the world to peace. As an Avatar, their gender, along with their name and birthday, is determined by the player.",
     "RecruitementChapter": "Prologue",
     "RecruitementDescription": "From start",
     "PersonalSkill": "Divinely Inspiring",
@@ -42,6 +43,7 @@
   {
     "ID": "Vander",
     "Name": "Vander",
+    "Bio": "A Steward of the Dragon, long in the service of the Divine Dragon. He is a straight-laced, rigid gentleman.",
     "RecruitementChapter": "Chapter 1",
     "RecruitementDescription": "-",
     "PersonalSkill": "Alabaster Duty",
@@ -82,6 +84,7 @@
   {
     "ID": "Clanne",
     "Name": "Clanne",
+    "Bio": "An apprentice Steward of the Dragon and the gentle twin brother of Framme.",
     "RecruitementChapter": "Chapter 2",
     "RecruitementDescription": "-",
     "PersonalSkill": "Verdant Faith",
@@ -122,6 +125,7 @@
   {
     "ID": "Framme",
     "Name": "Framme",
+    "Bio": "An apprentice Steward of the Dragon and the determined, buoyant twin sister of Clanne.",
     "RecruitementChapter": "Chapter 2",
     "RecruitementDescription": "-",
     "PersonalSkill": "Crimson Cheer",
@@ -162,6 +166,7 @@
   {
     "ID": "Alfred",
     "Name": "Alfred",
+    "Bio": "The staunch and loyal crown prince of Firene. He trains constantly to strengthen his constitution.",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "PersonalSkill": "Self-Improver",
@@ -202,6 +207,7 @@
   {
     "ID": "Etie",
     "Name": "Etie",
+    "Bio": "Prince Alfred's retainer. A haughty woman with a love for building muscle.",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "PersonalSkill": "Energized",
@@ -242,6 +248,7 @@
   {
     "ID": "Boucheron",
     "Name": "Boucheron",
+    "Bio": "Prince Alfred's retainer. A tender-hearted man whose powerful build comes naturally.",
     "RecruitementChapter": "Chapter 3",
     "RecruitementDescription": "When Turn 2 starts",
     "PersonalSkill": "Moved to Tears",
@@ -282,6 +289,7 @@
   {
     "ID": "Celine",
     "Name": "Céline",
+    "Bio": "The princess of Firene. Despite her gentle demeanor, she has an iron will when her people must be protected.",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Gentle Flower",
@@ -317,11 +325,15 @@
     "MaxRes": 1,
     "MaxLck": 3,
     "InnateProficiencies": "Tome",
-    "Proficiencies": ["Sword", "Staff"]
+    "Proficiencies": [
+      "Sword",
+      "Staff"
+    ]
   },
   {
     "ID": "Chloe",
     "Name": "Chloé",
+    "Bio": "Princess Céline's retainer. A woman of noble birth who loves fairy tales and sampling folk food.",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Fairy-Tale Folk",
@@ -362,6 +374,7 @@
   {
     "ID": "Louis",
     "Name": "Louis",
+    "Bio": "Princess Céline's retainer. A smiling, refined gentleman who loves tea.",
     "RecruitementChapter": "Chapter 4",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Admiration",
@@ -402,6 +415,7 @@
   {
     "ID": "Jean",
     "Name": "Jean",
+    "Bio": "A doctor's son from Firene who works his hardest to save all the lives he can.",
     "RecruitementChapter": "Paralogue 1",
     "RecruitementDescription": "Talk with Alear or survive",
     "PersonalSkill": "Expertise",
@@ -437,11 +451,15 @@
     "MaxRes": 0,
     "MaxLck": 1,
     "InnateProficiencies": "Arts",
-    "Proficiencies": ["Tome", "Staff"]
+    "Proficiencies": [
+      "Tome",
+      "Staff"
+    ]
   },
   {
     "ID": "Yunaka",
     "Name": "Yunaka",
+    "Bio": "A thief encountered in a mountain settlement. She keeps a tight lid on the details of her past.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Trained to Kill",
@@ -482,6 +500,7 @@
   {
     "ID": "Anna",
     "Name": "Anna",
+    "Bio": "A traveling merchant from a wintry part of Elusia. She is a cheerful and  cunning cheapskate.",
     "RecruitementChapter": "Paralogue 2",
     "RecruitementDescription": "Talk with Alear or survive",
     "PersonalSkill": "Make a Killing",
@@ -522,6 +541,7 @@
   {
     "ID": "Alcryst",
     "Name": "Alcryst",
+    "Bio": "The self-torturing, wildly imaginative prince of Brodia. Has hidden talents even he isn't aware of.",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Get Behind Me!",
@@ -562,6 +582,7 @@
   {
     "ID": "Citrinne",
     "Name": "Citrinne",
+    "Bio": "Prince Alcryst's retainer. Despite her fierce demeanor, she's a noble who cares deeply for her friends.",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Generosity",
@@ -602,6 +623,7 @@
   {
     "ID": "Lapis",
     "Name": "Lapis",
+    "Bio": "Prince Alcryst's retainer. Her quiet modesty belies her superhuman strength.",
     "RecruitementChapter": "Chapter 7",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Share Spoils",
@@ -642,6 +664,7 @@
   {
     "ID": "Diamant",
     "Name": "Diamant",
+    "Bio": "The majestic crown prince of Brodia. His people trust him greatly for his strong, genuine demeanor.",
     "RecruitementChapter": "Chapter 8",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Fair Fight",
@@ -682,6 +705,7 @@
   {
     "ID": "Amber",
     "Name": "Amber",
+    "Bio": "Prince Diamant's retainer. Has a boundless enthusiasm for legends and adventure.",
     "RecruitementChapter": "Chapter 8",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Aspiring Hero",
@@ -722,6 +746,7 @@
   {
     "ID": "Jade",
     "Name": "Jade",
+    "Bio": "Prince Diamant's retainer. A warrior of few words who always keeps her wits about her.",
     "RecruitementChapter": "Chapter 9",
     "RecruitementDescription": "Tallk with Alear/Diamant or survive",
     "PersonalSkill": "Meditation",
@@ -762,6 +787,7 @@
   {
     "ID": "Ivy",
     "Name": "Ivy",
+    "Bio": "The mysterious, melancholy crown princess of Elusia. She never relaxes her icy royal decorum.",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "PersonalSkill": "Single-Minded",
@@ -802,6 +828,7 @@
   {
     "ID": "Kagetsu",
     "Name": "Kagetsu",
+    "Bio": "Princess Ivy's retainer. A handsome young man from outside Elusia who speaks freely and without inhibition.",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "PersonalSkill": "Blinding Flash",
@@ -842,6 +869,7 @@
   {
     "ID": "Zelkov",
     "Name": "Zelkov",
+    "Bio": "Princess Ivy's retainer. An enigmatic man who's always absorbed in intrigues of his own making.",
     "RecruitementChapter": "Chapter 11",
     "RecruitementDescription": "-",
     "PersonalSkill": "Not ''Quite''",
@@ -882,6 +910,7 @@
   {
     "ID": "Fogado",
     "Name": "Fogado",
+    "Bio": "A freewheeling, optimistic young Sentinel. He's easygoing, but there's something mysterious about him.",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "PersonalSkill": "Charmer",
@@ -922,6 +951,7 @@
   {
     "ID": "Pandreo",
     "Name": "Pandreo",
+    "Bio": "A member of the Sentinels. Though deeply religious, he loves to party more than just about anyone.",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "PersonalSkill": "Party Animal",
@@ -957,11 +987,15 @@
     "MaxRes": 3,
     "MaxLck": 2,
     "InnateProficiencies": "Staff",
-    "Proficiencies": ["Tome", "Arts"]
+    "Proficiencies": [
+      "Tome",
+      "Arts"
+    ]
   },
   {
     "ID": "Bunet",
     "Name": "Bunet",
+    "Bio": "A member of the Sentinels, and a chef with incredibly refined senses of taste and smell.",
     "RecruitementChapter": "Chapter 12",
     "RecruitementDescription": "-",
     "PersonalSkill": "Seconds",
@@ -1002,6 +1036,7 @@
   {
     "ID": "Timerra",
     "Name": "Timerra",
+    "Bio": "The bubbly and outgoing crown  princess of Solm. Known for being accessible and approachable by all.",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Racket of Solm",
@@ -1042,6 +1077,7 @@
   {
     "ID": "Panette",
     "Name": "Panette",
+    "Bio": "Princess Timerra's retainer. She has a tendency to speak in erratic and somewhat stilted tones.",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Blood Fury",
@@ -1082,6 +1118,7 @@
   {
     "ID": "Merrin",
     "Name": "Merrin",
+    "Bio": "Princess Timerra's retainer. She's a dashing woman with a fondness for animals.",
     "RecruitementChapter": "Chapter 13",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Knightly Escort",
@@ -1122,6 +1159,7 @@
   {
     "ID": "Hortensia",
     "Name": "Hortensia",
+    "Bio": "A mischievous, spoiled princess of Elusia. She is nonetheless devoted to her family and friends.",
     "RecruitementChapter": "Chapter 14",
     "RecruitementDescription": "-",
     "PersonalSkill": "Big Personality",
@@ -1162,6 +1200,7 @@
   {
     "ID": "Seadall",
     "Name": "Seadall",
+    "Bio": "A famous dancer of Solm. He is also a skilled fortune-teller and cultivates an aura of mystery.",
     "RecruitementChapter": "Chapter 15",
     "RecruitementDescription": "-",
     "PersonalSkill": "Curious Dance",
@@ -1202,6 +1241,7 @@
   {
     "ID": "Rosado",
     "Name": "Rosado",
+    "Bio": "Princess Hortensia's retainer. He loves cute things, and always maintains a bright, positive attitude.",
     "RecruitementChapter": "Chapter 16",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Stunning Smile",
@@ -1242,6 +1282,7 @@
   {
     "ID": "Goldmary",
     "Name": "Goldmary",
+    "Bio": "Princess Hortensia's retainer. She seems demure on the surface, but is conceited to the core.",
     "RecruitementChapter": "Chapter 16",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Disarming Sigh",
@@ -1282,6 +1323,7 @@
   {
     "ID": "Lindon",
     "Name": "Lindon",
+    "Bio": "A scholar from Elusia. Has a great hunger for knowledge, which he feeds with studies and experiments.",
     "RecruitementChapter": "Chapter 18",
     "RecruitementDescription": "Talk with Alear/Ivy/Hortensia",
     "PersonalSkill": "Weapon Insight",
@@ -1322,6 +1364,7 @@
   {
     "ID": "Saphir",
     "Name": "Saphir",
+    "Bio": "A warrior from Brodia. She is a dauntless and determined seeker of truth.",
     "RecruitementChapter": "Chapter 19",
     "RecruitementDescription": "Talk with Alear/Diamant/Alcryst or survive?",
     "PersonalSkill": "Will to Win",
@@ -1362,6 +1405,7 @@
   {
     "ID": "Veyle",
     "Name": "Veyle",
+    "Bio": "The younger sister of Alear. Her darkness conquered, she fights for peace.",
     "RecruitementChapter": "Chapter 21",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Fell Protection",
@@ -1402,6 +1446,7 @@
   {
     "ID": "Mauvier",
     "Name": "Mauvier",
+    "Bio": "Formerly one of the Four Hounds. He is Veyle's knight, and has sworn to fight alongside Alear.",
     "RecruitementChapter": "Chapter 22",
     "RecruitementDescription": "When the fight begins",
     "PersonalSkill": "Contemplative",
@@ -1442,6 +1487,7 @@
   {
     "ID": "Nel",
     "Name": "Nel",
+    "Bio": "The elder of twins with Fell Dragon blood. She fights courageously alongside her brother.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "PersonalSkill": "Protective",
@@ -1482,6 +1528,7 @@
   {
     "ID": "Rafal",
     "Name": "Rafal",
+    "Bio": "A man with Fell Dragon blood. He accepted the invitation to fight alongside the Divine Dragon.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "PersonalSkill": "Rivalry",
@@ -1522,6 +1569,7 @@
   {
     "ID": "Zelestia",
     "Name": "Zelestia",
+    "Bio": "Leader of the Four Winds. A scion of Mage Dragons, she is rich in love and affection for her companions.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "PersonalSkill": "Friendly Boost",
@@ -1562,6 +1610,7 @@
   {
     "ID": "Gregory",
     "Name": "Gregory",
+    "Bio": "Second in-command of the Four Winds. An amiable, if somewhat excessively cautious, magic user.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "PersonalSkill": "Survival Plan",
@@ -1602,6 +1651,7 @@
   {
     "ID": "Madeline",
     "Name": "Madeline",
+    "Bio": "One of the Four Winds. An intellectual armored knight who holds strong convictions.",
     "RecruitementChapter": "Chapter 6",
     "RecruitementDescription": "DLC Pack 4\\nComplete Fell Xenologue",
     "PersonalSkill": "Knightly Code",
