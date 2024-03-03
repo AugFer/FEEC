@@ -10,6 +10,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Covert",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 19,
 		"BaseStr": 6,
@@ -56,6 +58,8 @@
 	  "ExclusiveChar": "Alfred",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Golden Lotus",
+	  "SkillDescription": "During combat, may prevent 50% of physical damage taken. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -102,6 +106,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -148,6 +154,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Careful Aim",
+	  "SkillDescription": "If unit initiates combat without moving first, grants Hit+40 during combat",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -194,6 +202,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -240,6 +250,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 26,
 		"BaseStr": 9,
@@ -286,6 +298,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -332,6 +346,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "Swap",
+	  "SkillDescription": "Use to switch places with an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 28,
 		"BaseStr": 11,
@@ -378,6 +394,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "Clear the Way",
+	  "SkillDescription": "Unit’s space and adjacent spaces have a movement cost of 1 for allies",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -424,6 +442,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Chaos Style",
+	  "SkillDescription": "If unit initiates combat with a physical attack against a foe armed with magic or vice versa, grants Spd+3 during combat",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -470,6 +490,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Hobble",
+	  "SkillDescription": "If unit initiates combat with a knife, inflicts Mov-2 on foe for 1 turn",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -516,6 +538,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Smash+",
+	  "SkillDescription": "When making a smash attack, push the target 2 spaces instead of 1",
 	  "BaseStats": {
 		"BaseHp": 29,
 		"BaseStr": 13,
@@ -562,6 +586,8 @@
 	  "ExclusiveChar": "Fogado",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Back at You",
+	  "SkillDescription": "When countering, unit may deal extra damage = half of damage taken. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -608,6 +634,8 @@
 	  "ExclusiveChar": "Seadall",
 	  "UnitType": "Qi Adept",
 	  "UnitWeaknesses": "",
+	  "Skill": "Special Dance",
+	  "SkillDescription": "If unit uses Dance, grants Dex/Spd/Lck+3 to target for 1 turn",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -654,6 +682,8 @@
 	  "ExclusiveChar": "Alear",
 	  "UnitType": "Dragon",
 	  "UnitWeaknesses": "Dragon",
+	  "Skill": "Divine Spirit",
+	  "SkillDescription": "Unit’s engage meter is shortened one step",
 	  "BaseStats": {
 		"BaseHp": 24,
 		"BaseStr": 8,
@@ -700,6 +730,8 @@
 	  "ExclusiveChar": "Alear",
 	  "UnitType": "Dragon",
 	  "UnitWeaknesses": "Dragon",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 6,
@@ -746,6 +778,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Qi Adept",
 	  "UnitWeaknesses": "",
+	  "Skill": "Convoy",
+	  "SkillDescription": "Use to deposit or retrieve weapons and items",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -792,6 +826,8 @@
 	  "ExclusiveChar": "Veyle",
 	  "UnitType": "Dragon",
 	  "UnitWeaknesses": "Dark Spirit",
+	  "Skill": "Fell Spirit",
+	  "SkillDescription": "At the start of each turn, unit’s engage meter is filled by 1",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 3,
@@ -838,6 +874,8 @@
 	  "ExclusiveChar": "Nel",
 	  "UnitType": "Dragon",
 	  "UnitWeaknesses": "Dark Spirit",
+	  "Skill": "Resist Emblems",
+	  "SkillDescription": "When attacked with an engage attack, prevents 20% of damage",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -884,6 +922,8 @@
 	  "ExclusiveChar": "Rafal",
 	  "UnitType": "Dragon",
 	  "UnitWeaknesses": "Dark Spirit",
+	  "Skill": "Spur Emblems",
+	  "SkillDescription": "At start of player phase, fills adjacent allies’ engage meters by 1",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -920,7 +960,7 @@
 	  }
 	},
 	{
-	  "ID": "Great Knight Lance Axe",
+	  "ID": "Lance Axe Great Knight",
 	  "Name": "Great Knight",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Armor, Lance Armor, Axe Armor",
@@ -930,6 +970,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Armor, Cavalry",
+	  "Skill": "Allied Defense",
+	  "SkillDescription": "If unit is between an ally and a foe, reduces damage to unit by 3 during combat with that foe",
 	  "BaseStats": {
 		"BaseHp": 26,
 		"BaseStr": 9,
@@ -966,7 +1008,7 @@
 	  }
 	},
 	{
-	  "ID": "Great Knight Sword Axe",
+	  "ID": "Sword Axe Great Knight",
 	  "Name": "Great Knight",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Armor, Lance Armor, Axe Armor",
@@ -976,6 +1018,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Armor, Cavalry",
+	  "Skill": "Allied Defense",
+	  "SkillDescription": "If unit is between an ally and a foe, reduces damage to unit by 3 during combat with that foe",
 	  "BaseStats": {
 		"BaseHp": 26,
 		"BaseStr": 9,
@@ -1012,7 +1056,7 @@
 	  }
 	},
 	{
-	  "ID": "Great Knight Sword Lance",
+	  "ID": "Sword Lance Great Knight",
 	  "Name": "Great Knight",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Armor, Lance Armor, Axe Armor",
@@ -1022,6 +1066,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Armor, Cavalry",
+	  "Skill": "Allied Defense",
+	  "SkillDescription": "If unit is between an ally and a foe, reduces damage to unit by 3 during combat with that foe",
 	  "BaseStats": {
 		"BaseHp": 26,
 		"BaseStr": 9,
@@ -1068,6 +1114,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Pincer Attack",
+	  "SkillDescription": "If unit initiates combat while an ally is on the opposite side of the foe, always follow up (if weapon allows)",
 	  "BaseStats": {
 		"BaseHp": 24,
 		"BaseStr": 9,
@@ -1104,7 +1152,7 @@
 	  }
 	},
 	{
-	  "ID": "Hero Axe",
+	  "ID": "Axe Hero",
 	  "Name": "Hero",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Fighter",
@@ -1114,6 +1162,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Brave Assist",
+	  "SkillDescription": "If unit’s HP is at max while unit makes a chain attack, unit attacks twice",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 8,
@@ -1150,7 +1200,7 @@
 	  }
 	},
 	{
-	  "ID": "Hero Lance",
+	  "ID": "Lance Hero",
 	  "Name": "Hero",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Fighter",
@@ -1160,6 +1210,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Brave Assist",
+	  "SkillDescription": "If unit’s HP is at max while unit makes a chain attack, unit attacks twice",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 8,
@@ -1206,6 +1258,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Mystical",
 	  "UnitWeaknesses": "",
+	  "Skill": "Self-Healing",
+	  "SkillDescription": "Unit can target itself with healing staves",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 3,
@@ -1252,6 +1306,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -1298,6 +1354,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying, Dragon",
+	  "Skill": "Air Raid",
+	  "SkillDescription": "If unit initiates combat from a space a foe cannot enter, grants Spd+5 during combat",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 9,
@@ -1344,6 +1402,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Careful Aim",
+	  "SkillDescription": "If unit initiates combat without moving first, grants Hit+40 during combat",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -1390,6 +1450,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -1436,6 +1498,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 7,
@@ -1482,6 +1546,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -1528,6 +1594,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "Swap",
+	  "SkillDescription": "Use to switch places with an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 28,
 		"BaseStr": 11,
@@ -1574,6 +1642,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "Clear the Way",
+	  "SkillDescription": "Unit’s space and adjacent spaces have a movement cost of 1 for allies",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -1620,6 +1690,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Chaos Style",
+	  "SkillDescription": "If unit initiates combat with a physical attack against a foe armed with magic or vice versa, grants Spd+3 during combat",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -1666,6 +1738,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Hobble",
+	  "SkillDescription": "If unit initiates combat with a knife, inflicts Mov-2 on foe for 1 turn",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -1712,6 +1786,8 @@
 	  "ExclusiveChar": "Ivy",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying, Dragon",
+	  "Skill": "Grasping Void",
+	  "SkillDescription": "When attacking with a tome, unit may deal extra damage = half of foe’s Mag. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 2,
@@ -1758,6 +1834,8 @@
 	  "ExclusiveChar": "Alcryst",
 	  "UnitType": "Covert",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 7,
@@ -1804,6 +1882,8 @@
 	  "ExclusiveChar": "Diamant",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 8,
@@ -1850,6 +1930,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Mystical",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 18,
 		"BaseStr": 1,
@@ -1896,6 +1978,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "Let Fly",
+	  "SkillDescription": "Use to perform a guaranteed-hit, area-of-effect attack at the start of the next player phase. Unit loses equipped weapon",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -1942,6 +2026,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Qi Adept",
 	  "UnitWeaknesses": "",
+	  "Skill": "Diffuse Healer",
+	  "SkillDescription": "When unit is healed by a staff, all adjacent allies also recover 50% of the HP that the unit recovered",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 6,
@@ -1988,6 +2074,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Qi Adept",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 18,
 		"BaseStr": 3,
@@ -2034,6 +2122,8 @@
 	  "ExclusiveChar": "Zelestia",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "Soulblade",
+	  "SkillDescription": "When attacking with a sword, damage is calculated using average of foe’s Def and Res",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -2080,6 +2170,8 @@
 	  "ExclusiveChar": "Alfred",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 24,
 		"BaseStr": 7,
@@ -2126,6 +2218,8 @@
 	  "ExclusiveChar": "Celine",
 	  "UnitType": "Mystical",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -2162,7 +2256,7 @@
 	  }
 	},
 	{
-	  "ID": "Paladin Axe",
+	  "ID": "Axe Paladin",
 	  "Name": "Paladin",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Cavalier, Lance Cavalier, Axe Cavalier",
@@ -2172,6 +2266,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Pivot",
+	  "SkillDescription": "Use to move to the opposite side of an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -2208,7 +2304,7 @@
 	  }
 	},
 	{
-	  "ID": "Paladin Lance",
+	  "ID": "Lance Paladin",
 	  "Name": "Paladin",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Cavalier, Lance Cavalier, Axe Cavalier",
@@ -2218,6 +2314,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Pivot",
+	  "SkillDescription": "Use to move to the opposite side of an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -2254,7 +2352,7 @@
 	  }
 	},
 	{
-	  "ID": "Paladin Sword",
+	  "ID": "Sword Paladin",
 	  "Name": "Paladin",
 	  "Type": "Advanced",
 	  "ReqBaseClassId": "Sword Cavalier, Lance Cavalier, Axe Cavalier",
@@ -2264,6 +2362,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Pivot",
+	  "SkillDescription": "Use to move to the opposite side of an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -2310,6 +2410,8 @@
 	  "ExclusiveChar": "Timerra",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Sandstorm",
+	  "SkillDescription": "While making a physical attack, may calculate damage with 150% of Def instead of Str. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 9,
@@ -2356,6 +2458,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Reforge",
+	  "SkillDescription": "If unit’s HP is 11 or more and an adjacent ally is broken after combat, sacrifices 10 HP and removes the break status from that ally",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 7,
@@ -2402,6 +2506,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Mystical",
 	  "UnitWeaknesses": "",
+	  "Skill": "Spell Harmony",
+	  "SkillDescription": "If unit initiates combat with a tome, grants Atk equal to the number of adjacent allies with tomes",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 1,
@@ -2448,6 +2554,8 @@
 	  "ExclusiveChar": "Fogado",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -2494,6 +2602,8 @@
 	  "ExclusiveChar": "Timerra",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 24,
 		"BaseStr": 8,
@@ -2540,6 +2650,8 @@
 	  "ExclusiveChar": "Hortensia",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "World Tree",
+	  "SkillDescription": "When unit uses a staff, may not consume a use. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 18,
 		"BaseStr": 1,
@@ -2586,6 +2698,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Covert",
 	  "UnitWeaknesses": "",
+	  "Skill": "No Distractions",
+	  "SkillDescription": "Grants Crit+10 during combat with a foe that can’t counter",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 8,
@@ -2632,6 +2746,8 @@
 	  "ExclusiveChar": "Diamant",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Sol",
+	  "SkillDescription": "Unit may recover HP=50% damage dealt. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 10,
@@ -2678,6 +2794,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 8,
@@ -2724,6 +2842,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying, Dragon",
+	  "Skill": "Air Raid",
+	  "SkillDescription": "If unit initiates combat from a space a foe cannot enter, grants Spd+5 during combat",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 9,
@@ -2770,6 +2890,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Careful Aim",
+	  "SkillDescription": "If unit initiates combat without moving first, grants Hit+40 during combat",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -2816,6 +2938,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -2862,6 +2986,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 5,
@@ -2908,6 +3034,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -2954,6 +3082,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Armor",
 	  "UnitWeaknesses": "Armor",
+	  "Skill": "Swap",
+	  "SkillDescription": "Use to switch places with an adjacent ally",
 	  "BaseStats": {
 		"BaseHp": 28,
 		"BaseStr": 11,
@@ -3000,6 +3130,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "Clear the Way",
+	  "SkillDescription": "Unit’s space and adjacent spaces have a movement cost of 1 for allies",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 7,
@@ -3046,6 +3178,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying, Dragon",
+	  "Skill": "Air Raid",
+	  "SkillDescription": "If unit initiates combat from a space a foe cannot enter, grants Spd+5 during combat",
 	  "BaseStats": {
 		"BaseHp": 25,
 		"BaseStr": 9,
@@ -3092,6 +3226,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Chaos Style",
+	  "SkillDescription": "If unit initiates combat with a physical attack against a foe armed with magic or vice versa, grants Spd+3 during combat",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 5,
@@ -3138,6 +3274,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Cavalry",
 	  "UnitWeaknesses": "Cavalry",
+	  "Skill": "Hobble",
+	  "SkillDescription": "If unit initiates combat with a knife, inflicts Mov-2 on foe for 1 turn",
 	  "BaseStats": {
 		"BaseHp": 23,
 		"BaseStr": 6,
@@ -3184,6 +3322,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Run Through",
+	  "SkillDescription": "Use to attack an adjacent foe, then move to the space opposite that foe",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 6,
@@ -3230,6 +3370,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Covert",
 	  "UnitWeaknesses": "",
+	  "Skill": "Pass",
+	  "SkillDescription": "Foes do not block this unit’s movement",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 5,
@@ -3276,6 +3418,8 @@
 	  "ExclusiveChar": "Alcryst",
 	  "UnitType": "Covert",
 	  "UnitWeaknesses": "",
+	  "Skill": "Luna",
+	  "SkillDescription": "While making an attack, may ignore half of foe’s Def/Res. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 22,
 		"BaseStr": 8,
@@ -3322,6 +3466,8 @@
 	  "ExclusiveChar": "Celine",
 	  "UnitType": "Mystical",
 	  "UnitWeaknesses": "",
+	  "Skill": "Ignis",
+	  "SkillDescription": "During combat, may add half of Str to magic damage or half of Mag to all other damage. Trigger %=Dex",
 	  "BaseStats": {
 		"BaseHp": 21,
 		"BaseStr": 6,
@@ -3368,6 +3514,8 @@
 	  "ExclusiveChar": "",
 	  "UnitType": "Backup",
 	  "UnitWeaknesses": "",
+	  "Skill": "Merciless",
+	  "SkillDescription": "Unit deals +50% damage against broken foes",
 	  "BaseStats": {
 		"BaseHp": 27,
 		"BaseStr": 12,
@@ -3414,6 +3562,8 @@
 	  "ExclusiveChar": "Hortensia",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 18,
 		"BaseStr": 0,
@@ -3460,6 +3610,8 @@
 	  "ExclusiveChar": "Ivy",
 	  "UnitType": "Flying",
 	  "UnitWeaknesses": "Flying, Dragon",
+	  "Skill": "",
+	  "SkillDescription": "",
 	  "BaseStats": {
 		"BaseHp": 20,
 		"BaseStr": 1,

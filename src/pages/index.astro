@@ -6,9 +6,55 @@ import CharCard from '@/components/CharCard.astro'
 	title="Fire Emblem: Engage - Companion App"
 	description="Web application with the necessary information to know the statistics of the characters, classes, and weapons of the game Fire Emblem Engage."
 >
-	<h1 class="mb-10 text-5xl font-bold text-center">Characters</h1>
-	<!-- falta un search box que oculte las tarjetas que no van coincidiendo con lo que se tipea -->
-	<section class="grid max-w-5xl grid-cols-3 gap-2 px-4 m-auto sm:grid-cols-4 md:grid-cols-6">	
+	<h1 class="my-4 text-5xl font-bold text-center">Characters</h1>
+  <div class="flex flex-col my-4">
+    <input class="max-w-xs px-4 py-2 mx-auto mb-4 text-gray-400 rounded-lg shadow-md outline-none bg-white/85" id="searchInput" type="text" placeholder="Name..." />
+    <p id="noResults" class="hidden mx-auto my-8 transition-all duration-200 ease-in-out max-w-fit">No characters found matching the entered name</p>
+  </div>
+	<div id="characters" class="grid max-w-5xl grid-cols-3 gap-3 px-4 m-auto sm:grid-cols-4 md:grid-cols-6">
 		<CharCard />
-	</section>
+	</div>
 </Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+    const characters = document.getElementById('characters')!.children as HTMLCollectionOf<HTMLElement>;
+    const noResults = document.getElementById('noResults') as HTMLDivElement;
+    let timeout: ReturnType<typeof setTimeout>;
+
+    searchInput.addEventListener('input', function() {
+        clearTimeout(timeout);
+        const searchTerm = searchInput.value.toLowerCase();
+        timeout = setTimeout(() => {
+          let allCharactersHidden = true;
+          for (const character of characters) {
+          const characterId = character.id.toLowerCase();
+          if (searchTerm ==='' || characterId.startsWith(searchTerm)) {
+            character.classList.remove('hidden');
+            character.classList.remove('opacity-0');
+            character.classList.add('opacity-100');
+            allCharactersHidden = false;
+          } else {
+            character.classList.remove('opacity-100');
+            character.classList.add('opacity-0');
+            setTimeout(() => {
+              character.classList.add('hidden');
+            }, 200);
+          }
+        }
+        if (allCharactersHidden) {
+          setTimeout(() => {
+            noResults.classList.remove('hidden');
+          }, 200);
+          noResults.classList.remove('opacity-0');
+          noResults.classList.add('opacity-100');
+        } else {
+          noResults.classList.add('hidden');
+          noResults.classList.remove('opacity-100');
+          noResults.classList.add('opacity-0');
+        }
+      }, 200);
+    });
+  });
+</script>

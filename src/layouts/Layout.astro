@@ -22,23 +22,19 @@ const { title, description } = Astro.props;
 		<meta name="description" content={description} />
 		
 	</head>
-	<body class="min-h-screen pt-20 pb-3">
+	<body class="min-h-screen pt-20 pb-3 text-gray-100 bg-gradient-to-t from-pink-600 to-indigo-600">
 		<Header />
 		<slot />
 		<Footer />
 	</body>
 </html>
+
 <style is:global>
 	:root {
         color-scheme: dark;
 	}
 	html {
 		font-family: 'Onest Variable', system-ui, Roboto;
-		background-image: linear-gradient(to top, #e4454f 0%, #44408f 100%);
-		color: rgb(209 213 219);
-	}
-	p {
-		margin-bottom: 0.5em;
 	}
 	th, td{
 		padding: 0.25rem;
@@ -48,5 +44,4 @@ const { title, description } = Astro.props;
 		color: rgb(55 65 81);
   		opacity: 1;
 	}
-	
 </style>

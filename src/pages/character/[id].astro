@@ -22,18 +22,18 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
     .filter(item => item.src.includes(id))
 );
 
-
+const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClass);
 ---
 <Layout 
     title={char[0].Name}
     description=`Character info: ${char[0].Name}`
 >
-  <section class="grid max-w-6xl gap-2 p-2 m-auto overflow-hidden auto-rows-min md:grid-cols-12"
+  <section class="grid max-w-6xl gap-2 p-4 m-auto overflow-hidden auto-rows-min grid-cols-2 md:grid-cols-12"
   id="charInfo"
   data-charID={char[0].ID}
   data-baseClass={char[0].BaseClass}
   >
-    <BentoItem title="Image"          class="md:col-span-3 md:row-span-6">
+    <BentoItem title="Image"          class="md:col-span-3 md:row-span-4">
       {
         imagen.map(img => (  
           <Image
@@ -44,26 +44,26 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
         ))
       }
     </BentoItem>
-    <BentoItem title="Bio"            class="md:col-span-5 md:row-span-3">
-      <h2 class="mb-2 text-2xl font-semibold">{char[0].Name}</h2>
-      <p class="text-justify text-balance">{char[0].Bio}</p>
+    <BentoItem title="Bio"            class="md:col-span-5 md:row-span-1">
+      <h2 class="mb-2 text-2xl font-semibold leading-7">{char[0].Name}</h2>
+      <p class="text-pretty text-sm font-light">{char[0].Bio}</p>
     </BentoItem>
-    <BentoItem title="Recruitment"    class="md:col-span-4 md:row-span-2">
-      <p>{char[0].RecruitementChapter} ({char[0].RecruitementDescription})</p>
-    </BentoItem>
-    <BentoItem title="Base SP"        class="md:col-span-2 md:row-span-1">
-      <p>{char[0].BaseSP}</p>
-    </BentoItem>
-    <BentoItem title="Libre2"         class="md:col-span-2 md:row-span-1">
-      <p>Libre2</p>
+    <BentoItem title="Recruitment"    class="md:col-span-4 md:row-span-1">
+      <p class="inline font-medium">{char[0].RecruitementChapter}: </p>
+      <p class="inline text-sm font-light">{char[0].RecruitementDescription}</p>
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
-      <img class="inline align-middle size-6" src=`/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
-      <p class="inline align-middle text-pretty ms-1">{char[0].PersonalSkill}: {char[0].PersonalSkillDesc}</p>
+      <div class="flex">
+        <img class="align-middle size-6" src=`/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
+        <div class="ms-2">
+          <p class="inline font-medium">{char[0].PersonalSkill}: </p>
+          <p class="inline text-sm font-light">{char[0].PersonalSkillDesc}</p>
+        </div>
+      </div>
     </BentoItem>
-    <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-2">
+    <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-1">
       <img class="inline align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
-      <p class="inline font-semibold align-middle ms-1 text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
+      <p class="inline font-medium align-middle ms-1 text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
       
       {(char[0].Proficiencies !== "-" && !Array.isArray(char[0].Proficiencies)) && (
         <>
@@ -79,27 +79,40 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
         </>
       ))}
     </BentoItem>
-    <BentoItem title="Rank"           class="md:col-span-5 md:row-span-2">
-      <p>Stats Ranking</p>
+    <BentoItem title="Base SP"        class="col-span-1 md:col-span-5 md:row-span-1">
+      <p class="text-sm font-light">{char[0].BaseSP}</p>
     </BentoItem>
-    <BentoItem title="Emblem"         class="md:col-span-2 md:row-span-2">
-      <div class="flex items-center mb-2">
+    <BentoItem title="Libre2"         class="col-span-1 md:col-span-9 md:row-span-1">
+      <p>Libre2</p>
+    </BentoItem>
+    <BentoItem title="Emblem"         class="md:col-span-2 md:row-span-1">
+      <div class="flex items-center">
         <select id="emblem" disabled name="emblem" class="p-2 rounded-lg min-w-min">
           <option value="" selected>- Soon -</option>
         </select>
       </div>
     </BentoItem>
-    <BentoItem title="Base Class"     class="md:col-span-5 md:row-span-2">
-      <div class="flex justify-between">
-        <p>Base: {char[0].BaseClass}</p>
-        <label for="applyBaseClass" class="inline-flex align-middle cursor-pointer ms-2">
+    <BentoItem title="Initial Class"     class="md:col-span-8 md:row-span-1">
+      <div class="flex gap-4 mb-2">
+        <p>{char[0].BaseClass} ({charClass!.Type})</p>
+        <label for="applyBaseClass" class="inline-flex align-middle cursor-pointer">
           <input id="applyBaseClass" type="checkbox" class="sr-only peer"/>
-          <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600 peer-disabled:peer-checked:bg-green-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
+          <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-lime-400 peer-checked:to-green-500 peer-disabled:peer-checked:bg-gradient-to-r peer-disabled:peer-checked:from-lime-600 peer-disabled:peer-checked:to-green-600 peer-disabled:after:bg-gray-400"></div>
           Apply
         </label>
       </div>
+      { (charClass!.Type === 'Advanced' || charClass!.Type === 'Special') ?
+      <div class="flex">
+        <img class="size-6" src={`/images/adv-skills/${charClass!.Skill}.webp`} alt="Advanced skill icon"/>
+        <div class="ms-2">
+          <p class="inline font-medium">{charClass!.Skill}: </p>
+          <p class="inline text-sm font-light">{charClass!.SkillDescription}</p>
+        </div>
+      </div>
+      : null 
+      }
     </BentoItem>
-    <BentoItem title="Base Level"     class="md:col-span-5 md:row-span-2">
+    <BentoItem title="Base Level"     class="md:col-span-2 md:row-span-1">
       <div class="flex">
         <button id="baseLvlDown"    class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
         <input type="text" readonly id="baseLvl" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` 
@@ -121,15 +134,15 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
       title="STATS"
       character={char[0]}
     />
-    <BentoItem title="Promotion"      class="md:col-span-2 md:row-span-2">
-      <label for="promote" class="inline-flex align-middle cursor-pointer ms-2">
+    <BentoItem title="Promotion"      class="md:col-span-2 md:row-span-1">
+      <label for="promote" class="inline-flex align-middle cursor-pointer">
         <input id="promote" type="checkbox" class="sr-only peer"/>
-        <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-violet-600 peer-disabled:peer-checked:bg-violet-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
+        <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-purple-400 peer-checked:to-indigo-500"></div>
         Promote
       </label>
     </BentoItem>
-    <BentoItem title="Advanced Class" class="md:col-span-5 md:row-span-2">
-      <div class="flex justify-between">
+    <BentoItem title="Advanced Class" class="md:col-span-8 md:row-span-1">
+      <div class="flex gap-4 mb-2">
         <select id="advClass" disabled name="advClass" class="p-2 rounded-lg min-w-min">
           <option value="" selected>- Select -</option>
           {classes.map(item => {
@@ -149,14 +162,21 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
             return null;
           })}
         </select>
-        <label for="applyAdvClass" class="inline-flex align-middle cursor-pointer ms-2">
+        <label for="applyAdvClass" class="align-middle cursor-pointer md:inline-flex">
           <input id="applyAdvClass" type="checkbox" disabled class="sr-only peer"/>
-          <div id="advClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-600 peer-disabled:peer-checked:bg-cyan-800 after:bg-gray-100 peer-disabled:after:bg-gray-500"></div>
+          <div id="advClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-cyan-300 peer-checked:to-blue-500 peer-disabled:peer-checked:bg-gradient-to-r peer-disabled:peer-checked:from-cyan-600 peer-disabled:peer-checked:to-blue-600 peer-disabled:after:bg-gray-400"></div>
           Apply
         </label>
       </div>
+      <div class="flex">
+        <img id="advSkillIcon" class="hidden align-middle size-6" src="" alt="Advanced skill icon"/>
+        <div class="ms-2">
+          <p id="advSkill" class="hidden font-semibold"></p>
+          <p id="advSkillDesc" class="hidden text-sm font-light"></p>
+        </div>
+      </div>
     </BentoItem>
-    <BentoItem title="Advanced Level" class="md:col-span-5 md:row-span-2">
+    <BentoItem title="Advanced Level" class="md:col-span-2 md:row-span-1">
       <div class="flex">
         <button id="advLvlDown" disabled class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
         <input type="text" readonly id="advLvl" value="1" min="1" max="20" class="w-12 p-1 text-sm text-center bg-gray-700 border border-gray-600">
@@ -188,6 +208,8 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
     ExclusiveChar: string;
     UnitType: string;
     UnitWeaknesses: string;
+    Skill: string;
+    SkillDescription: string;
     BaseStats: {
         BaseHp: number;
         BaseStr: number;
@@ -229,7 +251,6 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
   let baseClass = charInfo!.getAttribute('data-baseClass');
   let classes: Clase[];
 
-  const $optionBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
   const $baseClassToggle = document.getElementById('applyBaseClass') as HTMLInputElement;
   const $baseLvl = document.getElementById('baseLvl') as HTMLInputElement;
   const charBaseLvl = Number($baseLvl.min);
@@ -245,6 +266,7 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
   let baseClassBaseStats : number[] = [];
 
   const $promote = document.getElementById('promote') as HTMLInputElement;
+  const isCharBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
   const $advClass = document.getElementById('advClass') as HTMLSelectElement;
   const $advClassToggle = document.getElementById('applyAdvClass') as HTMLInputElement;
   const $advLvl = document.getElementById('advLvl') as HTMLInputElement;
@@ -291,7 +313,6 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
       if (newValue <= minValue + 1) {
         baseClassToggle(newValue);
       }
-      $optionBaseClass.disabled = !(newValue === maxValue);
       enablePromotion();
     }
   }
@@ -366,23 +387,18 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
   }
 
   $promote.addEventListener('change', function() {
-    // Habilitar o deshabilitar los botones de cambio de nivel base
-    const promoteState = $promote.checked;
-    $baseLvlDown.disabled = promoteState;
-    $baseLvlUp.disabled = promoteState;
-    if (promoteState) {
-      // Habilitar el selector de clase
+    const isChecked = this.checked;
+    $baseLvlDown.disabled = isChecked;
+    $baseLvlUp.disabled = isChecked;
+    if (isChecked) {
       $advClass.disabled = false;
+      isCharBaseClass.disabled = Number($baseLvl.value) !== Number($baseLvl.max);
     } else {
-      // Dehabilitar y resetear el selector de clase avanzada
       $advClass.disabled = true; 
       $advClass.value = "";
-      // Dehabilitar y resetear el checkbox de clase avanzada
       $advClassToggle.disabled = true; 
       $advClassToggle.checked = false;
-      // Resetea el estilo de las celdas de las tablas de crecimientos avanzados
       resetAdvTables();
-      // Setear el nivel avanzado en 1 y deshabilitar
       $advLvlDown.disabled = true;
       $advLvlUp.disabled = true;
       $advLvl.value = String(1);
@@ -393,6 +409,7 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
     const value = this.value;
     if(value === "") {
       resetAdvTables();
+      updateAdvSkill("", "");
     }
     else {
       getAdvClass(value);
@@ -409,6 +426,25 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
     $advLvlUp.disabled = true;
     $advLvl.value = String(1);
   });
+
+  function updateAdvSkill(skill: string, description: string) {
+    const $advSkillIcon = document.getElementById('advSkillIcon') as HTMLImageElement;
+    const $advSkill = document.getElementById('advSkill') as HTMLHeadingElement;
+    const $advSkillDesc = document.getElementById('advSkillDesc') as HTMLParagraphElement;
+    const isVisible = !!skill;
+
+    if (skill) {
+      $advSkillIcon.src = `/images/adv-skills/${skill}.webp`;
+      $advSkill.textContent = `${skill}: `;
+      $advSkillDesc.textContent = description;
+    }
+
+    $advSkillIcon.classList.toggle('hidden', !isVisible);
+    $advSkill.classList.toggle('hidden', !isVisible);
+    $advSkill.classList.toggle('inline', isVisible);
+    $advSkillDesc.classList.toggle('hidden', !isVisible);
+    $advSkillDesc.classList.toggle('inline', isVisible);
+  }
 
   $advClassToggle.addEventListener('change', function() {
     const value = !this.checked;
@@ -455,6 +491,7 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
       }
     });
     advClassBaseStats = Object.values(advClassData!.BaseStats);
+    updateAdvSkill(advClassData!.Skill, advClassData!.SkillDescription);
   }
 
   function applyAdvClass() {
@@ -489,7 +526,6 @@ const imagen = await Astro.glob('@/assets/images/characters/*.webp')
         $advStatsCells[index].classList.remove('text-cyan-400', 'text-red-400', 'text-green-400', 'font-semibold');
       });
     }
-    console.log(advClassApplyStyleChanges);
   }
   
   function changeAdvLvl(change: number) {
