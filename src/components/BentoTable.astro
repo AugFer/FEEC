@@ -1,9 +1,63 @@
 ---
+interface Character {
+  ID: string
+  Name: string
+  Bio: string
+  BaseClass: string
+  InitialLevel: number
+  InitialInternalLevel: number
+  InitialSP: number
+  Recruitment: {
+    Chapter: string
+    Description: string
+  }
+  PersonalSkill: {
+    Name: string
+    Description: string
+  }
+  Proficiencies: {
+    Innate: Array<string>
+    Regular: Array<string>
+  }
+  BaseStats: {
+    Hp: number
+    Str: number
+    Mag: number
+    Dex: number
+    Spd: number
+    Def: number
+    Res: number
+    Lck: number
+    Bld: number
+    Mov: number
+  }
+  GrowthRates: {
+    Hp: number
+    Str: number
+    Mag: number
+    Dex: number
+    Spd: number
+    Def: number
+    Res: number
+    Lck: number
+    Bld: number
+  }
+  MaxStatsModifiers: {
+    Str: number
+    Mag: number
+    Dex: number
+    Spd: number
+    Def: number
+    Res: number
+    Lck: number
+  }
+}
+
 interface Props {
   tableType: string
   id: string
   title: string
-  character?: any
+  character?: Character
 }
 
 const { tableType, id, title, character } = Astro.props
@@ -31,30 +85,30 @@ const { tableType, id, title, character } = Astro.props
     <tbody>
       <tr class="bg-gray-800">
         { 
-        (tableType === 'Base') 
+        (tableType === 'Base' && character !== undefined) 
         ? 
           (id === 'baseStats') 
           ?
-            <td>{character.BaseHp}</td>
-            <td>{character.BaseStr}</td>
-            <td>{character.BaseMag}</td>
-            <td>{character.BaseDex}</td>
-            <td>{character.BaseSpd}</td>
-            <td>{character.BaseDef}</td>
-            <td>{character.BaseRes}</td>
-            <td>{character.BaseLck}</td>
-            <td>{character.BaseBld}</td>
-            <td>{character.BaseMov}</td>
+            <td>{character.BaseStats.Hp}</td>
+            <td>{character.BaseStats.Str}</td>
+            <td>{character.BaseStats.Mag}</td>
+            <td>{character.BaseStats.Dex}</td>
+            <td>{character.BaseStats.Spd}</td>
+            <td>{character.BaseStats.Def}</td>
+            <td>{character.BaseStats.Res}</td>
+            <td>{character.BaseStats.Lck}</td>
+            <td>{character.BaseStats.Bld}</td>
+            <td>{character.BaseStats.Mov}</td>
           :
-            <td>{character.GrowthHp}</td>
-            <td>{character.GrowthStr}</td>
-            <td>{character.GrowthMag}</td>
-            <td>{character.GrowthDex}</td>
-            <td>{character.GrowthSpd}</td>
-            <td>{character.GrowthDef}</td>
-            <td>{character.GrowthRes}</td>
-            <td>{character.GrowthLck}</td>
-            <td>{character.GrowthBld}</td>
+            <td>{character.GrowthRates.Hp}</td>
+            <td>{character.GrowthRates.Str}</td>
+            <td>{character.GrowthRates.Mag}</td>
+            <td>{character.GrowthRates.Dex}</td>
+            <td>{character.GrowthRates.Spd}</td>
+            <td>{character.GrowthRates.Def}</td>
+            <td>{character.GrowthRates.Res}</td>
+            <td>{character.GrowthRates.Lck}</td>
+            <td>{character.GrowthRates.Bld}</td>
             <td>-</td>
         :
           <td>-</td>

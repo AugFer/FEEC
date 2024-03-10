@@ -28,12 +28,12 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
     title={char[0].Name}
     description=`Character info: ${char[0].Name}`
 >
-  <section class="grid max-w-6xl gap-2 p-4 m-auto overflow-hidden auto-rows-min grid-cols-2 md:grid-cols-12"
+  <section class="grid max-w-6xl gap-2 px-4 m-auto overflow-hidden auto-rows-min md:grid-cols-12"
   id="charInfo"
   data-charID={char[0].ID}
   data-baseClass={char[0].BaseClass}
   >
-    <BentoItem title="Image"          class="md:col-span-3 md:row-span-4">
+    <BentoItem title="Image"          class="justify-self-center w-fit md:col-span-3 md:row-span-4">
       {
         imagen.map(img => (  
           <Image
@@ -46,76 +46,87 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
     </BentoItem>
     <BentoItem title="Bio"            class="md:col-span-5 md:row-span-1">
       <h2 class="mb-2 text-2xl font-semibold leading-7">{char[0].Name}</h2>
-      <p class="text-pretty text-sm font-light">{char[0].Bio}</p>
+      <p class="text-sm font-light text-pretty">{char[0].Bio}</p>
     </BentoItem>
     <BentoItem title="Recruitment"    class="md:col-span-4 md:row-span-1">
-      <p class="inline font-medium">{char[0].RecruitementChapter}: </p>
-      <p class="inline text-sm font-light">{char[0].RecruitementDescription}</p>
+      <p class="inline font-medium">{char[0].Recruitment .Chapter}: </p>
+      <p class="inline text-sm font-light">{char[0].Recruitment.Description}</p>
     </BentoItem>
     <BentoItem title="Personal Skill" class="md:col-span-9 md:row-span-1">
       <div class="flex">
-        <img class="align-middle size-6" src=`/images/personal-skill/${char[0].PersonalSkill}.webp` alt={char[0].PersonalSkill}/>
-        <div class="ms-2">
-          <p class="inline font-medium">{char[0].PersonalSkill}: </p>
-          <p class="inline text-sm font-light">{char[0].PersonalSkillDesc}</p>
+        <img class="size-6" src=`/images/personal-skill/${char[0].PersonalSkill.Name}.webp` alt={char[0].PersonalSkill.Name} title={char[0].PersonalSkill.Name}/>
+        <div class="ml-2">
+          <p class="inline font-medium">{char[0].PersonalSkill.Name}: </p>
+          <p class="inline text-sm font-light">{char[0].PersonalSkill.Description}</p>
         </div>
       </div>
     </BentoItem>
     <BentoItem title="Proficiencies"  class="md:col-span-4 md:row-span-1">
-      <img class="inline align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].InnateProficiencies}.webp`} alt={char[0].InnateProficiencies}/>
-      <p class="inline font-medium align-middle ms-1 text-cyan-400">{char[0].InnateProficiencies} (Innate)</p>
-      
-      {(char[0].Proficiencies !== "-" && !Array.isArray(char[0].Proficiencies)) && (
-        <>
-          <img class="inline ml-2 align-middle rounded-md size-6" src={`/images/proficiencies/${char[0].Proficiencies}.webp`} alt={char[0].Proficiencies}/>
-          <p class="inline align-middle ms-1">{char[0].Proficiencies}</p>
-        </>
-      )}
-
-      {(char[0].Proficiencies !== "-") && Array.isArray(char[0].Proficiencies) && char[0].Proficiencies.map((proficiency: string) => (
-        <>
-          <img class="inline ml-2 align-middle rounded-md size-6" src={`/images/proficiencies/${proficiency}.webp`} alt={proficiency}/>
-          <p class="inline align-middle ms-1">{proficiency}</p>
-        </>
-      ))}
-    </BentoItem>
-    <BentoItem title="Base SP"        class="col-span-1 md:col-span-5 md:row-span-1">
-      <p class="text-sm font-light">{char[0].BaseSP}</p>
-    </BentoItem>
-    <BentoItem title="Libre2"         class="col-span-1 md:col-span-9 md:row-span-1">
-      <p>Libre2</p>
-    </BentoItem>
-    <BentoItem title="Emblem"         class="md:col-span-2 md:row-span-1">
-      <div class="flex items-center">
-        <select id="emblem" disabled name="emblem" class="p-2 rounded-lg min-w-min">
-          <option value="" selected>- Soon -</option>
-        </select>
+      <div class="flex">
+        <div class="flex mr-3">
+          <img class="inline mr-2 rounded-md size-6" src={`/images/proficiencies/${char[0].Proficiencies.Innate[0]}.webp`} alt={char[0].Proficiencies.Innate[0]} title={char[0].Proficiencies.Innate[0]}/>
+          <p class="inline font-medium text-cyan-400">{char[0].Proficiencies.Innate[0]} (Innate)</p>
+        </div>
+        {
+          char[0].Proficiencies.Regular.length > 0 && (
+          char[0].Proficiencies.Regular.map((proficiency) => (
+            <div class="flex mr-3">
+              <img class="inline mr-2 rounded-md size-6" src={`/images/proficiencies/${proficiency}.webp`} alt={proficiency} title={proficiency}/>
+              <p class="inline">{proficiency}</p>
+            </div>
+          )))
+        }
       </div>
     </BentoItem>
-    <BentoItem title="Initial Class"     class="md:col-span-8 md:row-span-1">
-      <div class="flex gap-4 mb-2">
-        <p>{char[0].BaseClass} ({charClass!.Type})</p>
-        <label for="applyBaseClass" class="inline-flex align-middle cursor-pointer">
+    <BentoItem title="Base SP"        class="md:col-span-2 md:row-span-1">
+      <p class="text-sm font-light">{char[0].InitialSP}</p>
+    </BentoItem>
+    <BentoItem title="Libre 1"        class="md:col-span-3 md:row-span-1">
+      <p>Libre 1</p>
+    </BentoItem>
+    <BentoItem title="Libre 2"        class="md:col-span-9 md:row-span-1">
+      <p>Libre 2</p>
+    </BentoItem>
+    <BentoItem title="Initial Class"  class="md:col-span-7 md:row-span-1">
+      <div class="flex gap-3">
+        <p>{char[0].BaseClass} <span class="text-sm font-thin">({charClass!.Type})</span></p>
+        <label for="applyBaseClass" class="inline-flex text-sm font-thin cursor-pointer">
           <input id="applyBaseClass" type="checkbox" class="sr-only peer"/>
           <div id="baseClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-lime-400 peer-checked:to-green-500 peer-disabled:peer-checked:bg-gradient-to-r peer-disabled:peer-checked:from-lime-600 peer-disabled:peer-checked:to-green-600 peer-disabled:after:bg-gray-400"></div>
           Apply
         </label>
       </div>
       { (charClass!.Type === 'Advanced' || charClass!.Type === 'Special') ?
-      <div class="flex">
-        <img class="size-6" src={`/images/adv-skills/${charClass!.Skill}.webp`} alt="Advanced skill icon"/>
+      <div class="flex mt-2">
+        <img class="size-6" src={`/images/adv-skills/${charClass!.Skill.Name}.webp`} alt="Skill icon" title={charClass!.Skill.Name}/>
         <div class="ms-2">
-          <p class="inline font-medium">{charClass!.Skill}: </p>
-          <p class="inline text-sm font-light">{charClass!.SkillDescription}</p>
+          <p class="inline font-medium">{charClass!.Skill.Name}: </p>
+          <p class="inline text-sm font-light">{charClass!.Skill.Description}</p>
         </div>
       </div>
       : null 
       }
     </BentoItem>
+    <BentoItem title="Weapons"        class="md:col-span-3 md:row-span-1">
+      <div class="flex">
+      {
+        charClass!.Proficiencies.Weapon.map((proficiency, index) => (
+          <div class="flex mr-3">
+            <img class="inline mr-2 rounded-md size-6" src={`/images/proficiencies/${proficiency}.webp`} alt={proficiency} title={proficiency}/>
+            <p class="inline mr-1">{charClass!.Proficiencies.RegularRank[index]}</p>
+            { (charClass!.Proficiencies.RegularRank[index] !== charClass!.Proficiencies.InnateRank[index]) ?
+            <p class="inline font-medium text-cyan-400">({charClass!.Proficiencies.InnateRank[index]})</p>
+            : null
+            }
+          </div>
+        ))
+      }
+      </div>
+    </BentoItem>
     <BentoItem title="Base Level"     class="md:col-span-2 md:row-span-1">
       <div class="flex">
         <button id="baseLvlDown"    class="w-8 p-1 font-extrabold text-center bg-gray-700 border border-gray-600 rounded-s-lg">-</button>
-        <input type="text" readonly id="baseLvl" value=`${char[0].BaseLevel}` min=`${char[0].BaseLevel}` 
+        <input type="text" readonly id="baseLvl" value=`${char[0].InitialLevel}` min=`${char[0].InitialLevel}` 
         max={(char[0].BaseClass === 'Thief' || char[0].BaseClass === 'Dancer') ? "40" : "20"} 
         class="w-12 p-1 text-sm text-center bg-gray-700 border border-gray-600"
         />
@@ -135,46 +146,49 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
       character={char[0]}
     />
     <BentoItem title="Promotion"      class="md:col-span-2 md:row-span-1">
-      <label for="promote" class="inline-flex align-middle cursor-pointer">
+      <label for="promote" class="inline-flex items-center text-sm font-thin cursor-pointer">
         <input id="promote" type="checkbox" class="sr-only peer"/>
         <div id="promoteToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-purple-400 peer-checked:to-indigo-500"></div>
         Promote
       </label>
     </BentoItem>
     <BentoItem title="Advanced Class" class="md:col-span-8 md:row-span-1">
-      <div class="flex gap-4 mb-2">
-        <select id="advClass" disabled name="advClass" class="p-2 rounded-lg min-w-min">
-          <option value="" selected>- Select -</option>
-          {classes.map(item => {
-            const isCharBaseClass = char[0].BaseClass === item.ID;
-            const meetsExclusiveCharCondition = item.ExclusiveChar === "" || item.ExclusiveChar === char[0].Name;
-            const meetsReqBaseClassCondition = item.ReqBaseClassId === "" || item.ReqBaseClassId.includes(char[0].BaseClass);
-            if (isCharBaseClass || (meetsExclusiveCharCondition && meetsReqBaseClassCondition)) {
-              return (
-                <option
-                  value={item.ID}
-                  id={isCharBaseClass ? "isCharBaseClass" : null}
-                >
-                  {item.ID} | {item.Type}
-                </option>
-              );
-            }
-            return null;
-          })}
-        </select>
-        <label for="applyAdvClass" class="align-middle cursor-pointer md:inline-flex">
-          <input id="applyAdvClass" type="checkbox" disabled class="sr-only peer"/>
-          <div id="advClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-cyan-300 peer-checked:to-blue-500 peer-disabled:peer-checked:bg-gradient-to-r peer-disabled:peer-checked:from-cyan-600 peer-disabled:peer-checked:to-blue-600 peer-disabled:after:bg-gray-400"></div>
-          Apply
-        </label>
-      </div>
-      <div class="flex">
-        <img id="advSkillIcon" class="hidden align-middle size-6" src="" alt="Advanced skill icon"/>
-        <div class="ms-2">
-          <p id="advSkill" class="hidden font-semibold"></p>
-          <p id="advSkillDesc" class="hidden text-sm font-light"></p>
+      <div class="flex-col sm:flex">
+        <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <select id="advClass" disabled name="advClass" class="p-2 text-sm rounded-lg min-w-min sm:text-base">
+            <option value="" selected>- Select -</option>
+            {classes.map(item => {
+              const isCharBaseClass = char[0].BaseClass === item.ID;
+              const meetsExclusiveCharCondition = item.ExclusiveChar === "" || item.ExclusiveChar === char[0].Name;
+              const meetsReqBaseClassCondition = item.ReqBaseClassId === "" || item.ReqBaseClassId.includes(char[0].BaseClass);
+              if (isCharBaseClass || (meetsExclusiveCharCondition && meetsReqBaseClassCondition)) {
+                return (
+                  <option
+                    value={item.ID}
+                    id={isCharBaseClass ? "isCharBaseClass" : null}
+                  >
+                    {item.ID} | {item.Type}
+                  </option>
+                );
+              }
+              return null;
+            })}
+          </select>
+          <label for="applyAdvClass" class="inline-flex items-center text-sm font-thin cursor-pointer">
+            <input id="applyAdvClass" type="checkbox" disabled class="sr-only peer"/>
+            <div id="advClassToggle" class="me-2 relative w-11 h-6 rounded-full bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full after:absolute after:top-[2px] after:start-[2px] after:rounded-full after:h-5 after:w-5 after:transition-all after:bg-gray-100 peer-checked:bg-gradient-to-r peer-checked:from-cyan-300 peer-checked:to-blue-500 peer-disabled:peer-checked:bg-gradient-to-r peer-disabled:peer-checked:from-cyan-600 peer-disabled:peer-checked:to-blue-600 peer-disabled:after:bg-gray-400"></div>
+            Apply
+          </label>
+        </div>
+        <div id="advSkillInfo" class="hidden mt-3">
+          <img class="align-middle size-6" src="" alt="Skill icon" title=""/>
+          <div class="ms-2">
+            <p class="inline font-semibold"></p>
+            <p class="inline text-sm font-light"></p>
+          </div>
         </div>
       </div>
+      
     </BentoItem>
     <BentoItem title="Advanced Level" class="md:col-span-2 md:row-span-1">
       <div class="flex">
@@ -198,51 +212,55 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
 
 <script>
   interface Clase {
-    ID: string;
-    Name: string;
-    Type: string;
-    ReqBaseClassId: string;
-    Proficiencies: string;
-    ProficienciesRank: string;
-    ProficienciesInnateRanks: string;
-    ExclusiveChar: string;
-    UnitType: string;
-    UnitWeaknesses: string;
-    Skill: string;
-    SkillDescription: string;
+    ID: string
+    Name: string
+    Type: string
+    ReqBaseClassId: string
+    ExclusiveChar: string
+    UnitType: string
+    UnitWeaknesses: string
+    Skill: {
+      Name: string
+      Description: string
+    }
+    Proficiencies: {
+      Weapon: Array<string>
+      RegularRank: Array<string>
+      InnateRank: Array<string>
+    }
     BaseStats: {
-        BaseHp: number;
-        BaseStr: number;
-        BaseMag: number;
-        BaseDex: number;
-        BaseSpd: number;
-        BaseLck: number;
-        BaseDef: number;
-        BaseRes: number;
-        BaseBld: number;
-        BaseMov: number;
-    };
-    Growths: {
-        GrowthHp: number;
-        GrowthStr: number;
-        GrowthMag: number;
-        GrowthDex: number;
-        GrowthSpd: number;
-        GrowthDef: number;
-        GrowthRes: number;
-        GrowthLck: number;
-        GrowthBld: number;
-    };
+      Hp: number
+      Str: number
+      Mag: number
+      Dex: number
+      Spd: number
+      Def: number
+      Res: number
+      Lck: number
+      Bld: number
+      Mov: number
+    }
+    GrowthRates: {
+      Hp: number
+      Str: number
+      Mag: number
+      Dex: number
+      Spd: number
+      Def: number
+      Res: number
+      Lck: number
+      Bld: number
+    }
     MaxStats: {
-        MaxHp: number;
-        MaxStr: number;
-        MaxMag: number;
-        MaxDex: number;
-        MaxSpd: number;
-        MaxLck: number;
-        MaxDef: number;
-        MaxRes: number;
-        MaxBld: number;
+      Hp: number
+      Str: number
+      Mag: number
+      Dex: number
+      Spd: number
+      Def: number
+      Res: number
+      Lck: number
+      Bld: number
     };
   }
 
@@ -266,12 +284,12 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
   let baseClassBaseStats : number[] = [];
 
   const $promote = document.getElementById('promote') as HTMLInputElement;
-  const isCharBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
+  const $isCharBaseClass = document.getElementById('isCharBaseClass') as HTMLOptionElement;
   const $advClass = document.getElementById('advClass') as HTMLSelectElement;
   const $advClassToggle = document.getElementById('applyAdvClass') as HTMLInputElement;
   const $advLvl = document.getElementById('advLvl') as HTMLInputElement;
   const $advStatsCells = document.querySelectorAll('#advStats tbody > tr > td') as NodeListOf<HTMLTableCellElement>;
-  const $advGrowthsCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)');
+  const $advGrowthsCells = document.querySelectorAll('#advGrowths tbody > tr > td:not(:last-child)') as NodeListOf<HTMLTableCellElement>;
   const $advLvlDown = document.getElementById('advLvlDown') as HTMLButtonElement;
   const $advLvlUp = document.getElementById('advLvlUp') as HTMLButtonElement;
   let advGrowthCounters : number[] = [];
@@ -284,7 +302,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
     const response = await fetch('/data/classes.json');
     classes = await response.json();
     const baseClassData = classes.find((cls: Clase) => cls.ID === baseClass);
-    classGrowths = Object.values(baseClassData!.Growths);
+    classGrowths = Object.values(baseClassData!.GrowthRates);
     classGrowths.forEach((growth, index) => {
       totalGrowths[index] = baseGrowths[index] + growth;
       if (charID === "Jean") {
@@ -392,7 +410,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
     $baseLvlUp.disabled = isChecked;
     if (isChecked) {
       $advClass.disabled = false;
-      isCharBaseClass.disabled = Number($baseLvl.value) !== Number($baseLvl.max);
+      $isCharBaseClass.disabled = Number($baseLvl.value) !== Number($baseLvl.max);
     } else {
       $advClass.disabled = true; 
       $advClass.value = "";
@@ -428,22 +446,20 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
   });
 
   function updateAdvSkill(skill: string, description: string) {
-    const $advSkillIcon = document.getElementById('advSkillIcon') as HTMLImageElement;
-    const $advSkill = document.getElementById('advSkill') as HTMLHeadingElement;
-    const $advSkillDesc = document.getElementById('advSkillDesc') as HTMLParagraphElement;
+    const $advSkillInfo = document.getElementById('advSkillInfo') as HTMLDivElement;
     const isVisible = !!skill;
 
     if (skill) {
-      $advSkillIcon.src = `/images/adv-skills/${skill}.webp`;
-      $advSkill.textContent = `${skill}: `;
-      $advSkillDesc.textContent = description;
+      const img = $advSkillInfo.querySelector('img');
+      img!.src = `/images/adv-skills/${skill}.webp`;
+      img!.title = skill;
+      const p = $advSkillInfo.querySelectorAll('p');
+      p[0].textContent = `${skill}: `;
+      p[1].textContent = description;
     }
 
-    $advSkillIcon.classList.toggle('hidden', !isVisible);
-    $advSkill.classList.toggle('hidden', !isVisible);
-    $advSkill.classList.toggle('inline', isVisible);
-    $advSkillDesc.classList.toggle('hidden', !isVisible);
-    $advSkillDesc.classList.toggle('inline', isVisible);
+    $advSkillInfo.classList.toggle('hidden', !isVisible);
+    $advSkillInfo.classList.toggle('flex', isVisible);  
   }
 
   $advClassToggle.addEventListener('change', function() {
@@ -483,7 +499,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
 
   function getAdvClass(advClass: string) {
     const advClassData = classes.find((cls: Clase) => cls.ID === advClass);
-    advClassGrowths = Object.values(advClassData!.Growths);
+    advClassGrowths = Object.values(advClassData!.GrowthRates);
     advClassGrowths.forEach((growth, index) => {
       advTotalGrowths[index] = baseGrowths[index] + growth;
       if(charID === "Jean") {
@@ -491,7 +507,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
       }
     });
     advClassBaseStats = Object.values(advClassData!.BaseStats);
-    updateAdvSkill(advClassData!.Skill, advClassData!.SkillDescription);
+    updateAdvSkill(advClassData!.Skill.Name, advClassData!.Skill.Description);
   }
 
   function applyAdvClass() {
