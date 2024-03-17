@@ -371,10 +371,10 @@
     }
   },  
   {
-    "ID": "Celine",
+    "ID": "Céline",
     "Name": "Céline",
     "Bio": "The princess of Firene. Despite her gentle demeanor, she has an iron will when her people must be protected.",
-    "BaseClass": "Noble Celine",
+    "BaseClass": "Noble Céline",
     "InitialLevel": 5,
     "InitialInternalLevel": 5,
     "InitialSP": 300,

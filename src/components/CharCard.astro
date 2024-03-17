@@ -12,7 +12,7 @@ const images = await Astro.glob('@/assets/images/characters/*.webp')
       id={char.ID}
       class="relative transition-all duration-200 ease-in-out bg-gray-800 border border-gray-700 rounded-lg shadow-md hover:scale-110 hover:z-1 hover:bg-gray-700 hover:border-gray-500"
     >
-      {
+       {
         (images.filter(item => item.src.includes(char.ID))).map((img) => (  
         <Image
             src={img}

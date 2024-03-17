@@ -3038,11 +3038,11 @@
 		}
 	},
 	{
-		"ID": "Noble Celine",
+		"ID": "Noble Céline",
 		"Name": "Noble",
 		"Type": "Base",
 		"ReqBaseClassId": "",
-		"ExclusiveChar": "Celine",
+		"ExclusiveChar": "Céline",
 		"UnitType": "Mystical",
 		"UnitWeaknesses": "",
 		"Skill": {
@@ -3924,8 +3924,8 @@
 		"ID": "Vidame",
 		"Name": "Vidame",
 		"Type": "Advanced",
-		"ReqBaseClassId": "Noble Celine",
-		"ExclusiveChar": "Celine",
+		"ReqBaseClassId": "Noble Céline",
+		"ExclusiveChar": "Céline",
 		"UnitType": "Mystical",
 		"UnitWeaknesses": "",
 		"Skill": {
