@@ -159,17 +159,32 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
             <option value="" selected>- Select -</option>
             {classes.map(item => {
               const isCharBaseClass = char[0].BaseClass === item.ID;
+              const isCharClassAdv = charClass!.Type === "Advanced" || charClass!.Type === "Special";
               const meetsExclusiveCharCondition = item.ExclusiveChar === "" || item.ExclusiveChar === char[0].Name;
               const meetsReqBaseClassCondition = item.ReqBaseClassId === "" || item.ReqBaseClassId.includes(char[0].BaseClass);
-              if (isCharBaseClass || (meetsExclusiveCharCondition && meetsReqBaseClassCondition)) {
-                return (
-                  <option
-                    value={item.ID}
-                    id={isCharBaseClass ? "isCharBaseClass" : null}
-                  >
-                    {item.ID} | {item.Type}
-                  </option>
-                );
+              if (!isCharClassAdv){
+                if (isCharBaseClass || isCharClassAdv || (meetsExclusiveCharCondition && meetsReqBaseClassCondition)) {
+                  return (
+                    <option
+                      value={item.ID}
+                      id={isCharBaseClass ? "isCharBaseClass" : null}
+                    >
+                      {item.ID} | {item.Type}
+                    </option>
+                  );
+                }
+              }
+              if (isCharClassAdv){
+                if (meetsExclusiveCharCondition) {
+                  return (
+                    <option
+                      value={item.ID}
+                      id={isCharBaseClass ? "isCharBaseClass" : null}
+                    >
+                      {item.ID} | {item.Type}
+                    </option>
+                  );
+                }
               }
               return null;
             })}
@@ -268,6 +283,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
   let charID = charInfo!.getAttribute('data-charID');
   let baseClass = charInfo!.getAttribute('data-baseClass');
   let classes: Clase[];
+  let baseClassData: Clase;
 
   const $baseClassToggle = document.getElementById('applyBaseClass') as HTMLInputElement;
   const $baseLvl = document.getElementById('baseLvl') as HTMLInputElement;
@@ -301,7 +317,7 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
   (async function getBaseClass() {
     const response = await fetch('/data/classes.json');
     classes = await response.json();
-    const baseClassData = classes.find((cls: Clase) => cls.ID === baseClass);
+    baseClassData = classes.find((cls: Clase) => cls.ID === baseClass)!;
     classGrowths = Object.values(baseClassData!.GrowthRates);
     classGrowths.forEach((growth, index) => {
       totalGrowths[index] = baseGrowths[index] + growth;
@@ -310,9 +326,16 @@ const charClass = Object.values(classes).find(cls => cls.ID === char[0].BaseClas
       }
     });
     baseClassBaseStats = Object.values(baseClassData!.BaseStats);
+    checkEnablePromotion();
   })();
 
-  enablePromotion();
+  function checkEnablePromotion() {
+    if (Number($baseLvl.value) < 10 && baseClassData.Type === 'Base') {
+      $promote.disabled = true;
+    } else {
+      $promote.disabled = false;
+    }
+  }
 
   $baseLvlDown.addEventListener("click", () => changeBaseLvl(-1));
 
